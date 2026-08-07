@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <script>
-    document.documentElement.classList.add("js");
+    document.documentElement.classList.add('js');
   </script>
 
   <style>
@@ -28,25 +28,17 @@
       --coral: #ff664a;
       --line-dark: rgba(17, 17, 15, .18);
       --line-light: rgba(255, 254, 248, .22);
-
       --display: "Archivo Black", "Arial Black", Impact, sans-serif;
       --sans: "Manrope", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
-
       --header-h: 5rem;
       --gutter: clamp(1rem, 3.2vw, 3.4rem);
-
       --ease-out: cubic-bezier(.16, 1, .3, 1);
       --ease-in-out: cubic-bezier(.76, 0, .24, 1);
-
       --shadow: 0 30px 90px rgba(0, 0, 0, .18);
     }
 
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { box-sizing: border-box; }
 
     html {
       scroll-behavior: smooth;
@@ -56,7 +48,6 @@
 
     body {
       margin: 0;
-      min-width: 320px;
       color: var(--ink);
       background: var(--paper);
       font-family: var(--sans);
@@ -68,34 +59,14 @@
     }
 
     body.menu-open,
-    body.dialog-open {
-      overflow: hidden;
-    }
+    body.dialog-open { overflow: hidden; }
 
-    ::selection {
-      color: var(--ink);
-      background: var(--acid);
-    }
+    ::selection { color: var(--ink); background: var(--acid); }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    a {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    img,
-    svg {
-      display: block;
-      max-width: 100%;
-    }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+    img, svg { display: block; max-width: 100%; }
 
     :focus-visible {
       outline: 3px solid var(--coral);
@@ -113,21 +84,18 @@
       transform: translateY(-160%);
       transition: transform .2s ease;
     }
-
-    .skip-link:focus {
-      transform: translateY(0);
-    }
+    .skip-link:focus { transform: translateY(0); }
 
     .sr-only {
       position: absolute !important;
       width: 1px !important;
       height: 1px !important;
-      margin: -1px !important;
       padding: 0 !important;
+      margin: -1px !important;
       overflow: hidden !important;
       clip: rect(0, 0, 0, 0) !important;
-      border: 0 !important;
       white-space: nowrap !important;
+      border: 0 !important;
     }
 
     .container {
@@ -153,7 +121,6 @@
       letter-spacing: .12em;
       text-transform: uppercase;
     }
-
     .eyebrow::before {
       width: 2.5rem;
       height: 1px;
@@ -173,7 +140,6 @@
     .button {
       --button-bg: transparent;
       --button-fg: currentColor;
-
       position: relative;
       display: inline-flex;
       min-height: 3.15rem;
@@ -182,27 +148,19 @@
       gap: .7rem;
       padding: .85rem 1.2rem;
       overflow: hidden;
-
       color: var(--button-fg);
       border: 1px solid currentColor;
       border-radius: 999px;
       background: var(--button-bg);
-
       font-family: var(--mono);
       font-size: .7rem;
       font-weight: 500;
       letter-spacing: .06em;
       text-transform: uppercase;
-
       isolation: isolate;
       cursor: pointer;
-
-      transition:
-        color .35s var(--ease-out),
-        border-color .35s var(--ease-out),
-        transform .35s var(--ease-out);
+      transition: color .35s var(--ease-out), border-color .35s var(--ease-out), transform .35s var(--ease-out);
     }
-
     .button::before {
       position: absolute;
       z-index: -1;
@@ -213,53 +171,27 @@
       transform: translateY(105%);
       transition: transform .45s var(--ease-out);
     }
-
     .button:hover::before,
-    .button:focus-visible::before {
-      transform: translateY(0);
-    }
-
+    .button:focus-visible::before { transform: translateY(0); }
     .button:hover,
-    .button:focus-visible {
-      color: var(--paper);
-    }
-
+    .button:focus-visible { color: var(--paper); }
     .button--solid {
       --button-bg: var(--ink);
       --button-fg: var(--white);
       border-color: var(--ink);
     }
-
-    .button--solid::before {
-      background: var(--blue);
-    }
-
+    .button--solid::before { background: var(--blue); }
     .button--light {
       --button-bg: var(--white);
       --button-fg: var(--ink);
       border-color: var(--white);
     }
-
-    .button--light::before {
-      background: var(--acid);
-    }
-
+    .button--light::before { background: var(--acid); }
     .button--light:hover,
-    .button--light:focus-visible {
-      color: var(--ink);
-      border-color: var(--acid);
-    }
+    .button--light:focus-visible { color: var(--ink); border-color: var(--acid); }
+    .button svg { width: 1rem; height: 1rem; }
 
-    .button svg {
-      width: 1rem;
-      height: 1rem;
-      flex: 0 0 auto;
-    }
-
-    /* ==========================================================
-       Intro
-       ========================================================== */
-
+    /* Intro */
     .intro {
       position: fixed;
       z-index: 9999;
@@ -268,23 +200,18 @@
       color: var(--white);
       background: var(--ink);
       place-items: center;
-      transition:
-        clip-path .95s var(--ease-in-out),
-        visibility 0s linear .95s;
+      transition: clip-path .95s var(--ease-in-out), visibility 0s linear .95s;
       clip-path: inset(0 0 0 0);
     }
-
     .intro.is-done {
       visibility: hidden;
       clip-path: inset(0 0 100% 0);
     }
-
     .intro__inner {
       width: min(90vw, 720px);
       display: grid;
       gap: 1.25rem;
     }
-
     .intro__top {
       display: flex;
       align-items: center;
@@ -295,7 +222,6 @@
       letter-spacing: .12em;
       text-transform: uppercase;
     }
-
     .intro__name {
       margin: 0;
       font-family: var(--display);
@@ -304,14 +230,12 @@
       letter-spacing: -.055em;
       text-transform: uppercase;
     }
-
     .intro__line {
       position: relative;
       height: 2px;
       overflow: hidden;
       background: rgba(255, 255, 255, .18);
     }
-
     .intro__line::after {
       position: absolute;
       inset: 0;
@@ -320,16 +244,9 @@
       transform-origin: left;
       animation: introLine .9s .15s var(--ease-out) both;
     }
+    @keyframes introLine { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
-    @keyframes introLine {
-      from { transform: scaleX(0); }
-      to { transform: scaleX(1); }
-    }
-
-    /* ==========================================================
-       Cursor
-       ========================================================== */
-
+    /* Cursor */
     .cursor {
       position: fixed;
       z-index: 9000;
@@ -343,25 +260,12 @@
       mix-blend-mode: difference;
       opacity: 0;
       transform: translate3d(-50%, -50%, 0);
-      transition:
-        width .25s var(--ease-out),
-        height .25s var(--ease-out),
-        opacity .2s ease;
+      transition: width .25s var(--ease-out), height .25s var(--ease-out), opacity .2s ease;
     }
+    .cursor.is-visible { opacity: 1; }
+    .cursor.is-active { width: 3.4rem; height: 3.4rem; }
 
-    .cursor.is-visible {
-      opacity: 1;
-    }
-
-    .cursor.is-active {
-      width: 3.4rem;
-      height: 3.4rem;
-    }
-
-    /* ==========================================================
-       Navigation
-       ========================================================== */
-
+    /* Header */
     .site-header {
       position: fixed;
       z-index: 1000;
@@ -372,7 +276,6 @@
       mix-blend-mode: difference;
       pointer-events: none;
     }
-
     .site-header__inner {
       min-height: var(--header-h);
       display: flex;
@@ -380,12 +283,8 @@
       justify-content: space-between;
       gap: 2rem;
     }
-
     .site-header a,
-    .site-header button {
-      pointer-events: auto;
-    }
-
+    .site-header button { pointer-events: auto; }
     .brand {
       display: inline-flex;
       align-items: center;
@@ -397,7 +296,6 @@
       letter-spacing: .08em;
       text-transform: uppercase;
     }
-
     .brand__mark {
       display: grid;
       width: 2.2rem;
@@ -408,14 +306,8 @@
       place-items: center;
       font-weight: 500;
     }
-
-    .brand__text span {
-      display: block;
-    }
-
-    .brand__text span:last-child {
-      opacity: .55;
-    }
+    .brand__text span { display: block; }
+    .brand__text span:last-child { opacity: .55; }
 
     .nav-list {
       display: flex;
@@ -425,7 +317,6 @@
       padding: 0;
       list-style: none;
     }
-
     .nav-link {
       position: relative;
       display: inline-block;
@@ -436,7 +327,6 @@
       letter-spacing: .09em;
       text-transform: uppercase;
     }
-
     .nav-link::after {
       position: absolute;
       right: 0;
@@ -449,13 +339,11 @@
       transform-origin: right;
       transition: transform .35s var(--ease-out);
     }
-
     .nav-link:hover::after,
     .nav-link[aria-current="true"]::after {
       transform: scaleX(1);
       transform-origin: left;
     }
-
     .menu-toggle {
       display: none;
       width: 3rem;
@@ -467,7 +355,6 @@
       background: transparent;
       cursor: pointer;
     }
-
     .menu-toggle span,
     .menu-toggle::before,
     .menu-toggle::after {
@@ -477,22 +364,11 @@
       margin: .25rem auto;
       content: "";
       background: currentColor;
-      transition:
-        transform .3s var(--ease-out),
-        opacity .2s ease;
+      transition: transform .3s var(--ease-out), opacity .2s ease;
     }
-
-    .menu-toggle[aria-expanded="true"] span {
-      opacity: 0;
-    }
-
-    .menu-toggle[aria-expanded="true"]::before {
-      transform: translateY(.3125rem) rotate(45deg);
-    }
-
-    .menu-toggle[aria-expanded="true"]::after {
-      transform: translateY(-.3125rem) rotate(-45deg);
-    }
+    .menu-toggle[aria-expanded="true"] span { opacity: 0; }
+    .menu-toggle[aria-expanded="true"]::before { transform: translateY(.3125rem) rotate(45deg); }
+    .menu-toggle[aria-expanded="true"]::after { transform: translateY(-.3125rem) rotate(-45deg); }
 
     .mobile-menu {
       position: fixed;
@@ -505,38 +381,28 @@
       visibility: hidden;
       opacity: 0;
       pointer-events: none;
-      transition:
-        opacity .35s ease,
-        visibility 0s linear .35s;
+      transition: opacity .35s ease, visibility 0s linear .35s;
       place-items: center stretch;
     }
-
     .mobile-menu.is-open {
       visibility: visible;
       opacity: 1;
       pointer-events: auto;
       transition-delay: 0s;
     }
-
-    .mobile-menu ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
+    .mobile-menu ul { margin: 0; padding: 0; list-style: none; }
     .mobile-menu a {
       display: flex;
       align-items: baseline;
       justify-content: space-between;
       padding: .9rem 0;
-      border-bottom: 1px solid rgba(255, 255, 255, .28);
+      border-bottom: 1px solid rgba(255,255,255,.28);
       font-family: var(--display);
       font-size: clamp(2.8rem, 15vw, 5.5rem);
       line-height: .9;
       letter-spacing: -.04em;
       text-transform: uppercase;
     }
-
     .mobile-menu a span {
       font-family: var(--mono);
       font-size: .65rem;
@@ -556,56 +422,45 @@
       transform-origin: left;
     }
 
-    /* ==========================================================
-       Hero
-       ========================================================== */
-
+    /* Hero */
     .hero {
       position: relative;
       min-height: 100svh;
       display: grid;
-      align-items: stretch;
+      align-items: end;
       overflow: hidden;
       padding-top: var(--header-h);
       background:
         radial-gradient(circle at 82% 30%, rgba(90, 98, 255, .17), transparent 30%),
         linear-gradient(var(--paper), var(--paper));
     }
-
     .hero::before {
       position: absolute;
       inset: 0;
       content: "";
       opacity: .42;
       background-image:
-        linear-gradient(rgba(17, 17, 15, .08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(17, 17, 15, .08) 1px, transparent 1px);
-      background-size:
-        clamp(36px, 5vw, 82px)
-        clamp(36px, 5vw, 82px);
+        linear-gradient(rgba(17,17,15,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17,17,15,.08) 1px, transparent 1px);
+      background-size: clamp(36px, 5vw, 82px) clamp(36px, 5vw, 82px);
       mask-image: linear-gradient(to bottom, #000 0%, transparent 86%);
     }
-
     .hero__inner {
       position: relative;
       z-index: 1;
-
       min-height: calc(100svh - var(--header-h));
-      display: flex;
-      flex-direction: column;
-
-      padding-top: clamp(1.3rem, 3vw, 3rem);
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 1.2rem;
+      padding-top: clamp(1.5rem, 5vw, 4rem);
       padding-bottom: 1.25rem;
     }
-
     .hero__meta {
       display: flex;
-      flex: 0 0 auto;
       align-items: center;
       justify-content: space-between;
       gap: 2rem;
     }
-
     .hero__status {
       display: inline-flex;
       align-items: center;
@@ -615,121 +470,53 @@
       letter-spacing: .07em;
       text-transform: uppercase;
     }
-
     .status-dot {
       width: .55rem;
       height: .55rem;
       background: var(--blue);
       border-radius: 50%;
-      box-shadow: 0 0 0 .28rem rgba(90, 98, 255, .15);
+      box-shadow: 0 0 0 .28rem rgba(90,98,255,.15);
       animation: pulse 2.4s ease-in-out infinite;
     }
-
-    @keyframes pulse {
-      50% {
-        transform: scale(.65);
-        opacity: .65;
-      }
-    }
-
-    /*
-      Hero layout fix:
-      - The previous .76 line-height was smaller than Archivo Black's
-        glyph bounds, which could visually place the paragraph inside
-        the outlined YADAV text on short-height deployments.
-      - Typography is now constrained by both viewport width and height.
-      - Copy remains in normal document flow rather than relying on
-        visual glyph bounds.
-    */
+    @keyframes pulse { 50% { transform: scale(.65); opacity: .65; } }
 
     .hero__stage {
       position: relative;
-
-      flex: 1 0 auto;
       display: grid;
-      grid-template-columns:
-        minmax(0, 1.3fr)
-        minmax(300px, .7fr);
-
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, .75fr);
       align-items: center;
-      gap: clamp(2rem, 4vw, 5rem);
-
-      padding-block:
-        clamp(2rem, 5vh, 4.5rem)
-        clamp(2.4rem, 6vh, 5rem);
+      gap: clamp(1.5rem, 4vw, 5rem);
+      padding-block: clamp(1.5rem, 4vw, 4rem);
     }
-
-    .hero__copy {
-      position: relative;
-      z-index: 2;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
+    .hero__copy { position: relative; z-index: 2; }
     .hero__name {
-      width: max-content;
-      max-width: 100%;
-      margin: 0;
-
+      margin: 0 0 1.4rem;
       font-family: var(--display);
-
-      /*
-        Width AND height aware sizing prevents the giant heading from
-        colliding with the body copy on short desktop viewports.
-      */
-      font-size: clamp(
-        4.8rem,
-        min(12.6vw, 20vh),
-        12.8rem
-      );
-
-      line-height: .9;
+      font-size: clamp(5rem, 13.5vw, 13.8rem);
+      line-height: .76;
       letter-spacing: -.07em;
       text-transform: uppercase;
     }
-
-    .hero__name span {
-      display: block;
-      line-height: .9;
-    }
-
+    .hero__name span { display: block; }
     .hero__name span:last-child {
-      width: max-content;
-      max-width: calc(100vw - (var(--gutter) * 2));
-      margin-top: .035em;
       color: transparent;
-      -webkit-text-stroke:
-        clamp(1px, .12vw, 2px)
-        var(--ink);
-      transform: translateX(clamp(.5rem, 4vw, 4.5rem));
+      -webkit-text-stroke: clamp(1px, .12vw, 2px) var(--ink);
+      transform: translateX(clamp(1rem, 5vw, 6rem));
     }
-
     .hero__positioning {
       display: grid;
-      grid-template-columns:
-        minmax(0, 490px)
-        auto;
-
+      grid-template-columns: minmax(0, 460px) auto;
       align-items: end;
-      gap: clamp(1.5rem, 3vw, 3rem);
-
-      /*
-        Explicit spacing below the display type keeps the paragraph
-        independent of font rendering differences between environments.
-      */
-      margin-top: clamp(2.2rem, 4vh, 4rem);
-      margin-left: clamp(0rem, 6vw, 6.5rem);
+      gap: 1.5rem;
+      margin-left: clamp(0rem, 8vw, 8rem);
     }
-
     .hero__positioning p {
       margin: 0;
       max-width: 42rem;
-      font-size: clamp(1rem, 1.45vw, 1.42rem);
-      line-height: 1.43;
-      letter-spacing: -.025em;
+      font-size: clamp(1.05rem, 1.55vw, 1.5rem);
+      line-height: 1.35;
+      letter-spacing: -.02em;
     }
-
     .hero__actions {
       display: flex;
       flex-wrap: wrap;
@@ -738,12 +525,11 @@
 
     .system-art {
       position: relative;
-      width: min(100%, 580px);
+      width: min(100%, 600px);
       aspect-ratio: 1;
       justify-self: end;
       isolation: isolate;
     }
-
     .system-art::before {
       position: absolute;
       z-index: -2;
@@ -753,7 +539,6 @@
       border-radius: 50%;
       transform: scale(.88);
     }
-
     .system-art::after {
       position: absolute;
       z-index: -1;
@@ -767,19 +552,8 @@
         radial-gradient(circle at 100% 50%, var(--blue) 0 7px, transparent 8px),
         radial-gradient(circle at 0 50%, var(--coral) 0 6px, transparent 7px);
     }
-
-    @keyframes orbitRotate {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .system-art svg {
-      width: 100%;
-      height: 100%;
-      overflow: visible;
-    }
-
+    @keyframes orbitRotate { to { transform: rotate(360deg); } }
+    .system-art svg { width: 100%; height: 100%; overflow: visible; }
     .system-art .path {
       fill: none;
       stroke: var(--ink);
@@ -787,31 +561,11 @@
       stroke-dasharray: 6 10;
       animation: flow 7s linear infinite;
     }
-
-    @keyframes flow {
-      to {
-        stroke-dashoffset: -64;
-      }
-    }
-
-    .system-art .node-ring {
-      fill: var(--paper);
-      stroke: var(--ink);
-      stroke-width: 1.4;
-    }
-
-    .system-art .node-core {
-      fill: var(--ink);
-    }
-
-    .system-art .node-core--blue {
-      fill: var(--blue);
-    }
-
-    .system-art .node-core--coral {
-      fill: var(--coral);
-    }
-
+    @keyframes flow { to { stroke-dashoffset: -64; } }
+    .system-art .node-ring { fill: var(--paper); stroke: var(--ink); stroke-width: 1.4; }
+    .system-art .node-core { fill: var(--ink); }
+    .system-art .node-core--blue { fill: var(--blue); }
+    .system-art .node-core--coral { fill: var(--coral); }
     .system-art text {
       fill: var(--ink);
       font-family: var(--mono);
@@ -819,33 +573,16 @@
       letter-spacing: .08em;
       text-transform: uppercase;
     }
-
-    .packet {
-      animation: packetMove 5.5s ease-in-out infinite;
-      transform-origin: center;
-    }
-
-    .packet--2 {
-      animation-delay: -2.1s;
-    }
-
-    .packet--3 {
-      animation-delay: -3.8s;
-    }
-
-    @keyframes packetMove {
-      50% {
-        transform: translate(14px, -10px) scale(1.18);
-      }
-    }
+    .packet { animation: packetMove 5.5s ease-in-out infinite; transform-origin: center; }
+    .packet--2 { animation-delay: -2.1s; }
+    .packet--3 { animation-delay: -3.8s; }
+    @keyframes packetMove { 50% { transform: translate(14px, -10px) scale(1.18); } }
 
     .hero__proof {
-      flex: 0 0 auto;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       border-top: 1px solid var(--line-dark);
     }
-
     .hero-proof {
       display: grid;
       grid-template-columns: auto 1fr;
@@ -854,32 +591,21 @@
       padding: 1rem clamp(.8rem, 2vw, 2rem);
       border-right: 1px solid var(--line-dark);
     }
-
-    .hero-proof:first-child {
-      padding-left: 0;
-    }
-
-    .hero-proof:last-child {
-      border-right: 0;
-    }
-
+    .hero-proof:first-child { padding-left: 0; }
+    .hero-proof:last-child { border-right: 0; }
     .hero-proof strong {
       font-family: var(--display);
       font-size: clamp(2rem, 4vw, 4.4rem);
       line-height: .85;
       letter-spacing: -.05em;
     }
-
     .hero-proof span {
       max-width: 11rem;
       font-size: .75rem;
       line-height: 1.35;
     }
 
-    /* ==========================================================
-       Marquee
-       ========================================================== */
-
+    /* Marquee */
     .marquee {
       overflow: hidden;
       color: var(--white);
@@ -887,13 +613,11 @@
       transform: rotate(-1.2deg) scale(1.02);
       transform-origin: center;
     }
-
     .marquee__track {
       display: flex;
       width: max-content;
       animation: marqueeMove 24s linear infinite;
     }
-
     .marquee__item {
       display: flex;
       align-items: center;
@@ -906,30 +630,16 @@
       text-transform: uppercase;
       white-space: nowrap;
     }
+    .marquee__item::after { content: "●"; color: var(--acid); font-size: .45em; }
+    @keyframes marqueeMove { to { transform: translateX(-50%); } }
 
-    .marquee__item::after {
-      content: "●";
-      color: var(--acid);
-      font-size: .45em;
-    }
-
-    @keyframes marqueeMove {
-      to {
-        transform: translateX(-50%);
-      }
-    }
-
-    /* ==========================================================
-       Work
-       ========================================================== */
-
+    /* Work */
     .work {
       position: relative;
       padding-top: clamp(8rem, 14vw, 14rem);
       color: var(--white);
       background: var(--ink);
     }
-
     .work__header {
       display: grid;
       grid-template-columns: 1fr minmax(260px, 32rem);
@@ -937,17 +647,13 @@
       gap: 3rem;
       padding-bottom: clamp(5rem, 10vw, 10rem);
     }
-
     .work__header p {
       margin: 0 0 .7rem;
       font-size: clamp(1rem, 1.5vw, 1.35rem);
       line-height: 1.45;
     }
 
-    .work-stack {
-      position: relative;
-    }
-
+    .work-stack { position: relative; }
     .project-story {
       position: relative;
       min-height: 100svh;
@@ -957,25 +663,15 @@
       background: var(--ink);
       overflow: hidden;
     }
-
     .project-story__inner {
       display: grid;
-      grid-template-columns:
-        minmax(300px, .9fr)
-        minmax(0, 1.1fr);
+      grid-template-columns: minmax(300px, .9fr) minmax(0, 1.1fr);
       align-items: center;
       gap: clamp(2rem, 7vw, 8rem);
       padding-block: clamp(5rem, 10vw, 9rem);
     }
-
-    .project-story:nth-child(even) .project-story__copy {
-      order: 2;
-    }
-
-    .project-story:nth-child(even) .project-visual {
-      order: 1;
-    }
-
+    .project-story:nth-child(even) .project-story__copy { order: 2; }
+    .project-story:nth-child(even) .project-visual { order: 1; }
     .project-index {
       display: flex;
       align-items: center;
@@ -984,11 +680,7 @@
       padding-bottom: .75rem;
       border-bottom: 1px solid var(--line-light);
     }
-
-    .project-index span:last-child {
-      color: var(--acid);
-    }
-
+    .project-index span:last-child { color: var(--acid); }
     .project-story h3 {
       margin: 0 0 1.5rem;
       font-family: var(--display);
@@ -997,15 +689,13 @@
       letter-spacing: -.055em;
       text-transform: uppercase;
     }
-
     .project-story__copy > p {
-      max-width: 38rem;
+      max-width: 36rem;
       margin: 0 0 1.6rem;
-      color: rgba(255, 255, 255, .72);
+      color: rgba(255,255,255,.72);
       font-size: clamp(1rem, 1.25vw, 1.2rem);
       line-height: 1.55;
     }
-
     .tech-line {
       display: flex;
       flex-wrap: wrap;
@@ -1018,16 +708,11 @@
       letter-spacing: .06em;
       text-transform: uppercase;
     }
-
     .tech-line li:not(:last-child)::after {
       margin-left: 1rem;
       color: var(--coral);
       content: "/";
     }
-
-    /* ==========================================================
-       Project visual system
-       ========================================================== */
 
     .project-visual {
       position: relative;
@@ -1041,182 +726,98 @@
       transform-style: preserve-3d;
       transition: transform .6s var(--ease-out);
     }
-
     .project-visual::before {
       position: absolute;
       inset: 0;
       content: "";
       opacity: .35;
       background-image:
-        linear-gradient(rgba(255, 255, 255, .12) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, .12) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px);
       background-size: 12.5% 12.5%;
     }
-
     .project-visual::after {
       position: absolute;
       inset: 8%;
       content: "";
-      border: 1px solid rgba(255, 255, 255, .3);
+      border: 1px solid rgba(255,255,255,.3);
       border-radius: 50%;
     }
-
     .project-visual svg {
       position: relative;
       z-index: 2;
-      width: 88%;
-      height: 88%;
+      width: 82%;
+      height: 82%;
       overflow: visible;
     }
-
     .project-visual .route {
       fill: none;
       stroke: var(--white);
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .project-visual .route--animated {
-      stroke-dasharray: 8 10;
+      stroke-width: 1.4;
+      stroke-dasharray: 9 13;
       animation: flow 6s linear infinite;
     }
-
-    .project-visual .route.acid {
-      stroke: var(--acid);
-    }
-
-    .project-visual .route.blue {
-      stroke: #9297ff;
-    }
-
-    .project-visual .route.coral {
-      stroke: var(--coral);
-    }
-
-    .project-visual .route.muted {
-      stroke: rgba(255, 255, 255, .4);
-    }
-
-    .project-visual .visual-node {
-      fill: #181816;
-      stroke: var(--white);
-      stroke-width: 1.6;
-    }
-
-    .project-visual .visual-node.acid {
-      fill: var(--acid);
-      stroke: var(--acid);
-    }
-
-    .project-visual .visual-node.blue {
-      fill: var(--blue);
-      stroke: var(--blue);
-    }
-
-    .project-visual .visual-node.coral {
-      fill: var(--coral);
-      stroke: var(--coral);
-    }
-
-    .project-visual .node-label {
+    .project-visual .route.accent { stroke: var(--acid); stroke-width: 2.4; }
+    .project-visual .route.blue { stroke: #8e94ff; }
+    .project-visual .route.coral { stroke: var(--coral); }
+    .project-visual .visual-node { fill: var(--ink); stroke: var(--white); stroke-width: 1.4; }
+    .project-visual .visual-node.acid { fill: var(--acid); stroke: var(--acid); }
+    .project-visual .visual-node.blue { fill: var(--blue); stroke: var(--blue); }
+    .project-visual .visual-node.coral { fill: var(--coral); stroke: var(--coral); }
+    .project-visual text {
       fill: var(--white);
       font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: .08em;
-      text-anchor: middle;
+      font-size: 10px;
+      letter-spacing: .1em;
       text-transform: uppercase;
     }
-
-    .project-visual .edge-label {
-      fill: rgba(255, 255, 255, .6);
-      font-family: var(--mono);
-      font-size: 8px;
-      letter-spacing: .075em;
-      text-anchor: middle;
-      text-transform: uppercase;
-    }
-
-    .project-visual .node-index {
-      fill: var(--ink);
-      font-family: var(--mono);
-      font-size: 8px;
-      font-weight: 500;
-      text-anchor: middle;
-    }
-
     .visual-label {
       position: absolute;
       z-index: 3;
       right: 1.25rem;
       bottom: 1.25rem;
-      color: rgba(255, 255, 255, .58);
+      color: rgba(255,255,255,.6);
       font-family: var(--mono);
       font-size: .62rem;
       letter-spacing: .08em;
       text-transform: uppercase;
     }
+    .visual-a { background: radial-gradient(circle at 72% 28%, rgba(215,255,69,.21), transparent 34%), #181816; }
+    .visual-b { background: radial-gradient(circle at 22% 72%, rgba(90,98,255,.26), transparent 35%), #181816; }
+    .visual-c { background: radial-gradient(circle at 75% 68%, rgba(255,102,74,.22), transparent 35%), #181816; }
 
-    .visual-a {
-      background:
-        radial-gradient(circle at 72% 28%, rgba(215, 255, 69, .18), transparent 34%),
-        #181816;
-    }
-
-    .visual-b {
-      background:
-        radial-gradient(circle at 22% 72%, rgba(90, 98, 255, .26), transparent 35%),
-        #181816;
-    }
-
-    .visual-c {
-      background:
-        radial-gradient(circle at 75% 68%, rgba(255, 102, 74, .22), transparent 35%),
-        #181816;
-    }
-
-    /* ==========================================================
-       About
-       ========================================================== */
-
+    /* About */
     .about {
       position: relative;
       padding: clamp(7rem, 13vw, 14rem) 0;
       background: var(--paper);
       overflow: hidden;
     }
-
     .about::after {
       position: absolute;
       top: 8%;
       right: -8vw;
       content: "03";
-      color: rgba(17, 17, 15, .045);
+      color: rgba(17,17,15,.045);
       font-family: var(--display);
       font-size: min(45vw, 42rem);
       line-height: .8;
       letter-spacing: -.08em;
       pointer-events: none;
     }
-
     .about__layout {
       position: relative;
       z-index: 1;
       display: grid;
-      grid-template-columns:
-        minmax(0, 1.35fr)
-        minmax(280px, .65fr);
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
       gap: clamp(3rem, 8vw, 9rem);
     }
-
     .about__statement {
       margin: 2.5rem 0 0;
       font-size: clamp(2rem, 4.1vw, 4.7rem);
       line-height: 1.08;
       letter-spacing: -.045em;
     }
-
     .about__statement strong {
       font-weight: 600;
       text-decoration: underline;
@@ -1224,25 +825,17 @@
       text-decoration-thickness: .12em;
       text-underline-offset: .12em;
     }
-
     .career-note {
       align-self: end;
       padding-top: 1rem;
       border-top: 1px solid var(--ink);
     }
-
     .career-note__role {
       margin: 1rem 0 2.3rem;
       font-size: 1.05rem;
       line-height: 1.45;
     }
-
-    .impact-list {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
+    .impact-list { margin: 0; padding: 0; list-style: none; }
     .impact-list li {
       display: grid;
       grid-template-columns: 2rem 1fr;
@@ -1251,7 +844,6 @@
       border-top: 1px solid var(--line-dark);
       font-size: .9rem;
     }
-
     .impact-list li::before {
       color: var(--blue);
       font-family: var(--mono);
@@ -1259,17 +851,13 @@
       content: attr(data-index);
     }
 
-    /* ==========================================================
-       Capabilities
-       ========================================================== */
-
+    /* Capabilities */
     .capabilities {
       position: relative;
       padding: clamp(7rem, 13vw, 13rem) 0;
       background: var(--acid);
       overflow: hidden;
     }
-
     .capabilities__head {
       display: flex;
       align-items: end;
@@ -1277,28 +865,17 @@
       gap: 3rem;
       margin-bottom: clamp(4rem, 8vw, 8rem);
     }
-
     .capabilities__head p {
       max-width: 28rem;
       margin: 0;
       font-size: 1rem;
     }
-
     .capabilities__layout {
       display: grid;
-      grid-template-columns:
-        minmax(0, 1.2fr)
-        minmax(300px, .8fr);
+      grid-template-columns: minmax(0, 1.2fr) minmax(300px, .8fr);
       gap: clamp(2rem, 7vw, 8rem);
     }
-
-    .cap-list {
-      margin: 0;
-      padding: 0;
-      border-top: 1px solid var(--ink);
-      list-style: none;
-    }
-
+    .cap-list { margin: 0; padding: 0; border-top: 1px solid var(--ink); list-style: none; }
     .cap-item {
       position: relative;
       display: grid;
@@ -1308,21 +885,10 @@
       padding: 1.45rem .2rem;
       border-bottom: 1px solid var(--ink);
       cursor: default;
-      transition:
-        padding .35s var(--ease-out),
-        background .35s ease;
+      transition: padding .35s var(--ease-out), background .35s ease;
     }
-
-    .cap-item:is(:hover, :focus-within, .is-active) {
-      padding-inline: 1rem;
-      background: rgba(255, 255, 255, .25);
-    }
-
-    .cap-item > span:first-child {
-      font-family: var(--mono);
-      font-size: .68rem;
-    }
-
+    .cap-item:is(:hover, :focus-within, .is-active) { padding-inline: 1rem; background: rgba(255,255,255,.25); }
+    .cap-item > span:first-child { font-family: var(--mono); font-size: .68rem; }
     .cap-item h3 {
       margin: 0;
       font-family: var(--display);
@@ -1331,7 +897,6 @@
       letter-spacing: -.045em;
       text-transform: uppercase;
     }
-
     .cap-item button {
       width: 2.5rem;
       height: 2.5rem;
@@ -1342,13 +907,7 @@
       background: transparent;
       cursor: pointer;
     }
-
-    .cap-item__mobile {
-      display: none;
-      grid-column: 2 / -1;
-      margin: .7rem 0 0;
-      font-size: .85rem;
-    }
+    .cap-item__mobile { display: none; grid-column: 2 / -1; margin: .7rem 0 0; font-size: .85rem; }
 
     .cap-visual {
       position: sticky;
@@ -1362,48 +921,21 @@
       box-shadow: var(--shadow);
       overflow: hidden;
     }
-
     .cap-visual::before,
     .cap-visual::after {
       position: absolute;
       content: "";
-      border: 1px solid rgba(255, 255, 255, .24);
+      border: 1px solid rgba(255,255,255,.24);
       border-radius: 50%;
       transition: transform .7s var(--ease-out);
     }
-
-    .cap-visual::before {
-      width: 24rem;
-      height: 24rem;
-      top: -8rem;
-      right: -7rem;
-    }
-
-    .cap-visual::after {
-      width: 16rem;
-      height: 16rem;
-      bottom: -5rem;
-      left: -4rem;
-    }
-
-    .cap-visual[data-state="2"]::before {
-      transform: translate(-5rem, 8rem) scale(.7);
-    }
-
-    .cap-visual[data-state="3"]::after {
-      transform: translate(9rem, -8rem) scale(1.3);
-    }
-
-    .cap-visual[data-state="4"]::before {
-      transform: translate(-9rem, 12rem) rotate(45deg);
-    }
-
+    .cap-visual::before { width: 24rem; height: 24rem; top: -8rem; right: -7rem; }
+    .cap-visual::after { width: 16rem; height: 16rem; bottom: -5rem; left: -4rem; }
+    .cap-visual[data-state="2"]::before { transform: translate(-5rem, 8rem) scale(.7); }
+    .cap-visual[data-state="3"]::after { transform: translate(9rem, -8rem) scale(1.3); }
+    .cap-visual[data-state="4"]::before { transform: translate(-9rem, 12rem) rotate(45deg); }
     .cap-visual__top,
-    .cap-visual__bottom {
-      position: relative;
-      z-index: 2;
-    }
-
+    .cap-visual__bottom { position: relative; z-index: 2; }
     .cap-visual__title {
       margin: 1.6rem 0 1rem;
       font-family: var(--display);
@@ -1412,19 +944,12 @@
       letter-spacing: -.05em;
       text-transform: uppercase;
     }
-
-    .cap-visual__desc {
-      max-width: 25rem;
-      margin: 0;
-      color: rgba(255, 255, 255, .7);
-    }
-
+    .cap-visual__desc { max-width: 25rem; margin: 0; color: rgba(255,255,255,.7); }
     .cap-visual__signal {
       width: 100%;
       height: 7rem;
       margin-top: 3rem;
     }
-
     .cap-visual__signal polyline {
       fill: none;
       stroke: var(--acid);
@@ -1433,15 +958,11 @@
       animation: flow 6s linear infinite;
     }
 
-    /* ==========================================================
-       Proof
-       ========================================================== */
-
+    /* Proof */
     .proof {
       padding: clamp(7rem, 12vw, 12rem) 0;
       background: var(--paper);
     }
-
     .proof__head {
       display: grid;
       grid-template-columns: 1fr minmax(250px, 30rem);
@@ -1449,19 +970,13 @@
       gap: 3rem;
       margin-bottom: clamp(4rem, 8vw, 7rem);
     }
-
-    .proof__head p {
-      margin: 0;
-      font-size: 1rem;
-    }
-
+    .proof__head p { margin: 0; font-size: 1rem; }
     .proof-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       border-top: 1px solid var(--ink);
       border-bottom: 1px solid var(--ink);
     }
-
     .proof-item {
       min-height: 24rem;
       display: flex;
@@ -1471,47 +986,20 @@
       padding: 2rem clamp(1rem, 3vw, 3rem);
       border-right: 1px solid var(--ink);
     }
-
-    .proof-item:first-child {
-      padding-left: 0;
-    }
-
-    .proof-item:last-child {
-      padding-right: 0;
-      border-right: 0;
-    }
-
+    .proof-item:first-child { padding-left: 0; }
+    .proof-item:last-child { padding-right: 0; border-right: 0; }
     .proof-item__number {
       font-family: var(--display);
       font-size: clamp(4.6rem, 9vw, 10rem);
       line-height: .78;
       letter-spacing: -.07em;
     }
+    .proof-item:nth-child(2) .proof-item__number { color: var(--blue); }
+    .proof-item:nth-child(3) .proof-item__number { color: var(--coral); }
+    .proof-item h3 { margin: 0 0 .5rem; font-size: 1.05rem; }
+    .proof-item p { margin: 0; max-width: 18rem; color: rgba(17,17,15,.68); font-size: .9rem; }
 
-    .proof-item:nth-child(2) .proof-item__number {
-      color: var(--blue);
-    }
-
-    .proof-item:nth-child(3) .proof-item__number {
-      color: var(--coral);
-    }
-
-    .proof-item h3 {
-      margin: 0 0 .5rem;
-      font-size: 1.05rem;
-    }
-
-    .proof-item p {
-      margin: 0;
-      max-width: 18rem;
-      color: rgba(17, 17, 15, .68);
-      font-size: .9rem;
-    }
-
-    /* ==========================================================
-       Contact
-       ========================================================== */
-
+    /* Contact */
     .contact {
       position: relative;
       min-height: 100svh;
@@ -1522,7 +1010,6 @@
       background: var(--blue);
       overflow: hidden;
     }
-
     .contact::before {
       position: absolute;
       top: -22vw;
@@ -1530,18 +1017,11 @@
       width: 55vw;
       height: 55vw;
       content: "";
-      border: 1px solid rgba(255, 255, 255, .32);
+      border: 1px solid rgba(255,255,255,.32);
       border-radius: 50%;
-      box-shadow:
-        0 0 0 10vw rgba(255, 255, 255, .04),
-        0 0 0 20vw rgba(255, 255, 255, .03);
+      box-shadow: 0 0 0 10vw rgba(255,255,255,.04), 0 0 0 20vw rgba(255,255,255,.03);
     }
-
-    .contact__inner {
-      position: relative;
-      z-index: 1;
-    }
-
+    .contact__inner { position: relative; z-index: 1; }
     .contact__title {
       max-width: 14ch;
       margin: 2rem 0 3rem;
@@ -1551,20 +1031,15 @@
       letter-spacing: -.07em;
       text-transform: uppercase;
     }
-
-    .contact__title span {
-      color: var(--acid);
-    }
-
+    .contact__title span { color: var(--acid); }
     .contact__bar {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
       align-items: end;
       gap: 2rem;
       padding-top: 1.5rem;
-      border-top: 1px solid rgba(255, 255, 255, .5);
+      border-top: 1px solid rgba(255,255,255,.5);
     }
-
     .contact__mail {
       display: inline-block;
       width: fit-content;
@@ -1574,14 +1049,12 @@
       text-decoration-thickness: 1px;
       text-underline-offset: .25em;
     }
-
     .contact__actions {
       display: flex;
       flex-wrap: wrap;
       justify-content: end;
       gap: .65rem;
     }
-
     .contact-links {
       display: flex;
       flex-wrap: wrap;
@@ -1592,12 +1065,7 @@
       letter-spacing: .07em;
       text-transform: uppercase;
     }
-
-    .contact-links a {
-      position: relative;
-      padding-bottom: .25rem;
-    }
-
+    .contact-links a { position: relative; padding-bottom: .25rem; }
     .contact-links a::after {
       position: absolute;
       right: 0;
@@ -1610,12 +1078,7 @@
       transform-origin: right;
       transition: transform .3s var(--ease-out);
     }
-
-    .contact-links a:hover::after {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
-
+    .contact-links a:hover::after { transform: scaleX(1); transform-origin: left; }
     .footer {
       display: flex;
       align-items: center;
@@ -1623,17 +1086,14 @@
       gap: 1rem;
       margin-top: clamp(5rem, 10vw, 10rem);
       padding-top: 1rem;
-      border-top: 1px solid rgba(255, 255, 255, .28);
+      border-top: 1px solid rgba(255,255,255,.28);
       font-family: var(--mono);
       font-size: .62rem;
       letter-spacing: .05em;
       text-transform: uppercase;
     }
 
-    /* ==========================================================
-       Dialogs
-       ========================================================== */
-
+    /* Dialog */
     dialog {
       width: min(92vw, 820px);
       max-height: min(88vh, 820px);
@@ -1641,15 +1101,10 @@
       color: var(--ink);
       border: 0;
       background: var(--paper);
-      box-shadow: 0 35px 120px rgba(0, 0, 0, .45);
+      box-shadow: 0 35px 120px rgba(0,0,0,.45);
       overflow: auto;
     }
-
-    dialog::backdrop {
-      background: rgba(17, 17, 15, .78);
-      backdrop-filter: blur(4px);
-    }
-
+    dialog::backdrop { background: rgba(17,17,15,.78); backdrop-filter: blur(4px); }
     .dialog__head {
       position: sticky;
       z-index: 2;
@@ -1660,10 +1115,9 @@
       gap: 1rem;
       padding: 1rem 1.25rem;
       border-bottom: 1px solid var(--line-dark);
-      background: rgba(243, 240, 231, .94);
+      background: rgba(243,240,231,.94);
       backdrop-filter: blur(10px);
     }
-
     .dialog__close {
       width: 2.7rem;
       height: 2.7rem;
@@ -1674,11 +1128,7 @@
       background: transparent;
       cursor: pointer;
     }
-
-    .dialog__body {
-      padding: clamp(1.5rem, 5vw, 4rem);
-    }
-
+    .dialog__body { padding: clamp(1.5rem, 5vw, 4rem); }
     .dialog__body h2 {
       margin: 0 0 1.2rem;
       font-family: var(--display);
@@ -1687,44 +1137,17 @@
       letter-spacing: -.05em;
       text-transform: uppercase;
     }
-
-    .dialog__lead {
-      margin: 0 0 2.5rem;
-      font-size: 1.08rem;
-    }
-
+    .dialog__lead { margin: 0 0 2.5rem; font-size: 1.08rem; }
     .dialog-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       border-top: 1px solid var(--ink);
     }
-
-    .dialog-note {
-      padding: 1.25rem 1rem 1.25rem 0;
-      border-bottom: 1px solid var(--line-dark);
-    }
-
-    .dialog-note:nth-child(odd) {
-      border-right: 1px solid var(--line-dark);
-    }
-
-    .dialog-note:nth-child(even) {
-      padding-left: 1rem;
-    }
-
-    .dialog-note h3 {
-      margin: 0 0 .5rem;
-      font-family: var(--mono);
-      font-size: .68rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .dialog-note p {
-      margin: 0;
-      font-size: .9rem;
-      line-height: 1.6;
-    }
+    .dialog-note { padding: 1.25rem 1rem 1.25rem 0; border-bottom: 1px solid var(--line-dark); }
+    .dialog-note:nth-child(odd) { border-right: 1px solid var(--line-dark); }
+    .dialog-note:nth-child(even) { padding-left: 1rem; }
+    .dialog-note h3 { margin: 0 0 .5rem; font-family: var(--mono); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; }
+    .dialog-note p { margin: 0; font-size: .9rem; line-height: 1.6; }
 
     .toast {
       position: fixed;
@@ -1741,59 +1164,375 @@
       transform: translateY(150%);
       transition: transform .45s var(--ease-out);
     }
+    .toast.is-visible { transform: translateY(0); }
 
-    .toast.is-visible {
-      transform: translateY(0);
-    }
-
-    /* ==========================================================
-       Reveal states
-       ========================================================== */
-
+    /* Progressive motion */
     .motion-ready .reveal {
       opacity: 0;
       transform: translateY(3rem);
     }
-
     .motion-ready .reveal.is-visible {
       opacity: 1;
       transform: translateY(0);
-      transition:
-        opacity .9s var(--ease-out),
-        transform .9s var(--ease-out);
+      transition: opacity .9s var(--ease-out), transform .9s var(--ease-out);
     }
-
-    .motion-ready .reveal[data-delay="1"].is-visible {
-      transition-delay: .12s;
-    }
-
-    .motion-ready .reveal[data-delay="2"].is-visible {
-      transition-delay: .22s;
-    }
-
-    /* ==========================================================
-       Sticky project behaviour
-       ========================================================== */
+    .motion-ready .reveal[data-delay="1"].is-visible { transition-delay: .12s; }
+    .motion-ready .reveal[data-delay="2"].is-visible { transition-delay: .22s; }
 
     @media (min-width: 901px) {
+      .project-story { position: sticky; top: 0; }
+      .project-story:nth-child(2) { top: .6rem; }
+      .project-story:nth-child(3) { top: 1.2rem; }
+    }
+
+    @media (max-width: 1100px) {
+      .hero__stage { grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr); }
+      .hero__positioning { grid-template-columns: 1fr; margin-left: 0; }
+      .project-story__inner { grid-template-columns: 1fr 1fr; gap: 3rem; }
+      .project-visual { min-height: 54vw; }
+      .capabilities__layout { grid-template-columns: 1.15fr .85fr; gap: 3rem; }
+    }
+
+    @media (max-width: 900px) {
+      :root { --header-h: 4.5rem; }
+      .desktop-nav { display: none; }
+      .menu-toggle { display: block; }
+      .hero__stage { grid-template-columns: 1fr; align-content: center; }
+      .system-art {
+        position: absolute;
+        z-index: -1;
+        top: 50%;
+        right: -12vw;
+        width: min(62vw, 500px);
+        opacity: .44;
+        transform: translateY(-50%);
+      }
+      .hero__name { font-size: clamp(5.8rem, 20vw, 10rem); }
+      .hero__positioning { max-width: 36rem; }
+      .work__header,
+      .proof__head { grid-template-columns: 1fr; align-items: start; }
+      .project-story { min-height: auto; }
+      .project-story__inner { grid-template-columns: 1fr; }
+      .project-story:nth-child(even) .project-story__copy,
+      .project-story:nth-child(even) .project-visual { order: initial; }
+      .project-visual { min-height: 70vw; }
+      .about__layout { grid-template-columns: 1fr; }
+      .career-note { max-width: 38rem; }
+      .capabilities__layout { grid-template-columns: 1fr; }
+      .cap-visual { position: relative; top: auto; min-height: 28rem; }
+      .proof-grid { grid-template-columns: 1fr; }
+      .proof-item {
+        min-height: 18rem;
+        padding: 2rem 0;
+        border-right: 0;
+        border-bottom: 1px solid var(--ink);
+      }
+      .proof-item:last-child { border-bottom: 0; }
+      .contact__bar { grid-template-columns: 1fr; }
+      .contact__actions { justify-content: start; }
+    }
+
+    @media (max-width: 620px) {
+      :root { --gutter: 1rem; }
+      .brand__text { display: none; }
+      .hero__inner { padding-bottom: .75rem; }
+      .hero__meta { align-items: flex-start; }
+      .hero__meta .mono:last-child { max-width: 10rem; text-align: right; }
+      .hero__name { margin-bottom: 1rem; font-size: clamp(4.65rem, 23vw, 7.5rem); }
+      .hero__name span:last-child { transform: translateX(.45rem); }
+      .hero__positioning p { font-size: 1rem; }
+      .hero__actions { width: 100%; }
+      .hero__actions .button { flex: 1 1 10rem; }
+      .system-art { right: -22vw; width: 76vw; }
+      .hero__proof { grid-template-columns: 1fr; }
+      .hero-proof,
+      .hero-proof:first-child {
+        grid-template-columns: 5.2rem 1fr;
+        padding: .55rem 0;
+        border-right: 0;
+        border-bottom: 1px solid var(--line-dark);
+      }
+      .hero-proof:last-child { border-bottom: 0; }
+      .hero-proof strong { font-size: 1.85rem; }
+      .hero-proof span { max-width: none; }
+      .marquee__item { padding-block: .75rem; }
+      .work { padding-top: 7rem; }
+      .project-story__inner { padding-block: 4.5rem; }
+      .project-story h3 { font-size: clamp(3rem, 16vw, 4.8rem); }
+      .project-visual { min-height: 88vw; }
+      .about__statement { font-size: clamp(1.8rem, 8vw, 2.65rem); }
+      .capabilities__head { display: grid; }
+      .cap-item { grid-template-columns: 1.8rem 1fr auto; gap: .7rem; padding-block: 1.15rem; }
+      .cap-item h3 { font-size: 1.65rem; }
+      .cap-item__mobile { display: block; }
+      .cap-visual { display: none; }
+      .proof-item { min-height: 15rem; }
+      .contact__title { font-size: clamp(4rem, 21vw, 7rem); }
+      .contact__actions { display: grid; grid-template-columns: 1fr 1fr; }
+      .contact__actions .button { width: 100%; }
+      .footer { align-items: flex-start; flex-direction: column; }
+      .dialog-grid { grid-template-columns: 1fr; }
+      .dialog-note:nth-child(odd) { border-right: 0; }
+      .dialog-note:nth-child(even) { padding-left: 0; }
+    }
+
+    @media (hover: none), (pointer: coarse) {
+      .cursor { display: none; }
+      .magnetic { transform: none !important; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .001ms !important;
+      }
+      .intro { display: none; }
+      .motion-ready .reveal { opacity: 1; transform: none; }
+      .cursor { display: none; }
+    }
+
+    @media print {
+      .intro, .cursor, .site-header, .mobile-menu, .scroll-progress, .marquee, .toast { display: none !important; }
+      body { color: #000; background: #fff; }
+      section { min-height: auto !important; color: #000 !important; background: #fff !important; break-inside: avoid; }
+    }
+  
+
+    /* ==========================================================
+       FINAL LAYOUT FIXES
+       Deployment-safe hero + complete project visibility
+       ========================================================== */
+
+    /* Hero: constrain display type by both viewport width and height. */
+    .hero {
+      align-items: stretch;
+    }
+
+    .hero__inner {
+      min-height: calc(100svh - var(--header-h));
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding-top: clamp(1.2rem, 3vh, 2.6rem);
+      padding-bottom: 1.25rem;
+    }
+
+    .hero__meta {
+      flex: 0 0 auto;
+    }
+
+    .hero__stage {
+      flex: 1 0 auto;
+      grid-template-columns: minmax(0, 1.3fr) minmax(280px, .7fr);
+      gap: clamp(2rem, 4vw, 5rem);
+      padding-block: clamp(2rem, 5vh, 4.25rem) clamp(2.5rem, 6vh, 5rem);
+    }
+
+    .hero__copy {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero__name {
+      width: max-content;
+      max-width: 100%;
+      margin: 0;
+      font-size: clamp(4.8rem, min(12.4vw, 19.5vh), 12.6rem);
+      line-height: .9;
+    }
+
+    .hero__name span {
+      line-height: .9;
+    }
+
+    .hero__name span:last-child {
+      width: max-content;
+      max-width: calc(100vw - (var(--gutter) * 2));
+      margin-top: .035em;
+      transform: translateX(clamp(.5rem, 4vw, 4.5rem));
+    }
+
+    .hero__positioning {
+      grid-template-columns: minmax(0, 490px) auto;
+      gap: clamp(1.5rem, 3vw, 3rem);
+      margin-top: clamp(2.2rem, 4vh, 4rem);
+      margin-left: clamp(0rem, 6vw, 6.5rem);
+    }
+
+    .hero__positioning p {
+      font-size: clamp(1rem, 1.45vw, 1.42rem);
+      line-height: 1.43;
+    }
+
+    .hero__proof {
+      flex: 0 0 auto;
+    }
+
+    .system-art {
+      width: min(100%, 580px);
+    }
+
+    /* Project text always completes before the following story can cover it. */
+    .project-story {
+      position: relative;
+      top: auto;
+      z-index: auto;
+      min-height: auto;
+    }
+
+    .project-story__inner {
+      min-height: auto;
+      grid-template-columns: minmax(300px, .9fr) minmax(0, 1.1fr);
+      align-items: center;
+      gap: clamp(2rem, 6vw, 7rem);
+      padding-block: clamp(3.8rem, 7vh, 6.5rem);
+    }
+
+    .project-story__copy {
+      position: relative;
+      z-index: 4;
+      min-width: 0;
+    }
+
+    .project-index {
+      margin-bottom: clamp(1.5rem, 3.5vh, 3.2rem);
+    }
+
+    .project-story h3 {
+      margin-bottom: clamp(1.05rem, 2.3vh, 1.55rem);
+      font-size: clamp(3rem, min(6.1vw, 10.2vh), 6.7rem);
+      line-height: .9;
+    }
+
+    .project-story__copy > p {
+      max-width: 38rem;
+      margin-bottom: clamp(1.2rem, 2.6vh, 1.75rem);
+      font-size: clamp(.95rem, min(1.2vw, 2.2vh), 1.15rem);
+    }
+
+    .tech-line {
+      margin: 0 0 clamp(1.35rem, 2.8vh, 2rem);
+    }
+
+    .project-story__copy .button {
+      position: relative;
+      z-index: 6;
+      margin-bottom: .4rem;
+    }
+
+    /* Workflow diagram has a deliberate directed graph rather than decorative crossings. */
+    .workflow-diagram .route {
+      fill: none;
+      stroke: var(--white);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: none;
+      animation: none;
+    }
+
+    .workflow-diagram .route--animated {
+      stroke-dasharray: 8 10;
+      animation: flow 6s linear infinite;
+    }
+
+    .workflow-diagram .route.acid {
+      stroke: var(--acid);
+      stroke-width: 2.2;
+    }
+
+    .workflow-diagram .route.blue {
+      stroke: #9297ff;
+    }
+
+    .workflow-diagram .route.coral {
+      stroke: var(--coral);
+    }
+
+    .workflow-diagram .route.muted {
+      stroke: rgba(255,255,255,.18);
+      stroke-width: 1;
+      stroke-dasharray: 4 13;
+    }
+
+    .workflow-diagram .node-label,
+    .workflow-diagram .edge-label,
+    .workflow-diagram .node-index {
+      font-family: var(--mono);
+      text-anchor: middle;
+      text-transform: uppercase;
+    }
+
+    .workflow-diagram .node-label {
+      fill: var(--white);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .08em;
+    }
+
+    .workflow-diagram .edge-label {
+      fill: rgba(255,255,255,.58);
+      font-size: 8px;
+      letter-spacing: .07em;
+    }
+
+    .workflow-diagram .node-index {
+      fill: var(--ink);
+      font-size: 8px;
+      font-weight: 500;
+    }
+
+    /*
+      Sticky layer effect is opt-in only on genuinely tall desktops.
+      This prevents story 2/3 from covering the CTA of story 1/2 on laptops.
+    */
+    @media (min-width: 901px) and (min-height: 920px) {
       .project-story {
         position: sticky;
         top: 0;
+        min-height: 100svh;
       }
 
-      .project-story:nth-child(2) {
-        top: .6rem;
+      .project-story__inner {
+        min-height: 100svh;
       }
 
-      .project-story:nth-child(3) {
-        top: 1.2rem;
-      }
+      .project-story:nth-child(1) { z-index: 1; }
+      .project-story:nth-child(2) { z-index: 2; top: .5rem; }
+      .project-story:nth-child(3) { z-index: 3; top: 1rem; }
     }
 
-    /* ==========================================================
-       Short desktop screens
-       Critical deployment-overlap protection
-       ========================================================== */
+    /* Short desktop/laptop: normal flow is mandatory. */
+    @media (min-width: 901px) and (max-height: 919px) {
+      .project-story,
+      .project-story:nth-child(1),
+      .project-story:nth-child(2),
+      .project-story:nth-child(3) {
+        position: relative;
+        top: auto;
+        z-index: auto;
+        min-height: auto;
+      }
+
+      .project-story__inner {
+        min-height: auto;
+        padding-top: clamp(3.5rem, 7vh, 5rem);
+        padding-bottom: clamp(4.5rem, 9vh, 6.25rem);
+        gap: clamp(2.5rem, 5vw, 5rem);
+      }
+
+      .project-story h3 {
+        font-size: clamp(2.9rem, min(5.3vw, 9.2vh), 5.4rem);
+      }
+
+      .project-visual {
+        min-height: min(68vh, 590px);
+      }
+    }
 
     @media (min-width: 901px) and (max-height: 760px) {
       .hero__inner {
@@ -1801,15 +1540,11 @@
       }
 
       .hero__stage {
-        padding-block: 1.5rem 2rem;
+        padding-block: 1.3rem 1.8rem;
       }
 
       .hero__name {
-        font-size: clamp(
-          4.1rem,
-          min(10.5vw, 17vh),
-          8.8rem
-        );
+        font-size: clamp(4rem, min(10.2vw, 16.5vh), 8.5rem);
         line-height: .92;
       }
 
@@ -1818,16 +1553,16 @@
       }
 
       .hero__positioning {
-        margin-top: 1.5rem;
+        margin-top: 1.45rem;
         margin-left: clamp(0rem, 4vw, 4rem);
       }
 
       .hero__positioning p {
-        font-size: clamp(.95rem, 1.25vw, 1.18rem);
+        font-size: clamp(.94rem, 1.2vw, 1.15rem);
       }
 
       .system-art {
-        width: min(72vh, 480px);
+        width: min(70vh, 470px);
       }
 
       .hero-proof {
@@ -1839,94 +1574,47 @@
       }
     }
 
-    @media (min-width: 901px) and (max-height: 620px) {
-      .hero__stage {
-        align-items: start;
-        padding-top: 1rem;
-      }
-
-      .hero__name {
-        font-size: clamp(
-          3.8rem,
-          min(9.5vw, 15vh),
-          7.3rem
-        );
-      }
-
-      .hero__positioning {
-        margin-top: 1.1rem;
-      }
-
-      .system-art {
-        width: min(62vh, 390px);
-      }
-    }
-
-    /* ==========================================================
-       Tablet
-       ========================================================== */
-
-    @media (max-width: 1100px) {
-      .hero__stage {
-        grid-template-columns:
-          minmax(0, 1.1fr)
-          minmax(270px, .9fr);
-      }
-
-      .hero__positioning {
-        grid-template-columns: 1fr;
-        margin-left: 0;
-      }
-
+    @media (min-width: 901px) and (max-height: 690px) {
       .project-story__inner {
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
+        padding-block: 3.4rem;
+      }
+
+      .project-story h3 {
+        font-size: clamp(2.65rem, min(4.6vw, 8.2vh), 4.4rem);
+        margin-bottom: 1rem;
+      }
+
+      .project-index {
+        margin-bottom: 1.25rem;
+      }
+
+      .project-story__copy > p {
+        margin-bottom: 1.15rem;
+      }
+
+      .tech-line {
+        margin-bottom: 1.25rem;
       }
 
       .project-visual {
-        min-height: 54vw;
+        min-height: min(74vh, 510px);
       }
+    }
 
-      .capabilities__layout {
-        grid-template-columns: 1.15fr .85fr;
+    @media (max-width: 1100px) and (min-width: 901px) {
+      .project-story__inner {
+        grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
         gap: 3rem;
       }
     }
 
-    /* ==========================================================
-       Mobile / compact tablet
-       ========================================================== */
-
     @media (max-width: 900px) {
-      :root {
-        --header-h: 4.5rem;
-      }
-
-      .desktop-nav {
-        display: none;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-
       .hero__stage {
         grid-template-columns: 1fr;
-        align-content: center;
-      }
-
-      .system-art {
-        position: absolute;
-        z-index: -1;
-        top: 50%;
-        right: -12vw;
-        width: min(62vw, 500px);
-        opacity: .25;
-        transform: translateY(-50%);
       }
 
       .hero__name {
-        font-size: clamp(5.6rem, 19vw, 9.7rem);
+        font-size: clamp(5.4rem, 19vw, 9.5rem);
         line-height: .9;
       }
 
@@ -1937,20 +1625,24 @@
       .hero__positioning {
         max-width: 36rem;
         margin-top: 2rem;
+        margin-left: 0;
       }
 
-      .work__header,
-      .proof__head {
-        grid-template-columns: 1fr;
-        align-items: start;
-      }
-
-      .project-story {
+      .project-story,
+      .project-story:nth-child(1),
+      .project-story:nth-child(2),
+      .project-story:nth-child(3) {
+        position: relative;
+        top: auto;
+        z-index: auto;
         min-height: auto;
       }
 
       .project-story__inner {
+        min-height: auto;
         grid-template-columns: 1fr;
+        gap: clamp(2.5rem, 8vw, 4rem);
+        padding-block: clamp(4.5rem, 10vw, 6rem);
       }
 
       .project-story:nth-child(even) .project-story__copy,
@@ -1958,82 +1650,19 @@
         order: initial;
       }
 
-      .project-visual {
-        min-height: 70vw;
-      }
-
-      .about__layout {
-        grid-template-columns: 1fr;
-      }
-
-      .career-note {
-        max-width: 38rem;
-      }
-
-      .capabilities__layout {
-        grid-template-columns: 1fr;
-      }
-
-      .cap-visual {
-        position: relative;
-        top: auto;
-        min-height: 28rem;
-      }
-
-      .proof-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .proof-item {
-        min-height: 18rem;
-        padding: 2rem 0;
-        border-right: 0;
-        border-bottom: 1px solid var(--ink);
-      }
-
-      .proof-item:last-child {
-        border-bottom: 0;
-      }
-
-      .contact__bar {
-        grid-template-columns: 1fr;
-      }
-
-      .contact__actions {
-        justify-content: start;
+      .project-story h3 {
+        font-size: clamp(3rem, 11vw, 5.5rem);
       }
     }
 
     @media (max-width: 620px) {
-      :root {
-        --gutter: 1rem;
-      }
-
-      .brand__text {
-        display: none;
-      }
-
-      .hero__inner {
-        min-height: calc(100svh - var(--header-h));
-        padding-bottom: .75rem;
-      }
-
-      .hero__meta {
-        align-items: flex-start;
-      }
-
-      .hero__meta .mono:last-child {
-        max-width: 10rem;
-        text-align: right;
-      }
-
       .hero__stage {
         padding-block: 2rem 2.8rem;
       }
 
       .hero__name {
         width: 100%;
-        font-size: clamp(4.35rem, 22vw, 7.1rem);
+        font-size: clamp(4.25rem, 22vw, 7rem);
         line-height: .92;
       }
 
@@ -2043,225 +1672,57 @@
 
       .hero__name span:last-child {
         max-width: 100%;
-        transform: translateX(.3rem);
+        transform: translateX(.25rem);
       }
 
       .hero__positioning {
-        margin-top: 1.75rem;
-      }
-
-      .hero__positioning p {
-        font-size: 1rem;
-        line-height: 1.5;
-      }
-
-      .hero__actions {
-        width: 100%;
-      }
-
-      .hero__actions .button {
-        flex: 1 1 10rem;
-      }
-
-      .system-art {
-        right: -28vw;
-        width: 76vw;
-      }
-
-      .hero__proof {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-proof,
-      .hero-proof:first-child {
-        grid-template-columns: 5.2rem 1fr;
-        padding: .55rem 0;
-        border-right: 0;
-        border-bottom: 1px solid var(--line-dark);
-      }
-
-      .hero-proof:last-child {
-        border-bottom: 0;
-      }
-
-      .hero-proof strong {
-        font-size: 1.85rem;
-      }
-
-      .hero-proof span {
-        max-width: none;
-      }
-
-      .marquee__item {
-        padding-block: .75rem;
-      }
-
-      .work {
-        padding-top: 7rem;
+        margin-top: 1.7rem;
       }
 
       .project-story__inner {
-        padding-block: 4.5rem;
+        padding-block: 4.25rem;
+      }
+
+      .project-index {
+        margin-bottom: 1.7rem;
       }
 
       .project-story h3 {
-        font-size: clamp(3rem, 16vw, 4.8rem);
+        font-size: clamp(2.8rem, 15vw, 4.65rem);
+        margin-bottom: 1.15rem;
+      }
+
+      .project-story__copy > p {
+        font-size: 1rem;
+      }
+
+      .tech-line {
+        gap: .45rem .75rem;
+        margin-bottom: 1.65rem;
+      }
+
+      .tech-line li:not(:last-child)::after {
+        margin-left: .75rem;
+      }
+
+      .project-story__copy .button {
+        width: fit-content;
+        min-width: 12rem;
       }
 
       .project-visual {
         min-height: 94vw;
       }
 
-      .project-visual svg {
-        width: 94%;
-        height: 94%;
+      .workflow-diagram .node-label {
+        font-size: 8px;
       }
 
-      .project-visual .node-label {
-        font-size: 9px;
-      }
-
-      .project-visual .edge-label {
-        font-size: 7px;
-      }
-
-      .about__statement {
-        font-size: clamp(1.8rem, 8vw, 2.65rem);
-      }
-
-      .capabilities__head {
-        display: grid;
-      }
-
-      .cap-item {
-        grid-template-columns: 1.8rem 1fr auto;
-        gap: .7rem;
-        padding-block: 1.15rem;
-      }
-
-      .cap-item h3 {
-        font-size: 1.65rem;
-      }
-
-      .cap-item__mobile {
-        display: block;
-      }
-
-      .cap-visual {
-        display: none;
-      }
-
-      .proof-item {
-        min-height: 15rem;
-      }
-
-      .contact__title {
-        font-size: clamp(4rem, 21vw, 7rem);
-      }
-
-      .contact__actions {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .contact__actions .button {
-        width: 100%;
-      }
-
-      .footer {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .dialog-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .dialog-note:nth-child(odd) {
-        border-right: 0;
-      }
-
-      .dialog-note:nth-child(even) {
-        padding-left: 0;
+      .workflow-diagram .edge-label {
+        font-size: 6.5px;
       }
     }
 
-    @media (max-width: 390px) {
-      .hero__name {
-        font-size: clamp(4rem, 21vw, 5.2rem);
-      }
-
-      .hero__actions {
-        display: grid;
-        grid-template-columns: 1fr;
-      }
-
-      .contact__actions {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (hover: none), (pointer: coarse) {
-      .cursor {
-        display: none;
-      }
-
-      .magnetic {
-        transform: none !important;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *,
-      *::before,
-      *::after {
-        animation-duration: .001ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: .001ms !important;
-      }
-
-      .intro {
-        display: none;
-      }
-
-      .motion-ready .reveal {
-        opacity: 1;
-        transform: none;
-      }
-
-      .cursor {
-        display: none;
-      }
-    }
-
-    @media print {
-      .intro,
-      .cursor,
-      .site-header,
-      .mobile-menu,
-      .scroll-progress,
-      .marquee,
-      .toast {
-        display: none !important;
-      }
-
-      body {
-        color: #000;
-        background: #fff;
-      }
-
-      section {
-        min-height: auto !important;
-        color: #000 !important;
-        background: #fff !important;
-        break-inside: avoid;
-      }
-    }
   </style>
 
   <script type="application/ld+json">
@@ -2275,46 +1736,21 @@
       "https://www.linkedin.com/in/sumit-yadav-7938bb252/",
       "https://leetcode.com/u/im_sumit/"
     ],
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Tata Consultancy Services"
-    },
-    "alumniOf": {
-      "@type": "CollegeOrUniversity",
-      "name": "PSIT College of Engineering"
-    },
-    "knowsAbout": [
-      "Java",
-      "Spring Boot",
-      "Microservices",
-      "REST APIs",
-      "Event-driven systems",
-      "Spring Security",
-      "Reactive programming",
-      "GraalJS"
-    ]
+    "worksFor": { "@type": "Organization", "name": "Tata Consultancy Services" },
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "PSIT College of Engineering" },
+    "knowsAbout": ["Java", "Spring Boot", "Microservices", "REST APIs", "Event-driven systems", "Spring Security", "Reactive programming", "GraalJS"]
   }
   </script>
 </head>
-
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <div class="intro" id="intro" aria-hidden="true">
     <div class="intro__inner">
-      <div class="intro__top">
-        <span>System identity</span>
-        <span>Build ready</span>
-      </div>
-
+      <div class="intro__top"><span>System identity</span><span>Build ready</span></div>
       <p class="intro__name">Sumit<br>Yadav</p>
-
       <div class="intro__line"></div>
-
-      <div class="intro__top">
-        <span>Java backend engineer</span>
-        <span>Secure · reliable · connected</span>
-      </div>
+      <div class="intro__top"><span>Java backend engineer</span><span>Secure · reliable · connected</span></div>
     </div>
   </div>
 
@@ -2325,11 +1761,7 @@
     <div class="container site-header__inner">
       <a class="brand interactive" href="#home" aria-label="Sumit Yadav, back to top">
         <span class="brand__mark">SY</span>
-
-        <span class="brand__text">
-          <span>Sumit Yadav</span>
-          <span>Backend systems</span>
-        </span>
+        <span class="brand__text"><span>Sumit Yadav</span><span>Backend systems</span></span>
       </a>
 
       <nav class="desktop-nav" aria-label="Primary navigation">
@@ -2342,24 +1774,13 @@
         </ul>
       </nav>
 
-      <button
-        class="menu-toggle interactive"
-        type="button"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-        aria-label="Open menu"
-      >
+      <button class="menu-toggle interactive" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
         <span aria-hidden="true"></span>
       </button>
     </div>
   </header>
 
-  <nav
-    class="mobile-menu"
-    id="mobile-menu"
-    aria-label="Mobile navigation"
-    aria-hidden="true"
-  >
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
     <ul>
       <li><a href="#work"><span>01</span>Work</a></li>
       <li><a href="#about"><span>02</span>About</a></li>
@@ -2370,2319 +1791,714 @@
   </nav>
 
   <main id="main-content">
-
-    <!-- ========================================================
-         Hero
-         ======================================================== -->
-
     <section class="hero" id="home" aria-labelledby="hero-title">
       <div class="container hero__inner">
-
         <div class="hero__meta reveal">
-          <span class="hero__status">
-            <span class="status-dot" aria-hidden="true"></span>
-            Java Backend Engineer
-          </span>
-
+          <span class="hero__status"><span class="status-dot" aria-hidden="true"></span>Java Backend Engineer</span>
           <span class="mono">India · Enterprise FinTech</span>
         </div>
 
         <div class="hero__stage">
-
           <div class="hero__copy">
             <h1 class="hero__name" id="hero-title">
               <span class="hero-line">Sumit</span>
               <span class="hero-line">Yadav</span>
             </h1>
-
             <div class="hero__positioning reveal" data-delay="1">
-              <p>
-                I build secure, reliable, integration-heavy backend systems
-                with Java and Spring Boot—turning complex financial journeys
-                into dependable services.
-              </p>
-
+              <p>I build secure, reliable, integration-heavy backend systems with Java and Spring Boot—turning complex financial journeys into dependable services.</p>
               <div class="hero__actions">
-                <a
-                  class="button button--solid magnetic interactive"
-                  href="#work"
-                >
-                  Explore work
-
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="M5 12h12M13 7l5 5-5 5"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.7"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
+                <a class="button button--solid magnetic interactive" href="#work">Explore work
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12M13 7l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </a>
-
-                <a
-                  class="button magnetic interactive resume-link"
-                  href="data:text/plain;charset=utf-8,Sumit%20Yadav%20-%20Java%20Backend%20Engineer"
-                  download="Sumit_Yadav_Resume.txt"
-                >
-                  Resume
-
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="M12 4v11m0 0 4-4m-4 4-4-4M5 19h14"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.7"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
+                <a class="button magnetic interactive resume-link" href="data:text/plain;charset=utf-8,Sumit%20Yadav%20-%20Java%20Backend%20Engineer" download="Sumit_Yadav_Resume.txt">Resume
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0 4-4m-4 4-4-4M5 19h14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </a>
               </div>
             </div>
           </div>
 
           <div class="system-art" id="system-art" aria-hidden="true">
-            <svg viewBox="0 0 500 500">
-              <path
-                class="path"
-                d="M92 250C92 157 163 88 250 88s158 69 158 162-71 162-158 162S92 343 92 250Z"
-              />
+            <svg viewBox="0 0 500 500" role="img">
+              <path class="path" d="M92 250C92 157 163 88 250 88s158 69 158 162-71 162-158 162S92 343 92 250Z"/>
+              <path class="path" d="M143 155C202 109 313 117 365 184c51 65 23 157-42 203"/>
+              <path class="path" d="M132 345c56 53 157 61 225 10 59-45 75-135 28-199"/>
+              <path class="path" d="M250 89v322M91 250h318M139 139l222 222M361 139 139 361"/>
 
-              <path
-                class="path"
-                d="M143 155C202 109 313 117 365 184c51 65 23 157-42 203"
-              />
-
-              <path
-                class="path"
-                d="M132 345c56 53 157 61 225 10 59-45 75-135 28-199"
-              />
-
-              <path
-                class="path"
-                d="M250 89v322M91 250h318M139 139l222 222M361 139 139 361"
-              />
-
-              <g class="packet">
-                <circle cx="250" cy="250" r="70" class="node-ring"/>
-                <circle cx="250" cy="250" r="14" class="node-core"/>
-                <text x="250" y="288" text-anchor="middle">Core service</text>
-              </g>
-
-              <g class="packet packet--2">
-                <circle cx="250" cy="90" r="33" class="node-ring"/>
-                <circle cx="250" cy="90" r="8" class="node-core--blue"/>
-                <text x="250" y="55" text-anchor="middle">Identity</text>
-              </g>
-
-              <g class="packet packet--3">
-                <circle cx="408" cy="250" r="33" class="node-ring"/>
-                <circle cx="408" cy="250" r="8" class="node-core--coral"/>
-                <text x="408" y="295" text-anchor="middle">Risk</text>
-              </g>
-
-              <g>
-                <circle cx="250" cy="411" r="33" class="node-ring"/>
-                <circle cx="250" cy="411" r="8" class="node-core--blue"/>
-                <text x="250" y="458" text-anchor="middle">Bank data</text>
-              </g>
-
-              <g>
-                <circle cx="91" cy="250" r="33" class="node-ring"/>
-                <circle cx="91" cy="250" r="8" class="node-core--coral"/>
-                <text x="91" y="295" text-anchor="middle">Documents</text>
-              </g>
+              <g class="packet"><circle cx="250" cy="250" r="70" class="node-ring"/><circle cx="250" cy="250" r="14" class="node-core"/><text x="250" y="288" text-anchor="middle">Core service</text></g>
+              <g class="packet packet--2"><circle cx="250" cy="90" r="33" class="node-ring"/><circle cx="250" cy="90" r="8" class="node-core--blue"/><text x="250" y="55" text-anchor="middle">Identity</text></g>
+              <g class="packet packet--3"><circle cx="408" cy="250" r="33" class="node-ring"/><circle cx="408" cy="250" r="8" class="node-core--coral"/><text x="408" y="295" text-anchor="middle">Risk</text></g>
+              <g><circle cx="250" cy="411" r="33" class="node-ring"/><circle cx="250" cy="411" r="8" class="node-core--blue"/><text x="250" y="458" text-anchor="middle">Bank data</text></g>
+              <g><circle cx="91" cy="250" r="33" class="node-ring"/><circle cx="91" cy="250" r="8" class="node-core--coral"/><text x="91" y="295" text-anchor="middle">Documents</text></g>
             </svg>
           </div>
         </div>
 
-        <div
-          class="hero__proof reveal"
-          data-delay="2"
-          aria-label="Professional summary"
-        >
-          <div class="hero-proof">
-            <strong>3</strong>
-            <span>years building production-ready backend applications</span>
-          </div>
-
-          <div class="hero-proof">
-            <strong>API</strong>
-            <span>
-              secure integrations across identity, banking, risk, and documents
-            </span>
-          </div>
-
-          <div class="hero-proof">
-            <strong>RCA</strong>
-            <span>
-              production debugging with traceability, recovery, and resilient
-              delivery
-            </span>
-          </div>
+        <div class="hero__proof reveal" data-delay="2" aria-label="Professional summary">
+          <div class="hero-proof"><strong>3</strong><span>years building production-ready backend applications</span></div>
+          <div class="hero-proof"><strong>API</strong><span>secure integrations across identity, banking, risk, and documents</span></div>
+          <div class="hero-proof"><strong>24/7</strong><span>production thinking: traceability, recovery, and resilient delivery</span></div>
         </div>
-
       </div>
     </section>
 
     <div class="marquee" aria-hidden="true">
       <div class="marquee__track">
-        <span class="marquee__item">Java</span>
-        <span class="marquee__item">Spring Boot</span>
-        <span class="marquee__item">Secure APIs</span>
-        <span class="marquee__item">Event streams</span>
-        <span class="marquee__item">Reliable integrations</span>
-
-        <span class="marquee__item">Java</span>
-        <span class="marquee__item">Spring Boot</span>
-        <span class="marquee__item">Secure APIs</span>
-        <span class="marquee__item">Event streams</span>
-        <span class="marquee__item">Reliable integrations</span>
+        <span class="marquee__item">Java</span><span class="marquee__item">Spring Boot</span><span class="marquee__item">Secure APIs</span><span class="marquee__item">Event streams</span><span class="marquee__item">Reliable integrations</span><span class="marquee__item">Java</span><span class="marquee__item">Spring Boot</span><span class="marquee__item">Secure APIs</span><span class="marquee__item">Event streams</span><span class="marquee__item">Reliable integrations</span>
       </div>
     </div>
 
-    <!-- ========================================================
-         Work
-         ======================================================== -->
-
     <section class="work" id="work" aria-labelledby="work-title">
-
       <div class="container work__header">
         <div>
           <span class="eyebrow reveal">Selected engineering work</span>
-
-          <h2 class="section-title reveal" data-delay="1" id="work-title">
-            Systems with<br>real stakes.
-          </h2>
+          <h2 class="section-title reveal" data-delay="1" id="work-title">Systems with<br>real stakes.</h2>
         </div>
-
-        <p class="reveal" data-delay="2">
-          Three enterprise engineering stories—distilled from proprietary work
-          into the decisions, patterns, and responsibilities that mattered most.
-        </p>
+        <p class="reveal" data-delay="2">Three enterprise engineering stories—distilled from proprietary work into the decisions, patterns, and responsibilities that mattered most.</p>
       </div>
 
       <div class="work-stack">
-
-        <!-- ====================================================
-             Project 01
-             ==================================================== -->
-
         <article class="project-story" aria-labelledby="project-1-title">
           <div class="container project-story__inner">
-
             <div class="project-story__copy reveal">
-              <div class="project-index mono">
-                <span>01 / Orchestration</span>
-                <span>Enterprise work</span>
-              </div>
-
+              <div class="project-index mono"><span>01 / Orchestration</span><span>Enterprise work</span></div>
               <h3 id="project-1-title">Loan journey engine</h3>
-
-              <p>
-                Built Spring Boot services and REST APIs that coordinate
-                multi-step digital loan-origination flows through event-driven
-                processing, reactive patterns, asynchronous callbacks, and
-                scheduled work.
-              </p>
-
-              <ul class="tech-line" aria-label="Technologies">
-                <li>Java</li>
-                <li>Spring Boot</li>
-                <li>REST</li>
-                <li>Reactive</li>
-              </ul>
-
-              <button
-                class="button button--light magnetic interactive"
-                type="button"
-                data-dialog="dialog-loan"
-              >
-                Open engineering note
-              </button>
+              <p>Built Spring Boot services and REST APIs that coordinate multi-step digital loan-origination flows through event-driven processing, reactive patterns, asynchronous callbacks, and scheduled work.</p>
+              <ul class="tech-line" aria-label="Technologies"><li>Java</li><li>Spring Boot</li><li>REST</li><li>Reactive</li></ul>
+              <button class="button button--light magnetic interactive" type="button" data-dialog="dialog-loan">Open engineering note</button>
             </div>
-
-            <!-- Accurate backend workflow diagram -->
-            <div
-              class="project-visual visual-a reveal"
-              data-tilt
-              aria-hidden="true"
-            >
-              <svg viewBox="0 0 640 560">
-
+            <div class="project-visual visual-a reveal" data-tilt aria-hidden="true">
+              <svg class="workflow-diagram" viewBox="0 0 640 560">
                 <defs>
-                  <marker
-                    id="arrow-acid"
-                    viewBox="0 0 10 10"
-                    refX="8.2"
-                    refY="5"
-                    markerWidth="6"
-                    markerHeight="6"
-                    orient="auto-start-reverse"
-                  >
+                  <marker id="wf-arrow-acid" viewBox="0 0 10 10" refX="8.2" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                     <path d="M0 0L10 5L0 10Z" fill="#d7ff45"/>
                   </marker>
-
-                  <marker
-                    id="arrow-blue"
-                    viewBox="0 0 10 10"
-                    refX="8.2"
-                    refY="5"
-                    markerWidth="6"
-                    markerHeight="6"
-                    orient="auto-start-reverse"
-                  >
+                  <marker id="wf-arrow-blue" viewBox="0 0 10 10" refX="8.2" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                     <path d="M0 0L10 5L0 10Z" fill="#9297ff"/>
                   </marker>
-
-                  <marker
-                    id="arrow-coral"
-                    viewBox="0 0 10 10"
-                    refX="8.2"
-                    refY="5"
-                    markerWidth="6"
-                    markerHeight="6"
-                    orient="auto-start-reverse"
-                  >
+                  <marker id="wf-arrow-coral" viewBox="0 0 10 10" refX="8.2" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                     <path d="M0 0L10 5L0 10Z" fill="#ff664a"/>
                   </marker>
                 </defs>
 
-                <!-- Background architecture guides -->
-                <path
-                  class="route muted"
-                  d="M318 74V486"
-                  stroke-dasharray="4 12"
-                />
+                <!-- Structural guides -->
+                <path class="route muted" d="M82 280H568"/>
+                <path class="route muted" d="M300 86V476"/>
 
-                <path
-                  class="route muted"
-                  d="M92 280H558"
-                  stroke-dasharray="4 12"
-                />
+                <!-- Request -> API -> Orchestrator -->
+                <path class="route acid route--animated" d="M96 280H150" marker-end="url(#wf-arrow-acid)"/>
+                <path class="route acid route--animated" d="M214 280H262" marker-end="url(#wf-arrow-acid)"/>
 
-                <!--
-                  Logical request path:
+                <!-- Orchestrator -> third-party service -->
+                <path class="route blue route--animated" d="M327 251C365 210 400 183 437 165" marker-end="url(#wf-arrow-blue)"/>
 
-                  Request
-                    ->
-                  REST API
-                    ->
-                  Orchestrator
-                    ->
-                  Third-party integration
-                    ->
-                  Async callback
-                    ->
-                  Decision state
-                -->
+                <!-- Third-party asynchronous callback -->
+                <path class="route blue route--animated" d="M475 190V352" marker-end="url(#wf-arrow-blue)"/>
 
-                <!-- Request -> API -->
-                <path
-                  class="route acid route--animated"
-                  d="M100 280H157"
-                  marker-end="url(#arrow-acid)"
-                />
+                <!-- Callback reconciles state back through orchestration -->
+                <path class="route acid route--animated" d="M448 386C397 428 330 405 308 326" marker-end="url(#wf-arrow-acid)"/>
 
-                <!-- API -> Orchestrator -->
-                <path
-                  class="route acid route--animated"
-                  d="M213 280H273"
-                  marker-end="url(#arrow-acid)"
-                />
+                <!-- Orchestrator persists/resumes to a decision state -->
+                <path class="route acid route--animated" d="M318 320V423" marker-end="url(#wf-arrow-acid)"/>
 
-                <!-- Orchestrator -> External integration -->
-                <path
-                  class="route blue route--animated"
-                  d="M337 257C368 231 394 206 418 187"
-                  marker-end="url(#arrow-blue)"
-                />
+                <!-- Retry / recovery path for outbound integrations -->
+                <path class="route coral route--animated" d="M283 245C304 135 388 102 454 131" marker-end="url(#wf-arrow-coral)"/>
 
-                <!-- Third-party service -> callback -->
-                <path
-                  class="route blue route--animated"
-                  d="M450 204V349"
-                  marker-end="url(#arrow-blue)"
-                />
+                <text class="edge-label" x="123" y="262">REQUEST</text>
+                <text class="edge-label" x="238" y="262">VALIDATE</text>
+                <text class="edge-label" x="379" y="196">ASYNC CALL</text>
+                <text class="edge-label" x="505" y="282">CALLBACK</text>
+                <text class="edge-label" x="386" y="414">RECONCILE</text>
+                <text class="edge-label" x="362" y="112">RETRY / RECOVERY</text>
 
-                <!-- Callback -> Decision -->
-                <path
-                  class="route acid route--animated"
-                  d="M469 380C505 363 525 329 543 302"
-                  marker-end="url(#arrow-acid)"
-                />
+                <!-- Client request -->
+                <circle class="visual-node acid" cx="76" cy="280" r="18"/>
+                <text class="node-index" x="76" y="283">01</text>
+                <text class="node-label" x="76" y="319">REQUEST</text>
 
-                <!-- Recovery/retry path -->
-                <path
-                  class="route coral"
-                  d="M432 388C359 467 272 450 289 327"
-                  stroke-dasharray="5 12"
-                  marker-end="url(#arrow-coral)"
-                />
-
-                <text class="edge-label" x="127" y="263">
-                  HTTP REQUEST
-                </text>
-
-                <text class="edge-label" x="243" y="263">
-                  VALIDATED
-                </text>
-
-                <text class="edge-label" x="384" y="205">
-                  ASYNC CALL
-                </text>
-
-                <text class="edge-label" x="470" y="280">
-                  CALLBACK
-                </text>
-
-                <text class="edge-label" x="354" y="445">
-                  RETRY / RECOVERY
-                </text>
-
-                <!-- Request -->
-                <circle class="visual-node acid" cx="78" cy="280" r="17"/>
-                <text class="node-index" x="78" y="283">01</text>
-                <text class="node-label" x="78" y="323">REQUEST</text>
-
-                <!-- REST API -->
-                <rect
-                  class="visual-node"
-                  x="157"
-                  y="250"
-                  width="56"
-                  height="60"
-                  rx="16"
-                />
-                <text class="node-label" x="185" y="341">REST API</text>
+                <!-- API boundary -->
+                <rect class="visual-node" x="150" y="248" width="64" height="64" rx="17"/>
+                <text class="node-label" x="182" y="337">REST API</text>
 
                 <!-- Orchestrator -->
-                <rect
-                  class="visual-node"
-                  x="273"
-                  y="240"
-                  width="64"
-                  height="80"
-                  rx="20"
-                />
-                <circle
-                  class="visual-node blue"
-                  cx="305"
-                  cy="280"
-                  r="9"
-                />
-                <text class="node-label" x="305" y="351">
-                  ORCHESTRATOR
-                </text>
+                <rect class="visual-node" x="262" y="236" width="76" height="88" rx="22"/>
+                <circle class="visual-node blue" cx="300" cy="280" r="10"/>
+                <text class="node-label" x="300" y="351">ORCHESTRATOR</text>
 
-                <!-- Third party integration -->
-                <circle
-                  class="visual-node blue"
-                  cx="450"
-                  cy="172"
-                  r="31"
-                />
-                <text class="node-label" x="450" y="129">
-                  THIRD-PARTY
-                </text>
-                <text class="node-label" x="450" y="143">
-                  INTEGRATION
-                </text>
+                <!-- External dependency -->
+                <circle class="visual-node blue" cx="475" cy="160" r="35"/>
+                <text class="node-label" x="475" y="107">THIRD-PARTY</text>
+                <text class="node-label" x="475" y="122">SERVICE</text>
 
-                <!-- Callback -->
-                <circle
-                  class="visual-node coral"
-                  cx="450"
-                  cy="380"
-                  r="27"
-                />
-                <text class="node-label" x="450" y="425">
-                  ASYNC CALLBACK
-                </text>
+                <!-- Callback handler -->
+                <circle class="visual-node coral" cx="475" cy="385" r="31"/>
+                <text class="node-label" x="475" y="437">CALLBACK</text>
+                <text class="node-label" x="475" y="452">HANDLER</text>
 
-                <!-- Decision -->
-                <circle
-                  class="visual-node acid"
-                  cx="558"
-                  cy="280"
-                  r="18"
-                />
-                <text class="node-index" x="558" y="283">06</text>
-                <text class="node-label" x="558" y="323">
-                  DECISION STATE
-                </text>
-
+                <!-- Resulting internal state -->
+                <circle class="visual-node acid" cx="318" cy="458" r="25"/>
+                <text class="node-index" x="318" y="461">06</text>
+                <text class="node-label" x="318" y="505">DECISION STATE</text>
               </svg>
-
-              <span class="visual-label">
-                request → orchestration → integration → callback → decision
-              </span>
+              <span class="visual-label">request → orchestration → integration → callback → decision</span>
             </div>
           </div>
         </article>
 
-        <!-- ====================================================
-             Project 02
-             ==================================================== -->
-
         <article class="project-story" aria-labelledby="project-2-title">
           <div class="container project-story__inner">
-
             <div class="project-story__copy reveal">
-              <div class="project-index mono">
-                <span>02 / Trust layer</span>
-                <span>Enterprise work</span>
-              </div>
-
+              <div class="project-index mono"><span>02 / Trust layer</span><span>Enterprise work</span></div>
               <h3 id="project-2-title">Identity &amp; document trust</h3>
-
-              <p>
-                Integrated third-party identity, verification, and digital
-                document services into lending workflows with secure handling,
-                validation, audit trails, callbacks, retries, reconciliation,
-                and failure recovery.
-              </p>
-
-              <ul class="tech-line" aria-label="Technologies">
-                <li>Spring Security</li>
-                <li>OAuth 2.0</li>
-                <li>JSON</li>
-                <li>Validation</li>
-              </ul>
-
-              <button
-                class="button button--light magnetic interactive"
-                type="button"
-                data-dialog="dialog-trust"
-              >
-                Open engineering note
-              </button>
+              <p>Integrated third-party identity, verification, and digital document services into lending workflows with secure handling, validation, audit trails, callbacks, retries, reconciliation, and failure recovery.</p>
+              <ul class="tech-line" aria-label="Technologies"><li>Spring Security</li><li>OAuth 2.0</li><li>JSON</li><li>Validation</li></ul>
+              <button class="button button--light magnetic interactive" type="button" data-dialog="dialog-trust">Open engineering note</button>
             </div>
-
-            <div
-              class="project-visual visual-b reveal"
-              data-tilt
-              aria-hidden="true"
-            >
+            <div class="project-visual visual-b reveal" data-tilt aria-hidden="true">
               <svg viewBox="0 0 600 600">
-
-                <path
-                  class="route route--animated"
-                  d="M300 82c120 0 218 98 218 218s-98 218-218 218S82 420 82 300 180 82 300 82Z"
-                />
-
-                <path
-                  class="route blue route--animated"
-                  d="M300 130c94 0 170 76 170 170s-76 170-170 170-170-76-170-170 76-170 170-170Z"
-                />
-
-                <path
-                  class="route acid route--animated"
-                  d="M300 160V440M160 300H440"
-                />
-
-                <path
-                  class="route coral route--animated"
-                  d="M201 201L399 399M399 201L201 399"
-                />
-
+                <path class="route" d="M300 82c120 0 218 98 218 218s-98 218-218 218S82 420 82 300 180 82 300 82Z"/>
+                <path class="route blue" d="M300 130c94 0 170 76 170 170s-76 170-170 170-170-76-170-170 76-170 170-170Z"/>
+                <path class="route accent" d="M300 160v280M160 300h280"/>
+                <path class="route coral" d="m201 201 198 198m0-198L201 399"/>
                 <circle class="visual-node blue" cx="300" cy="300" r="55"/>
                 <circle class="visual-node acid" cx="300" cy="130" r="15"/>
                 <circle class="visual-node" cx="470" cy="300" r="21"/>
                 <circle class="visual-node coral" cx="300" cy="470" r="15"/>
                 <circle class="visual-node" cx="130" cy="300" r="21"/>
-
-                <text class="node-label" x="300" y="305">VERIFIED</text>
-                <text class="node-label" x="300" y="104">IDENTITY</text>
-                <text class="node-label" x="485" y="272">CONSENT</text>
-                <text class="node-label" x="300" y="510">SIGNED</text>
+                <text x="300" y="305" text-anchor="middle">verified</text>
+                <text x="300" y="104" text-anchor="middle">identity</text>
+                <text x="485" y="272" text-anchor="middle">consent</text>
+                <text x="300" y="510" text-anchor="middle">signed</text>
               </svg>
-
-              <span class="visual-label">
-                validate / consent / audit / recover
-              </span>
+              <span class="visual-label">Validate / consent / audit / recover</span>
             </div>
           </div>
         </article>
-
-        <!-- ====================================================
-             Project 03
-             ==================================================== -->
 
         <article class="project-story" aria-labelledby="project-3-title">
           <div class="container project-story__inner">
-
             <div class="project-story__copy reveal">
-              <div class="project-index mono">
-                <span>03 / Transformation</span>
-                <span>Enterprise work</span>
-              </div>
-
+              <div class="project-index mono"><span>03 / Transformation</span><span>Enterprise work</span></div>
               <h3 id="project-3-title">Adaptive data layer</h3>
-
-              <p>
-                Delivered consented banking-data flows and transformed statement
-                JSON into underwriting insights, while GraalJS mappers enabled
-                client-specific request and response changes without redeployment.
-              </p>
-
-              <ul class="tech-line" aria-label="Technologies">
-                <li>GraalJS</li>
-                <li>JSON</li>
-                <li>SQL</li>
-                <li>Spring Data JPA</li>
-              </ul>
-
-              <button
-                class="button button--light magnetic interactive"
-                type="button"
-                data-dialog="dialog-data"
-              >
-                Open engineering note
-              </button>
+              <p>Delivered consented banking-data flows and transformed statement JSON into underwriting insights, while GraalJS mappers enabled client-specific request and response changes without redeployment.</p>
+              <ul class="tech-line" aria-label="Technologies"><li>GraalJS</li><li>JSON</li><li>SQL</li><li>Spring Data JPA</li></ul>
+              <button class="button button--light magnetic interactive" type="button" data-dialog="dialog-data">Open engineering note</button>
             </div>
-
-            <div
-              class="project-visual visual-c reveal"
-              data-tilt
-              aria-hidden="true"
-            >
+            <div class="project-visual visual-c reveal" data-tilt aria-hidden="true">
               <svg viewBox="0 0 600 600">
-
-                <path
-                  class="route route--animated"
-                  d="M85 155H230c46 0 46 70 92 70h193"
-                />
-
-                <path
-                  class="route blue route--animated"
-                  d="M85 300H515"
-                />
-
-                <path
-                  class="route acid route--animated"
-                  d="M85 445H230c46 0 46-70 92-70h193"
-                />
-
-                <path
-                  class="route coral route--animated"
-                  d="M235 120V480M365 120V480"
-                />
-
+                <path class="route" d="M85 155h145c46 0 46 70 92 70h193"/>
+                <path class="route blue" d="M85 300h430"/>
+                <path class="route accent" d="M85 445h145c46 0 46-70 92-70h193"/>
+                <path class="route coral" d="M235 120v360M365 120v360"/>
                 <circle class="visual-node coral" cx="85" cy="155" r="13"/>
                 <circle class="visual-node" cx="85" cy="300" r="13"/>
                 <circle class="visual-node acid" cx="85" cy="445" r="13"/>
-
-                <rect
-                  class="visual-node blue"
-                  x="235"
-                  y="225"
-                  width="130"
-                  height="150"
-                />
-
+                <rect class="visual-node blue" x="235" y="225" width="130" height="150" rx="0"/>
                 <circle class="visual-node" cx="515" cy="155" r="13"/>
                 <circle class="visual-node acid" cx="515" cy="300" r="13"/>
                 <circle class="visual-node coral" cx="515" cy="445" r="13"/>
-
-                <text class="node-label" x="300" y="294">RUNTIME</text>
-                <text class="node-label" x="300" y="315">MAPPER</text>
-
-                <text class="node-label" x="85" y="128">SOURCE</text>
-                <text class="node-label" x="515" y="128">INSIGHT</text>
+                <text x="300" y="294" text-anchor="middle">runtime</text>
+                <text x="300" y="315" text-anchor="middle">mapper</text>
+                <text x="85" y="128" text-anchor="middle">source</text>
+                <text x="515" y="128" text-anchor="middle">insight</text>
               </svg>
-
-              <span class="visual-label">
-                ingest / map / standardise / decide
-              </span>
+              <span class="visual-label">Ingest / map / standardise / decide</span>
             </div>
           </div>
         </article>
-
       </div>
     </section>
-
-    <!-- ========================================================
-         About
-         ======================================================== -->
 
     <section class="about" id="about" aria-labelledby="about-title">
       <div class="container about__layout">
-
         <div>
           <span class="eyebrow reveal">About the engineer</span>
-
-          <h2 class="sr-only" id="about-title">
-            About Sumit Yadav
-          </h2>
-
-          <p class="about__statement reveal" data-delay="1">
-            I work where backend engineering gets messy: third-party
-            dependencies, sensitive data, asynchronous states, and production
-            edge cases. My approach is to make that complexity
-            <strong>observable, reusable, and recoverable</strong>—so services
-            remain understandable long after the happy path ends.
-          </p>
+          <h2 class="sr-only" id="about-title">About Sumit Yadav</h2>
+          <p class="about__statement reveal" data-delay="1">I work where backend engineering gets messy: third-party dependencies, sensitive data, asynchronous states, and production edge cases. My approach is to make that complexity <strong>observable, reusable, and recoverable</strong>—so services remain understandable long after the happy path ends.</p>
         </div>
-
-        <aside
-          class="career-note reveal"
-          data-delay="2"
-          aria-label="Current experience"
-        >
-          <span class="mono">
-            Current chapter / Oct 2023—Present
-          </span>
-
-          <p class="career-note__role">
-            <strong>Java Spring Boot Developer — Integrations</strong><br>
-            Tata Consultancy Services · Enterprise digital lending
-          </p>
-
+        <aside class="career-note reveal" data-delay="2" aria-label="Current experience">
+          <span class="mono">Current chapter / Oct 2023—Present</span>
+          <p class="career-note__role"><strong>Java Spring Boot Developer — Integrations</strong><br>Tata Consultancy Services · Enterprise digital lending</p>
           <ul class="impact-list">
-            <li data-index="01">
-              Created common libraries for API clients, mapping, validation,
-              exceptions, logging, and standard responses.
-            </li>
-
-            <li data-index="02">
-              Supported technical discussions, edge-case analysis, design
-              reviews, and implementation planning.
-            </li>
-
-            <li data-index="03">
-              Diagnosed production defects with structured logs and Actuator,
-              then supported fixes through Jenkins deployments.
-            </li>
+            <li data-index="01">Created common libraries for API clients, mapping, validation, exceptions, logging, and standard responses.</li>
+            <li data-index="02">Supported technical discussions, edge-case analysis, design reviews, and implementation planning.</li>
+            <li data-index="03">Diagnosed production defects with structured logs and Actuator, then supported fixes through Jenkins deployments.</li>
           </ul>
         </aside>
-
       </div>
     </section>
 
-    <!-- ========================================================
-         Capabilities
-         ======================================================== -->
-
-    <section
-      class="capabilities"
-      id="capabilities"
-      aria-labelledby="capabilities-title"
-    >
+    <section class="capabilities" id="capabilities" aria-labelledby="capabilities-title">
       <div class="container">
-
         <div class="capabilities__head">
           <div>
-            <span class="eyebrow reveal">
-              Technical capabilities
-            </span>
-
-            <h2
-              class="section-title reveal"
-              data-delay="1"
-              id="capabilities-title"
-            >
-              Built for<br>the backend.
-            </h2>
+            <span class="eyebrow reveal">Technical capabilities</span>
+            <h2 class="section-title reveal" data-delay="1" id="capabilities-title">Built for<br>the backend.</h2>
           </div>
-
-          <p class="reveal" data-delay="2">
-            A focused toolset for secure APIs, distributed workflows, data
-            transformations, and production delivery.
-          </p>
+          <p class="reveal" data-delay="2">A focused toolset for secure APIs, distributed workflows, data transformations, and production delivery.</p>
         </div>
 
         <div class="capabilities__layout">
-
           <ol class="cap-list">
-
-            <li
-              class="cap-item is-active"
-              data-cap="1"
-              data-title="Core runtime"
-              data-desc="Java and Spring Boot form the centre; Spring Data JPA connects persistence without losing domain clarity."
-            >
-              <span>01</span>
-
-              <h3>Java / Spring Boot / JPA</h3>
-
-              <button
-                type="button"
-                aria-label="Show Core runtime details"
-              >
-                ↗
-              </button>
-
-              <p class="cap-item__mobile">
-                Java and Spring Boot at the centre, with Spring Data JPA for
-                persistence.
-              </p>
+            <li class="cap-item is-active" data-cap="1" data-title="Core runtime" data-desc="Java and Spring Boot form the centre; Spring Data JPA connects persistence without losing domain clarity.">
+              <span>01</span><h3>Java / Spring Boot / JPA</h3><button type="button" aria-label="Show Core runtime details">↗</button>
+              <p class="cap-item__mobile">Java and Spring Boot at the centre, with Spring Data JPA for persistence.</p>
             </li>
-
-            <li
-              class="cap-item"
-              data-cap="2"
-              data-title="Service architecture"
-              data-desc="Microservices, REST APIs, and event-driven systems coordinate integration-heavy flows across asynchronous boundaries."
-            >
-              <span>02</span>
-
-              <h3>Microservices / REST / Events</h3>
-
-              <button
-                type="button"
-                aria-label="Show Service architecture details"
-              >
-                ↗
-              </button>
-
-              <p class="cap-item__mobile">
-                Microservices, REST APIs, and event-driven flows across
-                asynchronous boundaries.
-              </p>
+            <li class="cap-item" data-cap="2" data-title="Service architecture" data-desc="Microservices, REST APIs, and event-driven systems coordinate integration-heavy flows across asynchronous boundaries.">
+              <span>02</span><h3>Microservices / REST / Events</h3><button type="button" aria-label="Show Service architecture details">↗</button>
+              <p class="cap-item__mobile">Microservices, REST APIs, and event-driven flows across asynchronous boundaries.</p>
             </li>
-
-            <li
-              class="cap-item"
-              data-cap="3"
-              data-title="Security boundary"
-              data-desc="Spring Security, OAuth 2.0, and validation protect entry points, sensitive payloads, and trusted integrations."
-            >
-              <span>03</span>
-
-              <h3>Security / OAuth / Validation</h3>
-
-              <button
-                type="button"
-                aria-label="Show Security boundary details"
-              >
-                ↗
-              </button>
-
-              <p class="cap-item__mobile">
-                Spring Security, OAuth 2.0, and validation for trusted service
-                boundaries.
-              </p>
+            <li class="cap-item" data-cap="3" data-title="Security boundary" data-desc="Spring Security, OAuth 2.0, and validation protect entry points, sensitive payloads, and trusted integrations.">
+              <span>03</span><h3>Security / OAuth / Validation</h3><button type="button" aria-label="Show Security boundary details">↗</button>
+              <p class="cap-item__mobile">Spring Security, OAuth 2.0, and validation for trusted service boundaries.</p>
             </li>
-
-            <li
-              class="cap-item"
-              data-cap="4"
-              data-title="Data transformation"
-              data-desc="Reactive programming, JSON processing, SQL, and GraalJS turn varied external payloads into stable internal contracts."
-            >
-              <span>04</span>
-
-              <h3>Reactive / JSON / SQL / GraalJS</h3>
-
-              <button
-                type="button"
-                aria-label="Show Data transformation details"
-              >
-                ↗
-              </button>
-
-              <p class="cap-item__mobile">
-                Reactive processing, JSON, SQL, and GraalJS for adaptable data
-                flows.
-              </p>
+            <li class="cap-item" data-cap="4" data-title="Data transformation" data-desc="Reactive programming, JSON processing, SQL, and GraalJS turn varied external payloads into stable internal contracts.">
+              <span>04</span><h3>Reactive / JSON / SQL / GraalJS</h3><button type="button" aria-label="Show Data transformation details">↗</button>
+              <p class="cap-item__mobile">Reactive processing, JSON, SQL, and GraalJS for adaptable data flows.</p>
             </li>
-
           </ol>
 
-          <aside
-            class="cap-visual"
-            id="cap-visual"
-            data-state="1"
-            aria-live="polite"
-          >
+          <aside class="cap-visual" id="cap-visual" data-state="1" aria-live="polite">
             <div class="cap-visual__top">
-
-              <span class="mono">
-                Selected capability /
-                <span id="cap-number">01</span>
-              </span>
-
-              <h3
-                class="cap-visual__title"
-                id="cap-title"
-              >
-                Core runtime
-              </h3>
-
-              <p
-                class="cap-visual__desc"
-                id="cap-desc"
-              >
-                Java and Spring Boot form the centre; Spring Data JPA connects
-                persistence without losing domain clarity.
-              </p>
+              <span class="mono">Selected capability / <span id="cap-number">01</span></span>
+              <h3 class="cap-visual__title" id="cap-title">Core runtime</h3>
+              <p class="cap-visual__desc" id="cap-desc">Java and Spring Boot form the centre; Spring Data JPA connects persistence without losing domain clarity.</p>
             </div>
-
             <div class="cap-visual__bottom">
-              <svg
-                class="cap-visual__signal"
-                viewBox="0 0 500 100"
-                preserveAspectRatio="none"
-                aria-hidden="true"
-              >
-                <polyline
-                  points="0,70 55,70 80,28 115,82 150,45 190,45 220,16 260,78 310,52 355,52 385,24 420,72 500,72"
-                />
-              </svg>
-
-              <span class="mono">
-                Signal stable / contract explicit
-              </span>
+              <svg class="cap-visual__signal" viewBox="0 0 500 100" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,70 55,70 80,28 115,82 150,45 190,45 220,16 260,78 310,52 355,52 385,24 420,72 500,72"/></svg>
+              <span class="mono">Signal stable / contract explicit</span>
             </div>
           </aside>
-
         </div>
       </div>
     </section>
-
-    <!-- ========================================================
-         Proof
-         ======================================================== -->
 
     <section class="proof" id="proof" aria-labelledby="proof-title">
       <div class="container">
-
         <div class="proof__head">
           <div>
-            <span class="eyebrow reveal">
-              Selected proof
-            </span>
-
-            <h2
-              class="section-title reveal"
-              data-delay="1"
-              id="proof-title"
-            >
-              Practice,<br>measured.
-            </h2>
+            <span class="eyebrow reveal">Selected proof</span>
+            <h2 class="section-title reveal" data-delay="1" id="proof-title">Practice,<br>measured.</h2>
           </div>
-
-          <p class="reveal" data-delay="2">
-            A compact record of problem-solving discipline and competitive
-            performance beyond day-to-day delivery.
-          </p>
+          <p class="reveal" data-delay="2">A compact record of problem-solving discipline and competitive performance beyond day-to-day delivery.</p>
         </div>
 
         <div class="proof-grid">
-
           <article class="proof-item reveal">
-            <div class="proof-item__number">
-              700+
-            </div>
-
-            <div>
-              <h3>DSA problems solved</h3>
-              <p>
-                Across LeetCode and GeeksforGeeks.
-              </p>
-            </div>
+            <div class="proof-item__number">700+</div>
+            <div><h3>DSA problems solved</h3><p>Across LeetCode and GeeksforGeeks.</p></div>
           </article>
-
           <article class="proof-item reveal" data-delay="1">
-            <div class="proof-item__number">
-              1940
-            </div>
-
-            <div>
-              <h3>LeetCode Knight</h3>
-              <p>
-                Contest rating placing in the top 3% worldwide.
-              </p>
-            </div>
+            <div class="proof-item__number">1940</div>
+            <div><h3>LeetCode Knight</h3><p>Contest rating placing in the top 3% worldwide.</p></div>
           </article>
-
           <article class="proof-item reveal" data-delay="2">
-            <div class="proof-item__number">
-              934
-            </div>
-
-            <div>
-              <h3>TechGig Grand Finalist</h3>
-              <p>
-                Worldwide rank in a national-level coding competition.
-              </p>
-            </div>
+            <div class="proof-item__number">934</div>
+            <div><h3>TechGig Grand Finalist</h3><p>Worldwide rank in a national-level coding competition.</p></div>
           </article>
-
         </div>
       </div>
     </section>
 
-    <!-- ========================================================
-         Contact
-         ======================================================== -->
-
-    <section
-      class="contact"
-      id="contact"
-      aria-labelledby="contact-title"
-    >
+    <section class="contact" id="contact" aria-labelledby="contact-title">
       <div class="container contact__inner">
-
-        <span class="eyebrow reveal">
-          Start a conversation
-        </span>
-
-        <h2
-          class="contact__title reveal"
-          data-delay="1"
-          id="contact-title"
-        >
-          Build what<br><span>holds.</span>
-        </h2>
-
+        <span class="eyebrow reveal">Start a conversation</span>
+        <h2 class="contact__title reveal" data-delay="1" id="contact-title">Build what<br><span>holds.</span></h2>
         <div class="contact__bar reveal" data-delay="2">
-
           <div>
-            <p class="mono">
-              For backend roles, engineering conversations, and serious systems.
-            </p>
-
-            <a
-              class="contact__mail interactive"
-              href="mailto:sumityadavtg@gmail.com"
-            >
-              sumityadavtg@gmail.com
-            </a>
+            <p class="mono">For backend roles, engineering conversations, and serious systems.</p>
+            <a class="contact__mail interactive" href="mailto:sumityadavtg@gmail.com">sumityadavtg@gmail.com</a>
           </div>
-
           <div class="contact__actions">
-
-            <button
-              class="button button--light magnetic interactive"
-              type="button"
-              id="copy-email"
-            >
-              Copy email
-            </button>
-
-            <a
-              class="button magnetic interactive"
-              href="mailto:sumityadavtg@gmail.com"
-            >
-              Write an email
-            </a>
-
+            <button class="button button--light magnetic interactive" type="button" id="copy-email">Copy email</button>
+            <a class="button magnetic interactive" href="mailto:sumityadavtg@gmail.com">Write an email</a>
           </div>
         </div>
-
-        <div
-          class="contact-links reveal"
-          data-delay="2"
-          aria-label="Professional links"
-        >
-          <a
-            class="interactive"
-            href="https://www.linkedin.com/in/sumit-yadav-7938bb252/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            LinkedIn ↗
-          </a>
-
-          <a
-            class="interactive"
-            href="https://leetcode.com/u/im_sumit/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            LeetCode ↗
-          </a>
-
-          <a
-            class="interactive resume-link"
-            href="data:text/plain;charset=utf-8,Sumit%20Yadav%20-%20Java%20Backend%20Engineer"
-            download="Sumit_Yadav_Resume.txt"
-          >
-            Resume ↓
-          </a>
+        <div class="contact-links reveal" data-delay="2" aria-label="Professional links">
+          <a class="interactive" href="https://www.linkedin.com/in/sumit-yadav-7938bb252/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+          <a class="interactive" href="https://leetcode.com/u/im_sumit/" target="_blank" rel="noopener noreferrer">LeetCode ↗</a>
+          <a class="interactive resume-link" href="data:text/plain;charset=utf-8,Sumit%20Yadav%20-%20Java%20Backend%20Engineer" download="Sumit_Yadav_Resume.txt">Resume ↓</a>
         </div>
-
         <footer class="footer">
-          <span>
-            © <span id="year">2026</span> Sumit Yadav
-          </span>
-
-          <a
-            class="interactive"
-            href="#home"
-          >
-            Back to top ↑
-          </a>
+          <span>© <span id="year">2026</span> Sumit Yadav</span>
+          <a class="interactive" href="#home">Back to top ↑</a>
         </footer>
-
       </div>
     </section>
   </main>
 
-  <!-- ==========================================================
-       Dialog 01
-       ========================================================== -->
-
-  <dialog
-    id="dialog-loan"
-    aria-labelledby="dialog-loan-title"
-  >
-    <div class="dialog__head">
-      <span class="mono">
-        Engineering note / 01
-      </span>
-
-      <button
-        class="dialog__close"
-        type="button"
-        aria-label="Close dialog"
-      >
-        ×
-      </button>
-    </div>
-
+  <dialog id="dialog-loan" aria-labelledby="dialog-loan-title">
+    <div class="dialog__head"><span class="mono">Engineering note / 01</span><button class="dialog__close" type="button" aria-label="Close dialog">×</button></div>
     <div class="dialog__body">
-
-      <h2 id="dialog-loan-title">
-        Loan journey engine
-      </h2>
-
-      <p class="dialog__lead">
-        A backend orchestration problem: many dependencies, delayed responses,
-        and a customer journey that still needs one coherent state.
-      </p>
-
+      <h2 id="dialog-loan-title">Loan journey engine</h2>
+      <p class="dialog__lead">A backend orchestration problem: many providers, delayed responses, and a customer journey that still needs one coherent state.</p>
       <div class="dialog-grid">
-
-        <div class="dialog-note">
-          <h3>Context</h3>
-
-          <p>
-            Enterprise digital loan origination spanning service-to-service
-            calls, third-party integrations, callbacks, and scheduled
-            processing.
-          </p>
-        </div>
-
-        <div class="dialog-note">
-          <h3>Contribution</h3>
-
-          <p>
-            Built Spring Boot microservices and REST APIs using event-driven
-            architecture, reactive programming, and asynchronous workflows.
-          </p>
-        </div>
-
-        <div class="dialog-note">
-          <h3>Engineering focus</h3>
-
-          <p>
-            Reusable API clients, validation, object mapping, exception
-            handling, logging, and standardised responses.
-          </p>
-        </div>
-
-        <div class="dialog-note">
-          <h3>Operational focus</h3>
-
-          <p>
-            Traceable states, resilient errors, retries, and recovery paths for
-            integration-heavy journeys.
-          </p>
-        </div>
-
+        <div class="dialog-note"><h3>Context</h3><p>Enterprise digital loan origination spanning service-to-service calls, external integrations, callbacks, and scheduled processing.</p></div>
+        <div class="dialog-note"><h3>Contribution</h3><p>Built Spring Boot microservices and REST APIs using event-driven architecture, reactive programming, and asynchronous workflows.</p></div>
+        <div class="dialog-note"><h3>Engineering focus</h3><p>Reusable API clients, validation, object mapping, exception handling, logging, and standardised responses.</p></div>
+        <div class="dialog-note"><h3>Operational focus</h3><p>Traceable states, resilient errors, retries, and recovery paths for integration-heavy journeys.</p></div>
       </div>
     </div>
   </dialog>
 
-  <!-- ==========================================================
-       Dialog 02
-       ========================================================== -->
-
-  <dialog
-    id="dialog-trust"
-    aria-labelledby="dialog-trust-title"
-  >
-    <div class="dialog__head">
-
-      <span class="mono">
-        Engineering note / 02
-      </span>
-
-      <button
-        class="dialog__close"
-        type="button"
-        aria-label="Close dialog"
-      >
-        ×
-      </button>
-    </div>
-
+  <dialog id="dialog-trust" aria-labelledby="dialog-trust-title">
+    <div class="dialog__head"><span class="mono">Engineering note / 02</span><button class="dialog__close" type="button" aria-label="Close dialog">×</button></div>
     <div class="dialog__body">
-
-      <h2 id="dialog-trust-title">
-        Identity &amp; document trust
-      </h2>
-
-      <p class="dialog__lead">
-        Sensitive onboarding flows need more than connectivity: they need
-        validation, consent, auditability, resilient callbacks, and predictable
-        recovery.
-      </p>
-
+      <h2 id="dialog-trust-title">Identity &amp; document trust</h2>
+      <p class="dialog__lead">Sensitive onboarding flows need more than connectivity: they need validation, consent, auditability, resilient callbacks, and predictable recovery.</p>
       <div class="dialog-grid">
-
-        <div class="dialog-note">
-          <h3>Third-party integrations</h3>
-
-          <p>
-            Integrated external identity, verification, consent, and digital
-            document services into backend lending workflows.
-          </p>
-        </div>
-
-        <div class="dialog-note">
-          <h3>Asynchronous flows</h3>
-
-          <p>
-            Implemented callback handling, reconciliation, retries, and failure
-            recovery for integration workflows that do not complete
-            synchronously.
-          </p>
-        </div>
-
-        <div class="dialog-note">
-          <h3>Protection</h3>
-
-          <p>
-            Applied secure data handling, request validation, audit tracking,
-            and resilient error handling across third-party interactions.
-          </p>
-        </div>
-
-        <div class="dialog-note">
-          <h3>Engineering boundary</h3>
-
-          <p>
-            External-provider differences were kept behind predictable backend
-            contracts so the rest of the lending workflow could remain easier
-            to reason about.
-          </p>
-        </div>
-
+        <div class="dialog-note"><h3>Third-party integrations</h3><p>Integrated external identity, verification, consent, and digital document services into backend lending workflows.</p></div>
+        <div class="dialog-note"><h3>Asynchronous flows</h3><p>Implemented callback handling, reconciliation, retries, and failure recovery for integration workflows that do not complete synchronously.</p></div>
+        <div class="dialog-note"><h3>Protection</h3><p>Applied secure data handling, request validation, audit tracking, and resilient error handling across third-party interactions.</p></div>
+        <div class="dialog-note"><h3>Engineering boundary</h3><p>External-provider differences were kept behind predictable backend contracts so the rest of the lending workflow could remain easier to reason about.</p></div>
       </div>
     </div>
   </dialog>
 
-  <!-- ==========================================================
-       Dialog 03
-       ========================================================== -->
-
-  <dialog
-    id="dialog-data"
-    aria-labelledby="dialog-data-title"
-  >
-    <div class="dialog__head">
-
-      <span class="mono">
-        Engineering note / 03
-      </span>
-
-      <button
-        class="dialog__close"
-        type="button"
-        aria-label="Close dialog"
-      >
-        ×
-      </button>
-    </div>
-
+  <dialog id="dialog-data" aria-labelledby="dialog-data-title">
+    <div class="dialog__head"><span class="mono">Engineering note / 03</span><button class="dialog__close" type="button" aria-label="Close dialog">×</button></div>
     <div class="dialog__body">
-
-      <h2 id="dialog-data-title">
-        Adaptive data layer
-      </h2>
-
-      <p class="dialog__lead">
-        External contracts vary. Internal systems still need stable structures
-        for analysis, decisions, and long-term maintainability.
-      </p>
-
+      <h2 id="dialog-data-title">Adaptive data layer</h2>
+      <p class="dialog__lead">External contracts vary. Internal systems still need stable structures for analysis, decisions, and long-term maintainability.</p>
       <div class="dialog-grid">
-
-        <div class="dialog-note">
-          <h3>Banking data</h3>
-
-          <p>
-            Delivered consent-based banking-data flows for access to
-            customer-authorised information.
-          </p>
-        </div>
-
-        <div class="dialog-note">
-          <h3>Insights</h3>
-
-          <p>
-            Transformed statement JSON into income, cash-flow, balance,
-            transaction, and risk inputs for credit decisioning.
-          </p>
-        </div>
-
-        <div class="dialog-note">
-          <h3>Runtime mapping</h3>
-
-          <p>
-            Integrated GraalJS mappers for client-specific request and response
-            transformations without code commits or redeployment.
-          </p>
-        </div>
-
-        <div class="dialog-note">
-          <h3>Design intent</h3>
-
-          <p>
-            Keep changing external payloads away from stable domain logic and
-            reduce repetitive client-specific code.
-          </p>
-        </div>
-
+        <div class="dialog-note"><h3>Banking data</h3><p>Delivered consent-based banking-data flows for access to customer-authorised information.</p></div>
+        <div class="dialog-note"><h3>Insights</h3><p>Transformed statement JSON into income, cash-flow, balance, transaction, and risk inputs for credit decisioning.</p></div>
+        <div class="dialog-note"><h3>Runtime mapping</h3><p>Integrated GraalJS mappers for client-specific request and response transformations without code commits or redeployment.</p></div>
+        <div class="dialog-note"><h3>Design intent</h3><p>Keep changing external payloads away from stable domain logic and reduce repetitive client-specific code.</p></div>
       </div>
     </div>
   </dialog>
 
-  <div
-    class="toast"
-    id="toast"
-    role="status"
-    aria-live="polite"
-  >
-    Email copied
-  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite">Email copied</div>
 
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-    defer
-  ></script>
-
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-    defer
-  ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 
   <script>
     (() => {
-      "use strict";
+      'use strict';
 
-      const reducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
-
-      const finePointer = window.matchMedia(
-        "(hover: hover) and (pointer: fine)"
-      ).matches;
-
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
       const body = document.body;
       const root = document.documentElement;
 
-      /* ========================================================
-         Intro
-         ======================================================== */
-
-      const intro = document.getElementById("intro");
-
+      /* Intro: brief, non-blocking, and skipped after the first view in a session. */
+      const intro = document.getElementById('intro');
       const finishIntro = () => {
-        if (!intro || intro.classList.contains("is-done")) {
-          return;
-        }
-
-        intro.classList.add("is-done");
-
-        window.setTimeout(() => {
-          intro.remove();
-        }, 1050);
+        if (!intro || intro.classList.contains('is-done')) return;
+        intro.classList.add('is-done');
+        window.setTimeout(() => intro.remove(), 1050);
       };
-
-      let introSeen = false;
-
-      try {
-        introSeen =
-          sessionStorage.getItem("sumit-intro-seen") === "true";
-      } catch {
-        introSeen = false;
-      }
-
-      if (reducedMotion || introSeen) {
+      if (reducedMotion || sessionStorage.getItem('sumit-intro-seen')) {
         finishIntro();
       } else {
-        try {
-          sessionStorage.setItem("sumit-intro-seen", "true");
-        } catch {}
-
+        sessionStorage.setItem('sumit-intro-seen', 'true');
         window.setTimeout(finishIntro, 1150);
       }
+      intro?.addEventListener('click', finishIntro, { once: true });
 
-      intro?.addEventListener("click", finishIntro, {
-        once: true
-      });
-
-      /* ========================================================
-         Scroll reveals
-         ======================================================== */
-
-      root.classList.add("motion-ready");
-
-      const revealItems = [
-        ...document.querySelectorAll(".reveal")
-      ];
-
-      if ("IntersectionObserver" in window && !reducedMotion) {
-        const revealObserver = new IntersectionObserver(
-          (entries, observer) => {
-            entries.forEach((entry) => {
-              if (!entry.isIntersecting) {
-                return;
-              }
-
-              entry.target.classList.add("is-visible");
-              observer.unobserve(entry.target);
-            });
-          },
-          {
-            threshold: 0.12,
-            rootMargin: "0px 0px -6% 0px"
-          }
-        );
-
-        revealItems.forEach((item) => {
-          revealObserver.observe(item);
-        });
+      /* Progressive reveal fallback works with or without GSAP. */
+      root.classList.add('motion-ready');
+      const revealItems = [...document.querySelectorAll('.reveal')];
+      if ('IntersectionObserver' in window && !reducedMotion) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+        revealItems.forEach(item => revealObserver.observe(item));
       } else {
-        revealItems.forEach((item) => {
-          item.classList.add("is-visible");
-        });
+        revealItems.forEach(item => item.classList.add('is-visible'));
       }
 
-      /* ========================================================
-         Mobile menu
-         ======================================================== */
-
-      const toggle = document.querySelector(".menu-toggle");
-      const menu = document.getElementById("mobile-menu");
-      const menuLinks = [...menu.querySelectorAll("a")];
-
+      /* Header navigation + mobile focus management. */
+      const toggle = document.querySelector('.menu-toggle');
+      const menu = document.getElementById('mobile-menu');
+      const menuLinks = [...menu.querySelectorAll('a')];
       let menuLastFocus = null;
 
       const openMenu = () => {
         menuLastFocus = document.activeElement;
-
-        toggle.setAttribute("aria-expanded", "true");
-        toggle.setAttribute("aria-label", "Close menu");
-
-        menu.setAttribute("aria-hidden", "false");
-
-        menu.classList.add("is-open");
-        body.classList.add("menu-open");
-
-        window.setTimeout(() => {
-          menuLinks[0]?.focus();
-        }, 80);
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.setAttribute('aria-label', 'Close menu');
+        menu.setAttribute('aria-hidden', 'false');
+        menu.classList.add('is-open');
+        body.classList.add('menu-open');
+        window.setTimeout(() => menuLinks[0]?.focus(), 80);
       };
-
       const closeMenu = (restoreFocus = true) => {
-        toggle.setAttribute("aria-expanded", "false");
-        toggle.setAttribute("aria-label", "Open menu");
-
-        menu.setAttribute("aria-hidden", "true");
-
-        menu.classList.remove("is-open");
-        body.classList.remove("menu-open");
-
-        if (restoreFocus) {
-          menuLastFocus?.focus();
-        }
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open menu');
+        menu.setAttribute('aria-hidden', 'true');
+        menu.classList.remove('is-open');
+        body.classList.remove('menu-open');
+        if (restoreFocus) menuLastFocus?.focus();
       };
-
-      toggle.addEventListener("click", () => {
-        if (toggle.getAttribute("aria-expanded") === "true") {
-          closeMenu();
-        } else {
-          openMenu();
-        }
+      toggle.addEventListener('click', () => toggle.getAttribute('aria-expanded') === 'true' ? closeMenu() : openMenu());
+      menuLinks.forEach(link => link.addEventListener('click', () => closeMenu(false)));
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') closeMenu();
       });
 
-      menuLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-          closeMenu(false);
-        });
-      });
-
-      document.addEventListener("keydown", (event) => {
-        if (
-          event.key === "Escape" &&
-          toggle.getAttribute("aria-expanded") === "true"
-        ) {
-          closeMenu();
-        }
-      });
-
-      /* ========================================================
-         Active navigation
-         ======================================================== */
-
-      const sectionLinks = [
-        ...document.querySelectorAll(".desktop-nav .nav-link")
-      ];
-
-      const sections = sectionLinks
-        .map((link) => {
-          return document.querySelector(
-            link.getAttribute("href")
-          );
-        })
-        .filter(Boolean);
-
-      if ("IntersectionObserver" in window) {
-        const sectionObserver = new IntersectionObserver(
-          (entries) => {
-            const visible = entries
-              .filter((entry) => entry.isIntersecting)
-              .sort(
-                (a, b) =>
-                  b.intersectionRatio -
-                  a.intersectionRatio
-              )[0];
-
-            if (!visible) {
-              return;
-            }
-
-            sectionLinks.forEach((link) => {
-              link.setAttribute(
-                "aria-current",
-                String(
-                  link.getAttribute("href") ===
-                  `#${visible.target.id}`
-                )
-              );
-            });
-          },
-          {
-            threshold: [0.25, 0.45, 0.7],
-            rootMargin: "-15% 0px -55% 0px"
-          }
-        );
-
-        sections.forEach((section) => {
-          sectionObserver.observe(section);
-        });
+      /* Active section indicator. */
+      const sectionLinks = [...document.querySelectorAll('.desktop-nav .nav-link')];
+      const sections = sectionLinks.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+      if ('IntersectionObserver' in window) {
+        const sectionObserver = new IntersectionObserver(entries => {
+          const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (!visible) return;
+          sectionLinks.forEach(link => link.setAttribute('aria-current', String(link.getAttribute('href') === '#' + visible.target.id)));
+        }, { threshold: [0.25, 0.45, 0.7], rootMargin: '-15% 0px -55% 0px' });
+        sections.forEach(section => sectionObserver.observe(section));
       }
 
-      /* ========================================================
-         Scroll progress
-         ======================================================== */
-
-      const progress =
-        document.getElementById("scroll-progress");
-
+      /* Scroll progress uses one passive listener and one animation frame. */
+      const progress = document.getElementById('scroll-progress');
       let scrollFrame = 0;
-
       const updateScroll = () => {
         scrollFrame = 0;
-
-        const max =
-          document.documentElement.scrollHeight -
-          window.innerHeight;
-
-        const ratio =
-          max > 0
-            ? window.scrollY / max
-            : 0;
-
-        progress.style.transform =
-          `scaleX(${Math.min(1, Math.max(0, ratio))})`;
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const ratio = max > 0 ? window.scrollY / max : 0;
+        progress.style.transform = `scaleX(${Math.min(1, Math.max(0, ratio))})`;
       };
-
-      window.addEventListener(
-        "scroll",
-        () => {
-          if (!scrollFrame) {
-            scrollFrame =
-              requestAnimationFrame(updateScroll);
-          }
-        },
-        {
-          passive: true
-        }
-      );
-
+      window.addEventListener('scroll', () => {
+        if (!scrollFrame) scrollFrame = requestAnimationFrame(updateScroll);
+      }, { passive: true });
       updateScroll();
 
-      /* ========================================================
-         Cursor + magnetic interactions
-         ======================================================== */
-
+      /* Custom cursor and magnetic movement share requestAnimationFrame updates. */
       if (finePointer && !reducedMotion) {
-        const cursor =
-          document.getElementById("cursor");
-
-        let currentX = -100;
-        let currentY = -100;
-        let targetX = -100;
-        let targetY = -100;
-
-        let cursorFrame = 0;
-
+        const cursor = document.getElementById('cursor');
+        let cx = -100, cy = -100, tx = -100, ty = -100, cursorFrame = 0;
         const renderCursor = () => {
-          currentX +=
-            (targetX - currentX) * .19;
-
-          currentY +=
-            (targetY - currentY) * .19;
-
-          cursor.style.transform =
-            `translate3d(${currentX}px, ${currentY}px, 0) ` +
-            "translate(-50%, -50%)";
-
-          cursorFrame =
-            requestAnimationFrame(renderCursor);
+          cx += (tx - cx) * .19;
+          cy += (ty - cy) * .19;
+          cursor.style.transform = `translate3d(${cx}px, ${cy}px, 0) translate(-50%, -50%)`;
+          cursorFrame = requestAnimationFrame(renderCursor);
         };
+        window.addEventListener('pointermove', event => {
+          tx = event.clientX;
+          ty = event.clientY;
+          cursor.classList.add('is-visible');
+          if (!cursorFrame) cursorFrame = requestAnimationFrame(renderCursor);
+        }, { passive: true });
+        document.querySelectorAll('.interactive, button, a').forEach(element => {
+          element.addEventListener('pointerenter', () => cursor.classList.add('is-active'));
+          element.addEventListener('pointerleave', () => cursor.classList.remove('is-active'));
+        });
 
-        window.addEventListener(
-          "pointermove",
-          (event) => {
-            targetX = event.clientX;
-            targetY = event.clientY;
-
-            cursor.classList.add("is-visible");
-
-            if (!cursorFrame) {
-              cursorFrame =
-                requestAnimationFrame(renderCursor);
-            }
-          },
-          {
-            passive: true
-          }
-        );
-
-        document
-          .querySelectorAll(".interactive, button, a")
-          .forEach((element) => {
-            element.addEventListener(
-              "pointerenter",
-              () => {
-                cursor.classList.add("is-active");
-              }
-            );
-
-            element.addEventListener(
-              "pointerleave",
-              () => {
-                cursor.classList.remove("is-active");
-              }
-            );
+        document.querySelectorAll('.magnetic').forEach(element => {
+          let frame = 0;
+          element.addEventListener('pointermove', event => {
+            const rect = element.getBoundingClientRect();
+            const x = (event.clientX - rect.left - rect.width / 2) * .17;
+            const y = (event.clientY - rect.top - rect.height / 2) * .17;
+            if (frame) cancelAnimationFrame(frame);
+            frame = requestAnimationFrame(() => { element.style.transform = `translate3d(${x}px, ${y}px, 0)`; });
           });
-
-        document
-          .querySelectorAll(".magnetic")
-          .forEach((element) => {
-            let frame = 0;
-
-            element.addEventListener(
-              "pointermove",
-              (event) => {
-                const rect =
-                  element.getBoundingClientRect();
-
-                const x =
-                  (
-                    event.clientX -
-                    rect.left -
-                    rect.width / 2
-                  ) * .17;
-
-                const y =
-                  (
-                    event.clientY -
-                    rect.top -
-                    rect.height / 2
-                  ) * .17;
-
-                if (frame) {
-                  cancelAnimationFrame(frame);
-                }
-
-                frame =
-                  requestAnimationFrame(() => {
-                    element.style.transform =
-                      `translate3d(${x}px, ${y}px, 0)`;
-                  });
-              }
-            );
-
-            element.addEventListener(
-              "pointerleave",
-              () => {
-                if (frame) {
-                  cancelAnimationFrame(frame);
-                }
-
-                frame =
-                  requestAnimationFrame(() => {
-                    element.style.transform = "";
-                  });
-              }
-            );
+          element.addEventListener('pointerleave', () => {
+            if (frame) cancelAnimationFrame(frame);
+            frame = requestAnimationFrame(() => { element.style.transform = ''; });
           });
+        });
 
-        document
-          .querySelectorAll("[data-tilt]")
-          .forEach((element) => {
-            let frame = 0;
-
-            element.addEventListener(
-              "pointermove",
-              (event) => {
-                const rect =
-                  element.getBoundingClientRect();
-
-                const rotateX =
-                  (
-                    (event.clientY - rect.top) /
-                    rect.height -
-                    .5
-                  ) * -4;
-
-                const rotateY =
-                  (
-                    (event.clientX - rect.left) /
-                    rect.width -
-                    .5
-                  ) * 4;
-
-                if (frame) {
-                  cancelAnimationFrame(frame);
-                }
-
-                frame =
-                  requestAnimationFrame(() => {
-                    element.style.transform =
-                      `perspective(1100px) ` +
-                      `rotateX(${rotateX}deg) ` +
-                      `rotateY(${rotateY}deg)`;
-                  });
-              }
-            );
-
-            element.addEventListener(
-              "pointerleave",
-              () => {
-                element.style.transform = "";
-              }
-            );
+        document.querySelectorAll('[data-tilt]').forEach(element => {
+          let frame = 0;
+          element.addEventListener('pointermove', event => {
+            const rect = element.getBoundingClientRect();
+            const rx = ((event.clientY - rect.top) / rect.height - .5) * -4;
+            const ry = ((event.clientX - rect.left) / rect.width - .5) * 4;
+            if (frame) cancelAnimationFrame(frame);
+            frame = requestAnimationFrame(() => { element.style.transform = `perspective(1100px) rotateX(${rx}deg) rotateY(${ry}deg)`; });
           });
+          element.addEventListener('pointerleave', () => { element.style.transform = ''; });
+        });
       }
 
-      /* ========================================================
-         Capability interaction
-         ======================================================== */
-
-      const capabilityItems = [
-        ...document.querySelectorAll(".cap-item")
-      ];
-
-      const capabilityVisual =
-        document.getElementById("cap-visual");
-
-      const capabilityNumber =
-        document.getElementById("cap-number");
-
-      const capabilityTitle =
-        document.getElementById("cap-title");
-
-      const capabilityDescription =
-        document.getElementById("cap-desc");
-
-      const selectCapability = (item) => {
-        capabilityItems.forEach((entry) => {
-          entry.classList.toggle(
-            "is-active",
-            entry === item
-          );
-        });
-
-        capabilityVisual.dataset.state =
-          item.dataset.cap;
-
-        capabilityNumber.textContent =
-          String(item.dataset.cap).padStart(
-            2,
-            "0"
-          );
-
-        capabilityTitle.textContent =
-          item.dataset.title;
-
-        capabilityDescription.textContent =
-          item.dataset.desc;
+      /* Capabilities interaction: hover, focus, click, and touch all work. */
+      const capItems = [...document.querySelectorAll('.cap-item')];
+      const capVisual = document.getElementById('cap-visual');
+      const capNumber = document.getElementById('cap-number');
+      const capTitle = document.getElementById('cap-title');
+      const capDesc = document.getElementById('cap-desc');
+      const selectCapability = item => {
+        capItems.forEach(entry => entry.classList.toggle('is-active', entry === item));
+        capVisual.dataset.state = item.dataset.cap;
+        capNumber.textContent = String(item.dataset.cap).padStart(2, '0');
+        capTitle.textContent = item.dataset.title;
+        capDesc.textContent = item.dataset.desc;
       };
-
-      capabilityItems.forEach((item) => {
-        item.addEventListener(
-          "mouseenter",
-          () => {
-            selectCapability(item);
-          }
-        );
-
-        item.addEventListener(
-          "focusin",
-          () => {
-            selectCapability(item);
-          }
-        );
-
-        item
-          .querySelector("button")
-          .addEventListener(
-            "click",
-            () => {
-              selectCapability(item);
-            }
-          );
+      capItems.forEach(item => {
+        item.addEventListener('mouseenter', () => selectCapability(item));
+        item.addEventListener('focusin', () => selectCapability(item));
+        item.querySelector('button').addEventListener('click', () => selectCapability(item));
       });
 
-      /* ========================================================
-         Dialogs
-         ======================================================== */
-
-      document
-        .querySelectorAll("[data-dialog]")
-        .forEach((button) => {
-          button.addEventListener(
-            "click",
-            () => {
-              const dialog =
-                document.getElementById(
-                  button.dataset.dialog
-                );
-
-              if (!dialog) {
-                return;
-              }
-
-              dialog.showModal();
-              body.classList.add("dialog-open");
-            }
-          );
+      /* Accessible project dialogs. */
+      document.querySelectorAll('[data-dialog]').forEach(button => {
+        button.addEventListener('click', () => {
+          const dialog = document.getElementById(button.dataset.dialog);
+          if (!dialog) return;
+          dialog.showModal();
+          body.classList.add('dialog-open');
         });
-
-      document
-        .querySelectorAll("dialog")
-        .forEach((dialog) => {
-          dialog
-            .querySelector(".dialog__close")
-            .addEventListener(
-              "click",
-              () => {
-                dialog.close();
-              }
-            );
-
-          dialog.addEventListener(
-            "click",
-            (event) => {
-              const rect =
-                dialog.getBoundingClientRect();
-
-              const outside =
-                event.clientX < rect.left ||
-                event.clientX > rect.right ||
-                event.clientY < rect.top ||
-                event.clientY > rect.bottom;
-
-              if (outside) {
-                dialog.close();
-              }
-            }
-          );
-
-          dialog.addEventListener(
-            "close",
-            () => {
-              body.classList.remove(
-                "dialog-open"
-              );
-            }
-          );
+      });
+      document.querySelectorAll('dialog').forEach(dialog => {
+        dialog.querySelector('.dialog__close').addEventListener('click', () => dialog.close());
+        dialog.addEventListener('click', event => {
+          const rect = dialog.getBoundingClientRect();
+          const outside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
+          if (outside) dialog.close();
         });
+        dialog.addEventListener('close', () => body.classList.remove('dialog-open'));
+      });
 
-      /* ========================================================
-         Copy email
-         ======================================================== */
-
-      const toast =
-        document.getElementById("toast");
-
-      const showToast = (message) => {
+      /* Copy email with resilient fallback. */
+      const toast = document.getElementById('toast');
+      const showToast = message => {
         toast.textContent = message;
-        toast.classList.add("is-visible");
-
+        toast.classList.add('is-visible');
         window.clearTimeout(showToast.timer);
-
-        showToast.timer =
-          window.setTimeout(() => {
-            toast.classList.remove(
-              "is-visible"
-            );
-          }, 2200);
+        showToast.timer = window.setTimeout(() => toast.classList.remove('is-visible'), 2200);
       };
-
-      document
-        .getElementById("copy-email")
-        .addEventListener(
-          "click",
-          async () => {
-            const email =
-              "sumityadavtg@gmail.com";
-
-            try {
-              await navigator.clipboard.writeText(
-                email
-              );
-
-              showToast("Email copied");
-            } catch {
-              const textarea =
-                document.createElement(
-                  "textarea"
-                );
-
-              textarea.value = email;
-              textarea.style.position =
-                "fixed";
-
-              textarea.style.opacity =
-                "0";
-
-              document.body.appendChild(
-                textarea
-              );
-
-              textarea.select();
-
-              document.execCommand("copy");
-
-              textarea.remove();
-
-              showToast("Email copied");
-            }
-          }
-        );
-
-      /* ========================================================
-         Resume PDF
-         ======================================================== */
-
-      const pdfEscape = (text) => {
-        return text
-          .replace(/\\/g, "\\\\")
-          .replace(/\(/g, "\\(")
-          .replace(/\)/g, "\\)");
-      };
-
-      const resumeLines = [
-        {
-          t: "SUMIT YADAV",
-          s: 22,
-          b: true,
-          g: 24
-        },
-        {
-          t: "Java Backend Engineer | sumityadavtg@gmail.com | linkedin.com/in/sumit-yadav-7938bb252 | leetcode.com/u/im_sumit",
-          s: 8.5,
-          g: 18
-        },
-        {
-          t: "PROFESSIONAL SUMMARY",
-          s: 11,
-          b: true,
-          g: 15
-        },
-        {
-          t: "Java Backend Developer with 3 years of experience building scalable Spring Boot microservices and RESTful APIs",
-          s: 8.7,
-          g: 11
-        },
-        {
-          t: "for enterprise FinTech systems. Skilled in event-driven integrations, reusable backend design, production debugging,",
-          s: 8.7,
-          g: 11
-        },
-        {
-          t: "and secure software delivery.",
-          s: 8.7,
-          g: 17
-        },
-        {
-          t: "EXPERIENCE",
-          s: 11,
-          b: true,
-          g: 15
-        },
-        {
-          t: "TATA CONSULTANCY SERVICES | Java Spring Boot Developer - Integrations | Oct 2023 - Present | Bengaluru, India",
-          s: 8.7,
-          b: true,
-          g: 13
-        },
-        {
-          t: "- Built Spring Boot microservices and REST APIs for digital loan-origination workflows using event-driven",
-          s: 8.5,
-          g: 10.5
-        },
-        {
-          t: "  architecture, reactive programming, asynchronous callbacks, and scheduled processing.",
-          s: 8.5,
-          g: 10.5
-        },
-        {
-          t: "- Developed reusable libraries for API clients, validation, object mapping, exception handling, logging, and",
-          s: 8.5,
-          g: 10.5
-        },
-        {
-          t: "  standardised responses.",
-          s: 8.5,
-          g: 10.5
-        },
-        {
-          t: "- Integrated third-party identity, verification, consent, and digital-document services with secure data handling,",
-          s: 8.5,
-          g: 10.5
-        },
-        {
-          t: "  request validation, audit tracking, resilient error handling, callbacks, retries, and recovery.",
-          s: 8.5,
-          g: 10.5
-        },
-        {
-          t: "- Delivered consent-based banking-data flows and transformed statement JSON into income, cash-flow, balance,",
-          s: 8.5,
-          g: 10.5
-        },
-        {
-          t: "  transaction, and risk insights for credit decisioning.",
-          s: 8.5,
-          g: 10.5
-        },
-        {
-          t: "- Diagnosed production defects using root-cause analysis, Spring Boot Actuator, structured logs, and Jenkins.",
-          s: 8.5,
-          g: 10.5
-        },
-        {
-          t: "- Integrated GraalJS runtime mappers for client-specific request and response transformations without redeployment.",
-          s: 8.5,
-          g: 17
-        },
-        {
-          t: "TECHNICAL SKILLS",
-          s: 11,
-          b: true,
-          g: 15
-        },
-        {
-          t: "Backend: Java, JavaScript, Spring Boot, Microservices, REST APIs, Event-Driven Architecture, Reactive Programming",
-          s: 8.3,
-          g: 10.5
-        },
-        {
-          t: "Security & Data: Spring Security, OAuth 2.0, Spring Data JPA, SQL, MySQL, JSON, XML, GraalJS",
-          s: 8.3,
-          g: 10.5
-        },
-        {
-          t: "Engineering: Reusable Libraries, Debugging, Root-Cause Analysis, API Testing, Exception Handling",
-          s: 8.3,
-          g: 10.5
-        },
-        {
-          t: "Tools: Git, GitHub, Jenkins, Docker, Postman, Swagger/OpenAPI, Kubernetes (Basics)",
-          s: 8.3,
-          g: 17
-        },
-        {
-          t: "ACHIEVEMENTS",
-          s: 11,
-          b: true,
-          g: 15
-        },
-        {
-          t: "- Solved 700+ DSA problems across LeetCode and GeeksforGeeks.",
-          s: 8.5,
-          g: 10.5
-        },
-        {
-          t: "- LeetCode contest rating 1940 (Knight), ranked in the top 3% worldwide.",
-          s: 8.5,
-          g: 10.5
-        },
-        {
-          t: "- Grand Finalist in TechGig national-level coding competition, worldwide rank 934.",
-          s: 8.5,
-          g: 10.5
-        },
-        {
-          t: "- CodeKaze 2023 rank 1,235 among approximately 150,000 participants.",
-          s: 8.5,
-          g: 17
-        },
-        {
-          t: "EDUCATION",
-          s: 11,
-          b: true,
-          g: 15
-        },
-        {
-          t: "B.Tech. Electronics and Communication Engineering | PSIT College of Engineering | 2019 - 2023",
-          s: 8.5,
-          b: true,
-          g: 11
-        },
-        {
-          t: "CGPA: 8.5 | Department Topper | University-sponsored for academic excellence",
-          s: 8.5,
-          g: 11
+      document.getElementById('copy-email').addEventListener('click', async () => {
+        const email = 'sumityadavtg@gmail.com';
+        try {
+          await navigator.clipboard.writeText(email);
+          showToast('Email copied');
+        } catch {
+          const textarea = document.createElement('textarea');
+          textarea.value = email;
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          textarea.remove();
+          showToast('Email copied');
         }
+      });
+
+      /* One-file resume: generate a compact, accurate PDF in the browser. */
+      const pdfEscape = text => text.replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)');
+      const resumeLines = [
+        { t: 'SUMIT YADAV', s: 22, b: true, g: 24 },
+        { t: 'Java Backend Engineer | sumityadavtg@gmail.com | linkedin.com/in/sumit-yadav-7938bb252 | leetcode.com/u/im_sumit', s: 8.5, g: 18 },
+        { t: 'PROFESSIONAL SUMMARY', s: 11, b: true, g: 15 },
+        { t: 'Java Backend Developer with 3 years of experience building scalable Spring Boot microservices and RESTful APIs', s: 8.7, g: 11 },
+        { t: 'for enterprise FinTech systems. Skilled in event-driven integrations, reusable backend design, production debugging,', s: 8.7, g: 11 },
+        { t: 'and secure software delivery.', s: 8.7, g: 17 },
+        { t: 'EXPERIENCE', s: 11, b: true, g: 15 },
+        { t: 'TATA CONSULTANCY SERVICES | Java Spring Boot Developer - Integrations | Oct 2023 - Present | Bengaluru, India', s: 8.7, b: true, g: 13 },
+        { t: '- Built Spring Boot microservices and REST APIs for digital loan-origination workflows using event-driven', s: 8.5, g: 10.5 },
+        { t: '  architecture, reactive programming, asynchronous callbacks, and scheduled processing.', s: 8.5, g: 10.5 },
+        { t: '- Developed reusable libraries for API clients, validation, object mapping, exception handling, logging, and', s: 8.5, g: 10.5 },
+        { t: '  standardised responses.', s: 8.5, g: 10.5 },
+        { t: '- Integrated third-party identity, verification, consent, and digital-document services with secure data handling,', s: 8.5, g: 10.5 },
+        { t: '  request validation, audit tracking, resilient error handling, callbacks, retries, and recovery.', s: 8.5, g: 10.5 },
+        { t: '- Delivered consent-based banking-data flows and transformed statement JSON into income, cash-flow,', s: 8.5, g: 10.5 },
+        { t: '  balance, transaction, and risk insights for credit decisioning.', s: 8.5, g: 10.5 },
+        { t: '- Integrated third-party verification, risk, and digital-document services with callbacks, reconciliation, retries,', s: 8.5, g: 10.5 },
+        { t: '  and failure recovery.', s: 8.5, g: 10.5 },
+        { t: '- Diagnosed production defects using root-cause analysis, Spring Boot Actuator, structured logs, and Jenkins.', s: 8.5, g: 10.5 },
+        { t: '- Integrated GraalJS runtime mappers for client-specific request and response transformations without redeployment.', s: 8.5, g: 17 },
+        { t: 'TECHNICAL SKILLS', s: 11, b: true, g: 15 },
+        { t: 'Backend: Java, JavaScript, Spring Boot, Microservices, REST APIs, Event-Driven Architecture, Reactive Programming', s: 8.3, g: 10.5 },
+        { t: 'Security & Data: Spring Security, OAuth 2.0, Spring Data JPA, SQL, MySQL, JSON, XML, GraalJS', s: 8.3, g: 10.5 },
+        { t: 'Engineering: Reusable Libraries, Debugging, Root-Cause Analysis, API Testing, Exception Handling', s: 8.3, g: 10.5 },
+        { t: 'Tools: Git, GitHub, Jenkins, Docker, Postman, Swagger/OpenAPI, Kubernetes (Basics)', s: 8.3, g: 17 },
+        { t: 'ACHIEVEMENTS', s: 11, b: true, g: 15 },
+        { t: '- Solved 700+ DSA problems across LeetCode and GeeksforGeeks.', s: 8.5, g: 10.5 },
+        { t: '- LeetCode contest rating 1940 (Knight), ranked in the top 3% worldwide.', s: 8.5, g: 10.5 },
+        { t: '- Grand Finalist in TechGig national-level coding competition, worldwide rank 934.', s: 8.5, g: 10.5 },
+        { t: '- CodeKaze 2023 rank 1,235 among approximately 150,000 participants.', s: 8.5, g: 17 },
+        { t: 'EDUCATION', s: 11, b: true, g: 15 },
+        { t: 'B.Tech. Electronics and Communication Engineering | PSIT College of Engineering | 2019 - 2023', s: 8.5, b: true, g: 11 },
+        { t: 'CGPA: 8.5 | Department Topper | University-sponsored for academic excellence', s: 8.5, g: 11 }
       ];
 
       const buildResumePdf = () => {
         let y = 755;
-        let stream = "BT\n";
-
-        resumeLines.forEach((line) => {
-          stream +=
-            `/${line.b ? "F2" : "F1"} ${line.s} Tf\n` +
-            `1 0 0 1 42 ${y.toFixed(2)} Tm\n` +
-            `(${pdfEscape(line.t)}) Tj\n`;
-
+        let stream = 'BT\n';
+        resumeLines.forEach(line => {
+          stream += `/${line.b ? 'F2' : 'F1'} ${line.s} Tf\n1 0 0 1 42 ${y.toFixed(2)} Tm\n(${pdfEscape(line.t)}) Tj\n`;
           y -= line.g;
         });
-
-        stream += "ET\n";
+        stream += 'ET\n';
 
         const objects = [];
+        objects[1] = '<< /Type /Catalog /Pages 2 0 R >>';
+        objects[2] = '<< /Type /Pages /Kids [3 0 R] /Count 1 >>';
+        objects[3] = '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> /Contents 4 0 R >>';
+        objects[4] = `<< /Length ${stream.length} >>\nstream\n${stream}endstream`;
+        objects[5] = '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>';
+        objects[6] = '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>';
 
-        objects[1] =
-          "<< /Type /Catalog /Pages 2 0 R >>";
-
-        objects[2] =
-          "<< /Type /Pages /Kids [3 0 R] /Count 1 >>";
-
-        objects[3] =
-          "<< /Type /Page /Parent 2 0 R " +
-          "/MediaBox [0 0 612 792] " +
-          "/Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> " +
-          "/Contents 4 0 R >>";
-
-        objects[4] =
-          `<< /Length ${stream.length} >>\n` +
-          `stream\n${stream}endstream`;
-
-        objects[5] =
-          "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>";
-
-        objects[6] =
-          "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>";
-
-        let pdf = "%PDF-1.4\n";
-
+        let pdf = '%PDF-1.4\n';
         const offsets = [0];
-
-        for (
-          let i = 1;
-          i < objects.length;
-          i += 1
-        ) {
+        for (let i = 1; i < objects.length; i++) {
           offsets[i] = pdf.length;
-
-          pdf +=
-            `${i} 0 obj\n${objects[i]}\nendobj\n`;
+          pdf += `${i} 0 obj\n${objects[i]}\nendobj\n`;
         }
-
         const xrefOffset = pdf.length;
-
-        pdf +=
-          `xref\n0 ${objects.length}\n` +
-          "0000000000 65535 f \n";
-
-        for (
-          let i = 1;
-          i < objects.length;
-          i += 1
-        ) {
-          pdf +=
-            `${String(offsets[i]).padStart(10, "0")} ` +
-            "00000 n \n";
-        }
-
-        pdf +=
-          "trailer\n" +
-          `<< /Size ${objects.length} /Root 1 0 R >>\n` +
-          "startxref\n" +
-          `${xrefOffset}\n` +
-          "%%EOF";
-
-        return new Blob(
-          [pdf],
-          {
-            type: "application/pdf"
-          }
-        );
+        pdf += `xref\n0 ${objects.length}\n0000000000 65535 f \n`;
+        for (let i = 1; i < objects.length; i++) pdf += `${String(offsets[i]).padStart(10, '0')} 00000 n \n`;
+        pdf += `trailer\n<< /Size ${objects.length} /Root 1 0 R >>\nstartxref\n${xrefOffset}\n%%EOF`;
+        return new Blob([pdf], { type: 'application/pdf' });
       };
 
-      document
-        .querySelectorAll(".resume-link")
-        .forEach((link) => {
-          link.addEventListener(
-            "click",
-            (event) => {
-              event.preventDefault();
+      document.querySelectorAll('.resume-link').forEach(link => {
+        link.addEventListener('click', event => {
+          event.preventDefault();
+          const url = URL.createObjectURL(buildResumePdf());
+          const download = document.createElement('a');
+          download.href = url;
+          download.download = 'Sumit_Yadav_Resume.pdf';
+          document.body.appendChild(download);
+          download.click();
+          download.remove();
+          window.setTimeout(() => URL.revokeObjectURL(url), 1500);
+        });
+      });
 
-              const url =
-                URL.createObjectURL(
-                  buildResumePdf()
-                );
+      document.getElementById('year').textContent = new Date().getFullYear();
 
-              const download =
-                document.createElement("a");
+      /* GSAP enhancement. The page remains complete when the CDN is unavailable. */
+      window.addEventListener('load', () => {
+        if (reducedMotion || !window.gsap || !window.ScrollTrigger) return;
+        gsap.registerPlugin(ScrollTrigger);
 
-              download.href = url;
-              download.download =
-                "Sumit_Yadav_Resume.pdf";
+        gsap.fromTo('.hero-line',
+          { yPercent: 115, rotate: 2 },
+          { yPercent: 0, rotate: 0, duration: 1.25, stagger: .08, ease: 'power4.out', delay: .15 }
+        );
 
-              document.body.appendChild(
-                download
-              );
+        gsap.to('#system-art', {
+          yPercent: 10,
+          rotate: 5,
+          ease: 'none',
+          scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+        });
 
-              download.click();
-              download.remove();
+        gsap.to('.hero__name', {
+          yPercent: 5,
+          ease: 'none',
+          scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+        });
 
-              window.setTimeout(() => {
-                URL.revokeObjectURL(url);
-              }, 1500);
-            }
+        document.querySelectorAll('.project-visual').forEach((visual, index) => {
+          gsap.fromTo(visual,
+            { clipPath: index % 2 ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)' },
+            { clipPath: 'inset(0 0 0 0)', duration: 1.2, ease: 'power4.out', scrollTrigger: { trigger: visual, start: 'top 78%', once: true } }
           );
         });
 
-      document.getElementById("year").textContent =
-        new Date().getFullYear();
-
-      /* ========================================================
-         GSAP enhancements
-         ======================================================== */
-
-      window.addEventListener("load", () => {
-        if (
-          reducedMotion ||
-          !window.gsap ||
-          !window.ScrollTrigger
-        ) {
-          return;
-        }
-
-        gsap.registerPlugin(
-          ScrollTrigger
-        );
-
-        gsap.fromTo(
-          ".hero-line",
-          {
-            yPercent: 105,
-            rotate: 1
-          },
-          {
-            yPercent: 0,
-            rotate: 0,
-            duration: 1.15,
-            stagger: .08,
-            ease: "power4.out",
-            delay: .15
-          }
-        );
-
-        gsap.to("#system-art", {
-          yPercent: 8,
-          rotate: 4,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".hero",
-            start: "top top",
-            end: "bottom top",
-            scrub: true
-          }
-        });
-
-        /*
-          Reduced the previous hero heading parallax so it cannot visually
-          push the display type into the supporting paragraph on short
-          viewport deployments.
-        */
-        gsap.to(".hero__name", {
-          yPercent: 5,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".hero",
-            start: "top top",
-            end: "bottom top",
-            scrub: true
-          }
-        });
-
-        document
-          .querySelectorAll(".project-visual")
-          .forEach((visual, index) => {
-            gsap.fromTo(
-              visual,
-              {
-                clipPath:
-                  index % 2
-                    ? "inset(0 100% 0 0)"
-                    : "inset(0 0 0 100%)"
-              },
-              {
-                clipPath: "inset(0 0 0 0)",
-                duration: 1.2,
-                ease: "power4.out",
-                scrollTrigger: {
-                  trigger: visual,
-                  start: "top 78%",
-                  once: true
-                }
-              }
-            );
-          });
-
-        gsap.fromTo(
-          ".proof-item__number",
-          {
-            y: 80
-          },
-          {
-            y: 0,
-            stagger: .12,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: ".proof-grid",
-              start: "top 80%",
-              once: true
-            }
-          }
+        gsap.to('.about::after', { duration: 0 });
+        gsap.fromTo('.proof-item__number',
+          { y: 80 },
+          { y: 0, stagger: .12, ease: 'power3.out', scrollTrigger: { trigger: '.proof-grid', start: 'top 80%', once: true } }
         );
       });
     })();

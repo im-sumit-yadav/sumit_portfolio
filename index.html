@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <script>
-    document.documentElement.classList.add('js');
+    document.documentElement.classList.add("js");
   </script>
 
   <style>
@@ -28,13 +28,17 @@
       --coral: #ff664a;
       --line-dark: rgba(17, 17, 15, .18);
       --line-light: rgba(255, 254, 248, .22);
+
       --display: "Archivo Black", "Arial Black", Impact, sans-serif;
       --sans: "Manrope", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+
       --header-h: 5rem;
       --gutter: clamp(1rem, 3.2vw, 3.4rem);
+
       --ease-out: cubic-bezier(.16, 1, .3, 1);
       --ease-in-out: cubic-bezier(.76, 0, .24, 1);
+
       --shadow: 0 30px 90px rgba(0, 0, 0, .18);
     }
 
@@ -52,6 +56,7 @@
 
     body {
       margin: 0;
+      min-width: 320px;
       color: var(--ink);
       background: var(--paper);
       font-family: var(--sans);
@@ -117,12 +122,12 @@
       position: absolute !important;
       width: 1px !important;
       height: 1px !important;
-      padding: 0 !important;
       margin: -1px !important;
+      padding: 0 !important;
       overflow: hidden !important;
       clip: rect(0, 0, 0, 0) !important;
-      white-space: nowrap !important;
       border: 0 !important;
+      white-space: nowrap !important;
     }
 
     .container {
@@ -168,6 +173,7 @@
     .button {
       --button-bg: transparent;
       --button-fg: currentColor;
+
       position: relative;
       display: inline-flex;
       min-height: 3.15rem;
@@ -176,17 +182,21 @@
       gap: .7rem;
       padding: .85rem 1.2rem;
       overflow: hidden;
+
       color: var(--button-fg);
       border: 1px solid currentColor;
       border-radius: 999px;
       background: var(--button-bg);
+
       font-family: var(--mono);
       font-size: .7rem;
       font-weight: 500;
       letter-spacing: .06em;
       text-transform: uppercase;
+
       isolation: isolate;
       cursor: pointer;
+
       transition:
         color .35s var(--ease-out),
         border-color .35s var(--ease-out),
@@ -243,7 +253,12 @@
     .button svg {
       width: 1rem;
       height: 1rem;
+      flex: 0 0 auto;
     }
+
+    /* ==========================================================
+       Intro
+       ========================================================== */
 
     .intro {
       position: fixed;
@@ -307,14 +322,13 @@
     }
 
     @keyframes introLine {
-      from {
-        transform: scaleX(0);
-      }
-
-      to {
-        transform: scaleX(1);
-      }
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
     }
+
+    /* ==========================================================
+       Cursor
+       ========================================================== */
 
     .cursor {
       position: fixed;
@@ -343,6 +357,10 @@
       width: 3.4rem;
       height: 3.4rem;
     }
+
+    /* ==========================================================
+       Navigation
+       ========================================================== */
 
     .site-header {
       position: fixed;
@@ -538,11 +556,15 @@
       transform-origin: left;
     }
 
+    /* ==========================================================
+       Hero
+       ========================================================== */
+
     .hero {
       position: relative;
       min-height: 100svh;
       display: grid;
-      align-items: end;
+      align-items: stretch;
       overflow: hidden;
       padding-top: var(--header-h);
       background:
@@ -567,16 +589,18 @@
     .hero__inner {
       position: relative;
       z-index: 1;
+
       min-height: calc(100svh - var(--header-h));
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      gap: 1.2rem;
-      padding-top: clamp(1.5rem, 5vw, 4rem);
+      display: flex;
+      flex-direction: column;
+
+      padding-top: clamp(1.3rem, 3vw, 3rem);
       padding-bottom: 1.25rem;
     }
 
     .hero__meta {
       display: flex;
+      flex: 0 0 auto;
       align-items: center;
       justify-content: space-between;
       gap: 2rem;
@@ -608,57 +632,102 @@
       }
     }
 
+    /*
+      Hero layout fix:
+      - The previous .76 line-height was smaller than Archivo Black's
+        glyph bounds, which could visually place the paragraph inside
+        the outlined YADAV text on short-height deployments.
+      - Typography is now constrained by both viewport width and height.
+      - Copy remains in normal document flow rather than relying on
+        visual glyph bounds.
+    */
+
     .hero__stage {
       position: relative;
+
+      flex: 1 0 auto;
       display: grid;
       grid-template-columns:
-        minmax(0, 1.25fr)
-        minmax(320px, .75fr);
+        minmax(0, 1.3fr)
+        minmax(300px, .7fr);
+
       align-items: center;
-      gap: clamp(1.5rem, 4vw, 5rem);
-      padding-block: clamp(1.5rem, 4vw, 4rem);
+      gap: clamp(2rem, 4vw, 5rem);
+
+      padding-block:
+        clamp(2rem, 5vh, 4.5rem)
+        clamp(2.4rem, 6vh, 5rem);
     }
 
     .hero__copy {
       position: relative;
       z-index: 2;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
     }
 
     .hero__name {
-      margin: 0 0 1.4rem;
+      width: max-content;
+      max-width: 100%;
+      margin: 0;
+
       font-family: var(--display);
-      font-size: clamp(5rem, 13.5vw, 13.8rem);
-      line-height: .76;
+
+      /*
+        Width AND height aware sizing prevents the giant heading from
+        colliding with the body copy on short desktop viewports.
+      */
+      font-size: clamp(
+        4.8rem,
+        min(12.6vw, 20vh),
+        12.8rem
+      );
+
+      line-height: .9;
       letter-spacing: -.07em;
       text-transform: uppercase;
     }
 
     .hero__name span {
       display: block;
+      line-height: .9;
     }
 
     .hero__name span:last-child {
+      width: max-content;
+      max-width: calc(100vw - (var(--gutter) * 2));
+      margin-top: .035em;
       color: transparent;
       -webkit-text-stroke:
         clamp(1px, .12vw, 2px)
         var(--ink);
-      transform: translateX(clamp(1rem, 5vw, 6rem));
+      transform: translateX(clamp(.5rem, 4vw, 4.5rem));
     }
 
     .hero__positioning {
       display: grid;
-      grid-template-columns: minmax(0, 460px) auto;
+      grid-template-columns:
+        minmax(0, 490px)
+        auto;
+
       align-items: end;
-      gap: 1.5rem;
-      margin-left: clamp(0rem, 8vw, 8rem);
+      gap: clamp(1.5rem, 3vw, 3rem);
+
+      /*
+        Explicit spacing below the display type keeps the paragraph
+        independent of font rendering differences between environments.
+      */
+      margin-top: clamp(2.2rem, 4vh, 4rem);
+      margin-left: clamp(0rem, 6vw, 6.5rem);
     }
 
     .hero__positioning p {
       margin: 0;
       max-width: 42rem;
-      font-size: clamp(1.05rem, 1.55vw, 1.5rem);
-      line-height: 1.35;
-      letter-spacing: -.02em;
+      font-size: clamp(1rem, 1.45vw, 1.42rem);
+      line-height: 1.43;
+      letter-spacing: -.025em;
     }
 
     .hero__actions {
@@ -669,7 +738,7 @@
 
     .system-art {
       position: relative;
-      width: min(100%, 600px);
+      width: min(100%, 580px);
       aspect-ratio: 1;
       justify-self: end;
       isolation: isolate;
@@ -771,6 +840,7 @@
     }
 
     .hero__proof {
+      flex: 0 0 auto;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       border-top: 1px solid var(--line-dark);
@@ -805,6 +875,10 @@
       font-size: .75rem;
       line-height: 1.35;
     }
+
+    /* ==========================================================
+       Marquee
+       ========================================================== */
 
     .marquee {
       overflow: hidden;
@@ -844,6 +918,10 @@
         transform: translateX(-50%);
       }
     }
+
+    /* ==========================================================
+       Work
+       ========================================================== */
 
     .work {
       position: relative;
@@ -921,7 +999,7 @@
     }
 
     .project-story__copy > p {
-      max-width: 36rem;
+      max-width: 38rem;
       margin: 0 0 1.6rem;
       color: rgba(255, 255, 255, .72);
       font-size: clamp(1rem, 1.25vw, 1.2rem);
@@ -946,6 +1024,10 @@
       color: var(--coral);
       content: "/";
     }
+
+    /* ==========================================================
+       Project visual system
+       ========================================================== */
 
     .project-visual {
       position: relative;
@@ -982,36 +1064,44 @@
     .project-visual svg {
       position: relative;
       z-index: 2;
-      width: 82%;
-      height: 82%;
+      width: 88%;
+      height: 88%;
       overflow: visible;
     }
 
     .project-visual .route {
       fill: none;
       stroke: var(--white);
-      stroke-width: 1.4;
-      stroke-dasharray: 9 13;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .project-visual .route--animated {
+      stroke-dasharray: 8 10;
       animation: flow 6s linear infinite;
     }
 
-    .project-visual .route.accent {
+    .project-visual .route.acid {
       stroke: var(--acid);
-      stroke-width: 2.4;
     }
 
     .project-visual .route.blue {
-      stroke: #8e94ff;
+      stroke: #9297ff;
     }
 
     .project-visual .route.coral {
       stroke: var(--coral);
     }
 
+    .project-visual .route.muted {
+      stroke: rgba(255, 255, 255, .4);
+    }
+
     .project-visual .visual-node {
-      fill: var(--ink);
+      fill: #181816;
       stroke: var(--white);
-      stroke-width: 1.4;
+      stroke-width: 1.6;
     }
 
     .project-visual .visual-node.acid {
@@ -1029,12 +1119,31 @@
       stroke: var(--coral);
     }
 
-    .project-visual text {
+    .project-visual .node-label {
       fill: var(--white);
       font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: .1em;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-anchor: middle;
       text-transform: uppercase;
+    }
+
+    .project-visual .edge-label {
+      fill: rgba(255, 255, 255, .6);
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: .075em;
+      text-anchor: middle;
+      text-transform: uppercase;
+    }
+
+    .project-visual .node-index {
+      fill: var(--ink);
+      font-family: var(--mono);
+      font-size: 8px;
+      font-weight: 500;
+      text-anchor: middle;
     }
 
     .visual-label {
@@ -1042,7 +1151,7 @@
       z-index: 3;
       right: 1.25rem;
       bottom: 1.25rem;
-      color: rgba(255, 255, 255, .6);
+      color: rgba(255, 255, 255, .58);
       font-family: var(--mono);
       font-size: .62rem;
       letter-spacing: .08em;
@@ -1051,7 +1160,7 @@
 
     .visual-a {
       background:
-        radial-gradient(circle at 72% 28%, rgba(215, 255, 69, .21), transparent 34%),
+        radial-gradient(circle at 72% 28%, rgba(215, 255, 69, .18), transparent 34%),
         #181816;
     }
 
@@ -1066,6 +1175,10 @@
         radial-gradient(circle at 75% 68%, rgba(255, 102, 74, .22), transparent 35%),
         #181816;
     }
+
+    /* ==========================================================
+       About
+       ========================================================== */
 
     .about {
       position: relative;
@@ -1145,6 +1258,10 @@
       font-size: .68rem;
       content: attr(data-index);
     }
+
+    /* ==========================================================
+       Capabilities
+       ========================================================== */
 
     .capabilities {
       position: relative;
@@ -1316,6 +1433,10 @@
       animation: flow 6s linear infinite;
     }
 
+    /* ==========================================================
+       Proof
+       ========================================================== */
+
     .proof {
       padding: clamp(7rem, 12vw, 12rem) 0;
       background: var(--paper);
@@ -1386,6 +1507,10 @@
       color: rgba(17, 17, 15, .68);
       font-size: .9rem;
     }
+
+    /* ==========================================================
+       Contact
+       ========================================================== */
 
     .contact {
       position: relative;
@@ -1505,6 +1630,10 @@
       text-transform: uppercase;
     }
 
+    /* ==========================================================
+       Dialogs
+       ========================================================== */
+
     dialog {
       width: min(92vw, 820px);
       max-height: min(88vh, 820px);
@@ -1617,6 +1746,10 @@
       transform: translateY(0);
     }
 
+    /* ==========================================================
+       Reveal states
+       ========================================================== */
+
     .motion-ready .reveal {
       opacity: 0;
       transform: translateY(3rem);
@@ -1638,6 +1771,10 @@
       transition-delay: .22s;
     }
 
+    /* ==========================================================
+       Sticky project behaviour
+       ========================================================== */
+
     @media (min-width: 901px) {
       .project-story {
         position: sticky;
@@ -1653,11 +1790,87 @@
       }
     }
 
+    /* ==========================================================
+       Short desktop screens
+       Critical deployment-overlap protection
+       ========================================================== */
+
+    @media (min-width: 901px) and (max-height: 760px) {
+      .hero__inner {
+        padding-top: 1rem;
+      }
+
+      .hero__stage {
+        padding-block: 1.5rem 2rem;
+      }
+
+      .hero__name {
+        font-size: clamp(
+          4.1rem,
+          min(10.5vw, 17vh),
+          8.8rem
+        );
+        line-height: .92;
+      }
+
+      .hero__name span {
+        line-height: .92;
+      }
+
+      .hero__positioning {
+        margin-top: 1.5rem;
+        margin-left: clamp(0rem, 4vw, 4rem);
+      }
+
+      .hero__positioning p {
+        font-size: clamp(.95rem, 1.25vw, 1.18rem);
+      }
+
+      .system-art {
+        width: min(72vh, 480px);
+      }
+
+      .hero-proof {
+        padding-block: .7rem;
+      }
+
+      .hero-proof strong {
+        font-size: clamp(1.8rem, 3vw, 3.2rem);
+      }
+    }
+
+    @media (min-width: 901px) and (max-height: 620px) {
+      .hero__stage {
+        align-items: start;
+        padding-top: 1rem;
+      }
+
+      .hero__name {
+        font-size: clamp(
+          3.8rem,
+          min(9.5vw, 15vh),
+          7.3rem
+        );
+      }
+
+      .hero__positioning {
+        margin-top: 1.1rem;
+      }
+
+      .system-art {
+        width: min(62vh, 390px);
+      }
+    }
+
+    /* ==========================================================
+       Tablet
+       ========================================================== */
+
     @media (max-width: 1100px) {
       .hero__stage {
         grid-template-columns:
           minmax(0, 1.1fr)
-          minmax(280px, .9fr);
+          minmax(270px, .9fr);
       }
 
       .hero__positioning {
@@ -1679,6 +1892,10 @@
         gap: 3rem;
       }
     }
+
+    /* ==========================================================
+       Mobile / compact tablet
+       ========================================================== */
 
     @media (max-width: 900px) {
       :root {
@@ -1709,11 +1926,17 @@
       }
 
       .hero__name {
-        font-size: clamp(5.8rem, 20vw, 10rem);
+        font-size: clamp(5.6rem, 19vw, 9.7rem);
+        line-height: .9;
+      }
+
+      .hero__name span {
+        line-height: .9;
       }
 
       .hero__positioning {
         max-width: 36rem;
+        margin-top: 2rem;
       }
 
       .work__header,
@@ -1791,6 +2014,7 @@
       }
 
       .hero__inner {
+        min-height: calc(100svh - var(--header-h));
         padding-bottom: .75rem;
       }
 
@@ -1803,17 +2027,32 @@
         text-align: right;
       }
 
+      .hero__stage {
+        padding-block: 2rem 2.8rem;
+      }
+
       .hero__name {
-        margin-bottom: 1rem;
-        font-size: clamp(4.65rem, 23vw, 7.5rem);
+        width: 100%;
+        font-size: clamp(4.35rem, 22vw, 7.1rem);
+        line-height: .92;
+      }
+
+      .hero__name span {
+        line-height: .92;
       }
 
       .hero__name span:last-child {
-        transform: translateX(.45rem);
+        max-width: 100%;
+        transform: translateX(.3rem);
+      }
+
+      .hero__positioning {
+        margin-top: 1.75rem;
       }
 
       .hero__positioning p {
         font-size: 1rem;
+        line-height: 1.5;
       }
 
       .hero__actions {
@@ -1870,7 +2109,20 @@
       }
 
       .project-visual {
-        min-height: 88vw;
+        min-height: 94vw;
+      }
+
+      .project-visual svg {
+        width: 94%;
+        height: 94%;
+      }
+
+      .project-visual .node-label {
+        font-size: 9px;
+      }
+
+      .project-visual .edge-label {
+        font-size: 7px;
       }
 
       .about__statement {
@@ -1931,6 +2183,21 @@
 
       .dialog-note:nth-child(even) {
         padding-left: 0;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .hero__name {
+        font-size: clamp(4rem, 21vw, 5.2rem);
+      }
+
+      .hero__actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .contact__actions {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -2103,8 +2370,14 @@
   </nav>
 
   <main id="main-content">
+
+    <!-- ========================================================
+         Hero
+         ======================================================== -->
+
     <section class="hero" id="home" aria-labelledby="hero-title">
       <div class="container hero__inner">
+
         <div class="hero__meta reveal">
           <span class="hero__status">
             <span class="status-dot" aria-hidden="true"></span>
@@ -2115,6 +2388,7 @@
         </div>
 
         <div class="hero__stage">
+
           <div class="hero__copy">
             <h1 class="hero__name" id="hero-title">
               <span class="hero-line">Sumit</span>
@@ -2149,8 +2423,8 @@
 
                 <a
                   class="button magnetic interactive resume-link"
-                  href="Sumit_Yadav_Resume.pdf"
-                  download="Sumit_Yadav_Resume.pdf"
+                  href="data:text/plain;charset=utf-8,Sumit%20Yadav%20-%20Java%20Backend%20Engineer"
+                  download="Sumit_Yadav_Resume.txt"
                 >
                   Resume
 
@@ -2170,7 +2444,7 @@
           </div>
 
           <div class="system-art" id="system-art" aria-hidden="true">
-            <svg viewBox="0 0 500 500" role="img">
+            <svg viewBox="0 0 500 500">
               <path
                 class="path"
                 d="M92 250C92 157 163 88 250 88s158 69 158 162-71 162-158 162S92 343 92 250Z"
@@ -2192,32 +2466,32 @@
               />
 
               <g class="packet">
-                <circle cx="250" cy="250" r="70" class="node-ring" />
-                <circle cx="250" cy="250" r="14" class="node-core" />
+                <circle cx="250" cy="250" r="70" class="node-ring"/>
+                <circle cx="250" cy="250" r="14" class="node-core"/>
                 <text x="250" y="288" text-anchor="middle">Core service</text>
               </g>
 
               <g class="packet packet--2">
-                <circle cx="250" cy="90" r="33" class="node-ring" />
-                <circle cx="250" cy="90" r="8" class="node-core--blue" />
+                <circle cx="250" cy="90" r="33" class="node-ring"/>
+                <circle cx="250" cy="90" r="8" class="node-core--blue"/>
                 <text x="250" y="55" text-anchor="middle">Identity</text>
               </g>
 
               <g class="packet packet--3">
-                <circle cx="408" cy="250" r="33" class="node-ring" />
-                <circle cx="408" cy="250" r="8" class="node-core--coral" />
+                <circle cx="408" cy="250" r="33" class="node-ring"/>
+                <circle cx="408" cy="250" r="8" class="node-core--coral"/>
                 <text x="408" y="295" text-anchor="middle">Risk</text>
               </g>
 
               <g>
-                <circle cx="250" cy="411" r="33" class="node-ring" />
-                <circle cx="250" cy="411" r="8" class="node-core--blue" />
+                <circle cx="250" cy="411" r="33" class="node-ring"/>
+                <circle cx="250" cy="411" r="8" class="node-core--blue"/>
                 <text x="250" y="458" text-anchor="middle">Bank data</text>
               </g>
 
               <g>
-                <circle cx="91" cy="250" r="33" class="node-ring" />
-                <circle cx="91" cy="250" r="8" class="node-core--coral" />
+                <circle cx="91" cy="250" r="33" class="node-ring"/>
+                <circle cx="91" cy="250" r="8" class="node-core--coral"/>
                 <text x="91" y="295" text-anchor="middle">Documents</text>
               </g>
             </svg>
@@ -2249,6 +2523,7 @@
             </span>
           </div>
         </div>
+
       </div>
     </section>
 
@@ -2259,6 +2534,7 @@
         <span class="marquee__item">Secure APIs</span>
         <span class="marquee__item">Event streams</span>
         <span class="marquee__item">Reliable integrations</span>
+
         <span class="marquee__item">Java</span>
         <span class="marquee__item">Spring Boot</span>
         <span class="marquee__item">Secure APIs</span>
@@ -2267,7 +2543,12 @@
       </div>
     </div>
 
+    <!-- ========================================================
+         Work
+         ======================================================== -->
+
     <section class="work" id="work" aria-labelledby="work-title">
+
       <div class="container work__header">
         <div>
           <span class="eyebrow reveal">Selected engineering work</span>
@@ -2284,8 +2565,14 @@
       </div>
 
       <div class="work-stack">
+
+        <!-- ====================================================
+             Project 01
+             ==================================================== -->
+
         <article class="project-story" aria-labelledby="project-1-title">
           <div class="container project-story__inner">
+
             <div class="project-story__copy reveal">
               <div class="project-index mono">
                 <span>01 / Orchestration</span>
@@ -2317,48 +2604,232 @@
               </button>
             </div>
 
+            <!-- Accurate backend workflow diagram -->
             <div
               class="project-visual visual-a reveal"
               data-tilt
               aria-hidden="true"
             >
-              <svg viewBox="0 0 600 600">
+              <svg viewBox="0 0 640 560">
+
+                <defs>
+                  <marker
+                    id="arrow-acid"
+                    viewBox="0 0 10 10"
+                    refX="8.2"
+                    refY="5"
+                    markerWidth="6"
+                    markerHeight="6"
+                    orient="auto-start-reverse"
+                  >
+                    <path d="M0 0L10 5L0 10Z" fill="#d7ff45"/>
+                  </marker>
+
+                  <marker
+                    id="arrow-blue"
+                    viewBox="0 0 10 10"
+                    refX="8.2"
+                    refY="5"
+                    markerWidth="6"
+                    markerHeight="6"
+                    orient="auto-start-reverse"
+                  >
+                    <path d="M0 0L10 5L0 10Z" fill="#9297ff"/>
+                  </marker>
+
+                  <marker
+                    id="arrow-coral"
+                    viewBox="0 0 10 10"
+                    refX="8.2"
+                    refY="5"
+                    markerWidth="6"
+                    markerHeight="6"
+                    orient="auto-start-reverse"
+                  >
+                    <path d="M0 0L10 5L0 10Z" fill="#ff664a"/>
+                  </marker>
+                </defs>
+
+                <!-- Background architecture guides -->
                 <path
-                  class="route"
-                  d="M80 300h130c42 0 48-72 92-72h118c47 0 48 72 100 72"
+                  class="route muted"
+                  d="M318 74V486"
+                  stroke-dasharray="4 12"
                 />
 
                 <path
-                  class="route accent"
-                  d="M80 300h112c50 0 54 115 106 115h111c51 0 59-115 111-115"
+                  class="route muted"
+                  d="M92 280H558"
+                  stroke-dasharray="4 12"
                 />
 
+                <!--
+                  Logical request path:
+
+                  Request
+                    ->
+                  REST API
+                    ->
+                  Orchestrator
+                    ->
+                  Third-party integration
+                    ->
+                  Async callback
+                    ->
+                  Decision state
+                -->
+
+                <!-- Request -> API -->
                 <path
-                  class="route blue"
-                  d="M300 92v416M143 143l314 314M457 143 143 457"
+                  class="route acid route--animated"
+                  d="M100 280H157"
+                  marker-end="url(#arrow-acid)"
                 />
 
-                <circle class="visual-node acid" cx="80" cy="300" r="14" />
-                <circle class="visual-node" cx="210" cy="300" r="28" />
-                <circle class="visual-node blue" cx="300" cy="228" r="18" />
-                <circle class="visual-node" cx="300" cy="415" r="34" />
-                <circle class="visual-node coral" cx="420" cy="300" r="18" />
-                <circle class="visual-node acid" cx="520" cy="300" r="14" />
+                <!-- API -> Orchestrator -->
+                <path
+                  class="route acid route--animated"
+                  d="M213 280H273"
+                  marker-end="url(#arrow-acid)"
+                />
 
-                <text x="80" y="272" text-anchor="middle">request</text>
-                <text x="300" y="465" text-anchor="middle">orchestrate</text>
-                <text x="520" y="272" text-anchor="middle">decision</text>
+                <!-- Orchestrator -> External integration -->
+                <path
+                  class="route blue route--animated"
+                  d="M337 257C368 231 394 206 418 187"
+                  marker-end="url(#arrow-blue)"
+                />
+
+                <!-- Third-party service -> callback -->
+                <path
+                  class="route blue route--animated"
+                  d="M450 204V349"
+                  marker-end="url(#arrow-blue)"
+                />
+
+                <!-- Callback -> Decision -->
+                <path
+                  class="route acid route--animated"
+                  d="M469 380C505 363 525 329 543 302"
+                  marker-end="url(#arrow-acid)"
+                />
+
+                <!-- Recovery/retry path -->
+                <path
+                  class="route coral"
+                  d="M432 388C359 467 272 450 289 327"
+                  stroke-dasharray="5 12"
+                  marker-end="url(#arrow-coral)"
+                />
+
+                <text class="edge-label" x="127" y="263">
+                  HTTP REQUEST
+                </text>
+
+                <text class="edge-label" x="243" y="263">
+                  VALIDATED
+                </text>
+
+                <text class="edge-label" x="384" y="205">
+                  ASYNC CALL
+                </text>
+
+                <text class="edge-label" x="470" y="280">
+                  CALLBACK
+                </text>
+
+                <text class="edge-label" x="354" y="445">
+                  RETRY / RECOVERY
+                </text>
+
+                <!-- Request -->
+                <circle class="visual-node acid" cx="78" cy="280" r="17"/>
+                <text class="node-index" x="78" y="283">01</text>
+                <text class="node-label" x="78" y="323">REQUEST</text>
+
+                <!-- REST API -->
+                <rect
+                  class="visual-node"
+                  x="157"
+                  y="250"
+                  width="56"
+                  height="60"
+                  rx="16"
+                />
+                <text class="node-label" x="185" y="341">REST API</text>
+
+                <!-- Orchestrator -->
+                <rect
+                  class="visual-node"
+                  x="273"
+                  y="240"
+                  width="64"
+                  height="80"
+                  rx="20"
+                />
+                <circle
+                  class="visual-node blue"
+                  cx="305"
+                  cy="280"
+                  r="9"
+                />
+                <text class="node-label" x="305" y="351">
+                  ORCHESTRATOR
+                </text>
+
+                <!-- Third party integration -->
+                <circle
+                  class="visual-node blue"
+                  cx="450"
+                  cy="172"
+                  r="31"
+                />
+                <text class="node-label" x="450" y="129">
+                  THIRD-PARTY
+                </text>
+                <text class="node-label" x="450" y="143">
+                  INTEGRATION
+                </text>
+
+                <!-- Callback -->
+                <circle
+                  class="visual-node coral"
+                  cx="450"
+                  cy="380"
+                  r="27"
+                />
+                <text class="node-label" x="450" y="425">
+                  ASYNC CALLBACK
+                </text>
+
+                <!-- Decision -->
+                <circle
+                  class="visual-node acid"
+                  cx="558"
+                  cy="280"
+                  r="18"
+                />
+                <text class="node-index" x="558" y="283">06</text>
+                <text class="node-label" x="558" y="323">
+                  DECISION STATE
+                </text>
+
               </svg>
 
               <span class="visual-label">
-                Event path / callback / recovery
+                request → orchestration → integration → callback → decision
               </span>
             </div>
           </div>
         </article>
 
+        <!-- ====================================================
+             Project 02
+             ==================================================== -->
+
         <article class="project-story" aria-labelledby="project-2-title">
           <div class="container project-story__inner">
+
             <div class="project-story__copy reveal">
               <div class="project-index mono">
                 <span>02 / Trust layer</span>
@@ -2368,9 +2839,10 @@
               <h3 id="project-2-title">Identity &amp; document trust</h3>
 
               <p>
-                Integrated Aadhaar, PAN validation, DigiLocker, eSign, and eStamp
-                into lending workflows with secure handling, validation, audit
-                trails, callbacks, retries, reconciliation, and failure recovery.
+                Integrated third-party identity, verification, and digital
+                document services into lending workflows with secure handling,
+                validation, audit trails, callbacks, retries, reconciliation,
+                and failure recovery.
               </p>
 
               <ul class="tech-line" aria-label="Technologies">
@@ -2395,43 +2867,53 @@
               aria-hidden="true"
             >
               <svg viewBox="0 0 600 600">
+
                 <path
-                  class="route"
+                  class="route route--animated"
                   d="M300 82c120 0 218 98 218 218s-98 218-218 218S82 420 82 300 180 82 300 82Z"
                 />
 
                 <path
-                  class="route blue"
+                  class="route blue route--animated"
                   d="M300 130c94 0 170 76 170 170s-76 170-170 170-170-76-170-170 76-170 170-170Z"
                 />
 
-                <path class="route accent" d="M300 160v280M160 300h280" />
                 <path
-                  class="route coral"
-                  d="m201 201 198 198m0-198L201 399"
+                  class="route acid route--animated"
+                  d="M300 160V440M160 300H440"
                 />
 
-                <circle class="visual-node blue" cx="300" cy="300" r="55" />
-                <circle class="visual-node acid" cx="300" cy="130" r="15" />
-                <circle class="visual-node" cx="470" cy="300" r="21" />
-                <circle class="visual-node coral" cx="300" cy="470" r="15" />
-                <circle class="visual-node" cx="130" cy="300" r="21" />
+                <path
+                  class="route coral route--animated"
+                  d="M201 201L399 399M399 201L201 399"
+                />
 
-                <text x="300" y="305" text-anchor="middle">verified</text>
-                <text x="300" y="104" text-anchor="middle">identity</text>
-                <text x="485" y="272" text-anchor="middle">consent</text>
-                <text x="300" y="510" text-anchor="middle">signed</text>
+                <circle class="visual-node blue" cx="300" cy="300" r="55"/>
+                <circle class="visual-node acid" cx="300" cy="130" r="15"/>
+                <circle class="visual-node" cx="470" cy="300" r="21"/>
+                <circle class="visual-node coral" cx="300" cy="470" r="15"/>
+                <circle class="visual-node" cx="130" cy="300" r="21"/>
+
+                <text class="node-label" x="300" y="305">VERIFIED</text>
+                <text class="node-label" x="300" y="104">IDENTITY</text>
+                <text class="node-label" x="485" y="272">CONSENT</text>
+                <text class="node-label" x="300" y="510">SIGNED</text>
               </svg>
 
               <span class="visual-label">
-                Validate / consent / audit / recover
+                validate / consent / audit / recover
               </span>
             </div>
           </div>
         </article>
 
+        <!-- ====================================================
+             Project 03
+             ==================================================== -->
+
         <article class="project-story" aria-labelledby="project-3-title">
           <div class="container project-story__inner">
+
             <div class="project-story__copy reveal">
               <div class="project-index mono">
                 <span>03 / Transformation</span>
@@ -2468,23 +2950,30 @@
               aria-hidden="true"
             >
               <svg viewBox="0 0 600 600">
-                <path
-                  class="route"
-                  d="M85 155h145c46 0 46 70 92 70h193"
-                />
-
-                <path class="route blue" d="M85 300h430" />
 
                 <path
-                  class="route accent"
-                  d="M85 445h145c46 0 46-70 92-70h193"
+                  class="route route--animated"
+                  d="M85 155H230c46 0 46 70 92 70h193"
                 />
 
-                <path class="route coral" d="M235 120v360M365 120v360" />
+                <path
+                  class="route blue route--animated"
+                  d="M85 300H515"
+                />
 
-                <circle class="visual-node coral" cx="85" cy="155" r="13" />
-                <circle class="visual-node" cx="85" cy="300" r="13" />
-                <circle class="visual-node acid" cx="85" cy="445" r="13" />
+                <path
+                  class="route acid route--animated"
+                  d="M85 445H230c46 0 46-70 92-70h193"
+                />
+
+                <path
+                  class="route coral route--animated"
+                  d="M235 120V480M365 120V480"
+                />
+
+                <circle class="visual-node coral" cx="85" cy="155" r="13"/>
+                <circle class="visual-node" cx="85" cy="300" r="13"/>
+                <circle class="visual-node acid" cx="85" cy="445" r="13"/>
 
                 <rect
                   class="visual-node blue"
@@ -2492,34 +2981,42 @@
                   y="225"
                   width="130"
                   height="150"
-                  rx="0"
                 />
 
-                <circle class="visual-node" cx="515" cy="155" r="13" />
-                <circle class="visual-node acid" cx="515" cy="300" r="13" />
-                <circle class="visual-node coral" cx="515" cy="445" r="13" />
+                <circle class="visual-node" cx="515" cy="155" r="13"/>
+                <circle class="visual-node acid" cx="515" cy="300" r="13"/>
+                <circle class="visual-node coral" cx="515" cy="445" r="13"/>
 
-                <text x="300" y="294" text-anchor="middle">runtime</text>
-                <text x="300" y="315" text-anchor="middle">mapper</text>
-                <text x="85" y="128" text-anchor="middle">source</text>
-                <text x="515" y="128" text-anchor="middle">insight</text>
+                <text class="node-label" x="300" y="294">RUNTIME</text>
+                <text class="node-label" x="300" y="315">MAPPER</text>
+
+                <text class="node-label" x="85" y="128">SOURCE</text>
+                <text class="node-label" x="515" y="128">INSIGHT</text>
               </svg>
 
               <span class="visual-label">
-                Ingest / map / standardise / decide
+                ingest / map / standardise / decide
               </span>
             </div>
           </div>
         </article>
+
       </div>
     </section>
 
+    <!-- ========================================================
+         About
+         ======================================================== -->
+
     <section class="about" id="about" aria-labelledby="about-title">
       <div class="container about__layout">
+
         <div>
           <span class="eyebrow reveal">About the engineer</span>
 
-          <h2 class="sr-only" id="about-title">About Sumit Yadav</h2>
+          <h2 class="sr-only" id="about-title">
+            About Sumit Yadav
+          </h2>
 
           <p class="about__statement reveal" data-delay="1">
             I work where backend engineering gets messy: third-party
@@ -2535,7 +3032,9 @@
           data-delay="2"
           aria-label="Current experience"
         >
-          <span class="mono">Current chapter / Oct 2023—Present</span>
+          <span class="mono">
+            Current chapter / Oct 2023—Present
+          </span>
 
           <p class="career-note__role">
             <strong>Java Spring Boot Developer — Integrations</strong><br>
@@ -2559,8 +3058,13 @@
             </li>
           </ul>
         </aside>
+
       </div>
     </section>
+
+    <!-- ========================================================
+         Capabilities
+         ======================================================== -->
 
     <section
       class="capabilities"
@@ -2568,9 +3072,12 @@
       aria-labelledby="capabilities-title"
     >
       <div class="container">
+
         <div class="capabilities__head">
           <div>
-            <span class="eyebrow reveal">Technical capabilities</span>
+            <span class="eyebrow reveal">
+              Technical capabilities
+            </span>
 
             <h2
               class="section-title reveal"
@@ -2588,7 +3095,9 @@
         </div>
 
         <div class="capabilities__layout">
+
           <ol class="cap-list">
+
             <li
               class="cap-item is-active"
               data-cap="1"
@@ -2596,6 +3105,7 @@
               data-desc="Java and Spring Boot form the centre; Spring Data JPA connects persistence without losing domain clarity."
             >
               <span>01</span>
+
               <h3>Java / Spring Boot / JPA</h3>
 
               <button
@@ -2618,6 +3128,7 @@
               data-desc="Microservices, REST APIs, and event-driven systems coordinate integration-heavy flows across asynchronous boundaries."
             >
               <span>02</span>
+
               <h3>Microservices / REST / Events</h3>
 
               <button
@@ -2640,6 +3151,7 @@
               data-desc="Spring Security, OAuth 2.0, and validation protect entry points, sensitive payloads, and trusted integrations."
             >
               <span>03</span>
+
               <h3>Security / OAuth / Validation</h3>
 
               <button
@@ -2662,6 +3174,7 @@
               data-desc="Reactive programming, JSON processing, SQL, and GraalJS turn varied external payloads into stable internal contracts."
             >
               <span>04</span>
+
               <h3>Reactive / JSON / SQL / GraalJS</h3>
 
               <button
@@ -2676,6 +3189,7 @@
                 flows.
               </p>
             </li>
+
           </ol>
 
           <aside
@@ -2685,14 +3199,23 @@
             aria-live="polite"
           >
             <div class="cap-visual__top">
+
               <span class="mono">
                 Selected capability /
                 <span id="cap-number">01</span>
               </span>
 
-              <h3 class="cap-visual__title" id="cap-title">Core runtime</h3>
+              <h3
+                class="cap-visual__title"
+                id="cap-title"
+              >
+                Core runtime
+              </h3>
 
-              <p class="cap-visual__desc" id="cap-desc">
+              <p
+                class="cap-visual__desc"
+                id="cap-desc"
+              >
                 Java and Spring Boot form the centre; Spring Data JPA connects
                 persistence without losing domain clarity.
               </p>
@@ -2710,18 +3233,28 @@
                 />
               </svg>
 
-              <span class="mono">Signal stable / contract explicit</span>
+              <span class="mono">
+                Signal stable / contract explicit
+              </span>
             </div>
           </aside>
+
         </div>
       </div>
     </section>
 
+    <!-- ========================================================
+         Proof
+         ======================================================== -->
+
     <section class="proof" id="proof" aria-labelledby="proof-title">
       <div class="container">
+
         <div class="proof__head">
           <div>
-            <span class="eyebrow reveal">Selected proof</span>
+            <span class="eyebrow reveal">
+              Selected proof
+            </span>
 
             <h2
               class="section-title reveal"
@@ -2739,39 +3272,64 @@
         </div>
 
         <div class="proof-grid">
+
           <article class="proof-item reveal">
-            <div class="proof-item__number">700+</div>
+            <div class="proof-item__number">
+              700+
+            </div>
 
             <div>
               <h3>DSA problems solved</h3>
-              <p>Across LeetCode and GeeksforGeeks.</p>
+              <p>
+                Across LeetCode and GeeksforGeeks.
+              </p>
             </div>
           </article>
 
           <article class="proof-item reveal" data-delay="1">
-            <div class="proof-item__number">1940</div>
+            <div class="proof-item__number">
+              1940
+            </div>
 
             <div>
               <h3>LeetCode Knight</h3>
-              <p>Contest rating placing in the top 3% worldwide.</p>
+              <p>
+                Contest rating placing in the top 3% worldwide.
+              </p>
             </div>
           </article>
 
           <article class="proof-item reveal" data-delay="2">
-            <div class="proof-item__number">934</div>
+            <div class="proof-item__number">
+              934
+            </div>
 
             <div>
               <h3>TechGig Grand Finalist</h3>
-              <p>Worldwide rank in a national-level coding competition.</p>
+              <p>
+                Worldwide rank in a national-level coding competition.
+              </p>
             </div>
           </article>
+
         </div>
       </div>
     </section>
 
-    <section class="contact" id="contact" aria-labelledby="contact-title">
+    <!-- ========================================================
+         Contact
+         ======================================================== -->
+
+    <section
+      class="contact"
+      id="contact"
+      aria-labelledby="contact-title"
+    >
       <div class="container contact__inner">
-        <span class="eyebrow reveal">Start a conversation</span>
+
+        <span class="eyebrow reveal">
+          Start a conversation
+        </span>
 
         <h2
           class="contact__title reveal"
@@ -2782,6 +3340,7 @@
         </h2>
 
         <div class="contact__bar reveal" data-delay="2">
+
           <div>
             <p class="mono">
               For backend roles, engineering conversations, and serious systems.
@@ -2796,6 +3355,7 @@
           </div>
 
           <div class="contact__actions">
+
             <button
               class="button button--light magnetic interactive"
               type="button"
@@ -2810,6 +3370,7 @@
             >
               Write an email
             </a>
+
           </div>
         </div>
 
@@ -2838,24 +3399,42 @@
 
           <a
             class="interactive resume-link"
-            href="Sumit_Yadav_Resume.pdf"
-            download="Sumit_Yadav_Resume.pdf"
+            href="data:text/plain;charset=utf-8,Sumit%20Yadav%20-%20Java%20Backend%20Engineer"
+            download="Sumit_Yadav_Resume.txt"
           >
             Resume ↓
           </a>
         </div>
 
         <footer class="footer">
-          <span>© <span id="year">2026</span> Sumit Yadav</span>
-          <a class="interactive" href="#home">Back to top ↑</a>
+          <span>
+            © <span id="year">2026</span> Sumit Yadav
+          </span>
+
+          <a
+            class="interactive"
+            href="#home"
+          >
+            Back to top ↑
+          </a>
         </footer>
+
       </div>
     </section>
   </main>
 
-  <dialog id="dialog-loan" aria-labelledby="dialog-loan-title">
+  <!-- ==========================================================
+       Dialog 01
+       ========================================================== -->
+
+  <dialog
+    id="dialog-loan"
+    aria-labelledby="dialog-loan-title"
+  >
     <div class="dialog__head">
-      <span class="mono">Engineering note / 01</span>
+      <span class="mono">
+        Engineering note / 01
+      </span>
 
       <button
         class="dialog__close"
@@ -2867,24 +3446,31 @@
     </div>
 
     <div class="dialog__body">
-      <h2 id="dialog-loan-title">Loan journey engine</h2>
+
+      <h2 id="dialog-loan-title">
+        Loan journey engine
+      </h2>
 
       <p class="dialog__lead">
-        A backend orchestration problem: many providers, delayed responses, and
-        a customer journey that still needs one coherent state.
+        A backend orchestration problem: many dependencies, delayed responses,
+        and a customer journey that still needs one coherent state.
       </p>
 
       <div class="dialog-grid">
+
         <div class="dialog-note">
           <h3>Context</h3>
+
           <p>
             Enterprise digital loan origination spanning service-to-service
-            calls, external integrations, callbacks, and scheduled processing.
+            calls, third-party integrations, callbacks, and scheduled
+            processing.
           </p>
         </div>
 
         <div class="dialog-note">
           <h3>Contribution</h3>
+
           <p>
             Built Spring Boot microservices and REST APIs using event-driven
             architecture, reactive programming, and asynchronous workflows.
@@ -2893,6 +3479,7 @@
 
         <div class="dialog-note">
           <h3>Engineering focus</h3>
+
           <p>
             Reusable API clients, validation, object mapping, exception
             handling, logging, and standardised responses.
@@ -2901,18 +3488,30 @@
 
         <div class="dialog-note">
           <h3>Operational focus</h3>
+
           <p>
             Traceable states, resilient errors, retries, and recovery paths for
             integration-heavy journeys.
           </p>
         </div>
+
       </div>
     </div>
   </dialog>
 
-  <dialog id="dialog-trust" aria-labelledby="dialog-trust-title">
+  <!-- ==========================================================
+       Dialog 02
+       ========================================================== -->
+
+  <dialog
+    id="dialog-trust"
+    aria-labelledby="dialog-trust-title"
+  >
     <div class="dialog__head">
-      <span class="mono">Engineering note / 02</span>
+
+      <span class="mono">
+        Engineering note / 02
+      </span>
 
       <button
         class="dialog__close"
@@ -2924,52 +3523,74 @@
     </div>
 
     <div class="dialog__body">
-      <h2 id="dialog-trust-title">Identity &amp; document trust</h2>
+
+      <h2 id="dialog-trust-title">
+        Identity &amp; document trust
+      </h2>
 
       <p class="dialog__lead">
         Sensitive onboarding flows need more than connectivity: they need
-        validation, consent, auditability, and predictable recovery.
+        validation, consent, auditability, resilient callbacks, and predictable
+        recovery.
       </p>
 
       <div class="dialog-grid">
+
         <div class="dialog-note">
-          <h3>Identity</h3>
+          <h3>Third-party integrations</h3>
+
           <p>
-            Integrated UIDAI Aadhaar, NSDL PAN validation, and DigiLocker into
-            backend lending workflows.
+            Integrated external identity, verification, consent, and digital
+            document services into backend lending workflows.
           </p>
         </div>
 
         <div class="dialog-note">
-          <h3>Documents</h3>
+          <h3>Asynchronous flows</h3>
+
           <p>
-            Connected NeSL eSign and eStamp flows with callbacks,
-            reconciliation, retries, and failure recovery.
+            Implemented callback handling, reconciliation, retries, and failure
+            recovery for integration workflows that do not complete
+            synchronously.
           </p>
         </div>
 
         <div class="dialog-note">
           <h3>Protection</h3>
+
           <p>
-            Implemented secure data handling, request validation, audit
-            tracking, and resilient error handling.
+            Applied secure data handling, request validation, audit tracking,
+            and resilient error handling across third-party interactions.
           </p>
         </div>
 
         <div class="dialog-note">
-          <h3>Boundary</h3>
+          <h3>Engineering boundary</h3>
+
           <p>
-            Generalised enterprise work; client identities, production data,
-            and proprietary implementation details are intentionally excluded.
+            External-provider differences were kept behind predictable backend
+            contracts so the rest of the lending workflow could remain easier
+            to reason about.
           </p>
         </div>
+
       </div>
     </div>
   </dialog>
 
-  <dialog id="dialog-data" aria-labelledby="dialog-data-title">
+  <!-- ==========================================================
+       Dialog 03
+       ========================================================== -->
+
+  <dialog
+    id="dialog-data"
+    aria-labelledby="dialog-data-title"
+  >
     <div class="dialog__head">
-      <span class="mono">Engineering note / 03</span>
+
+      <span class="mono">
+        Engineering note / 03
+      </span>
 
       <button
         class="dialog__close"
@@ -2981,7 +3602,10 @@
     </div>
 
     <div class="dialog__body">
-      <h2 id="dialog-data-title">Adaptive data layer</h2>
+
+      <h2 id="dialog-data-title">
+        Adaptive data layer
+      </h2>
 
       <p class="dialog__lead">
         External contracts vary. Internal systems still need stable structures
@@ -2989,16 +3613,19 @@
       </p>
 
       <div class="dialog-grid">
+
         <div class="dialog-note">
           <h3>Banking data</h3>
+
           <p>
-            Delivered net-banking and Account Aggregator consent flows for
-            access to customer-authorised information.
+            Delivered consent-based banking-data flows for access to
+            customer-authorised information.
           </p>
         </div>
 
         <div class="dialog-note">
           <h3>Insights</h3>
+
           <p>
             Transformed statement JSON into income, cash-flow, balance,
             transaction, and risk inputs for credit decisioning.
@@ -3007,6 +3634,7 @@
 
         <div class="dialog-note">
           <h3>Runtime mapping</h3>
+
           <p>
             Integrated GraalJS mappers for client-specific request and response
             transformations without code commits or redeployment.
@@ -3015,45 +3643,63 @@
 
         <div class="dialog-note">
           <h3>Design intent</h3>
+
           <p>
             Keep changing external payloads away from stable domain logic and
             reduce repetitive client-specific code.
           </p>
         </div>
+
       </div>
     </div>
   </dialog>
 
-  <div class="toast" id="toast" role="status" aria-live="polite">
+  <div
+    class="toast"
+    id="toast"
+    role="status"
+    aria-live="polite"
+  >
     Email copied
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    defer
+  ></script>
+
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+    defer
+  ></script>
 
   <script>
     (() => {
-      'use strict';
+      "use strict";
 
       const reducedMotion = window.matchMedia(
-        '(prefers-reduced-motion: reduce)'
+        "(prefers-reduced-motion: reduce)"
       ).matches;
 
       const finePointer = window.matchMedia(
-        '(hover: hover) and (pointer: fine)'
+        "(hover: hover) and (pointer: fine)"
       ).matches;
 
       const body = document.body;
       const root = document.documentElement;
 
-      const intro = document.getElementById('intro');
+      /* ========================================================
+         Intro
+         ======================================================== */
+
+      const intro = document.getElementById("intro");
 
       const finishIntro = () => {
-        if (!intro || intro.classList.contains('is-done')) {
+        if (!intro || intro.classList.contains("is-done")) {
           return;
         }
 
-        intro.classList.add('is-done');
+        intro.classList.add("is-done");
 
         window.setTimeout(() => {
           intro.remove();
@@ -3064,7 +3710,7 @@
 
       try {
         introSeen =
-          sessionStorage.getItem('sumit-intro-seen') === 'true';
+          sessionStorage.getItem("sumit-intro-seen") === "true";
       } catch {
         introSeen = false;
       }
@@ -3073,21 +3719,27 @@
         finishIntro();
       } else {
         try {
-          sessionStorage.setItem('sumit-intro-seen', 'true');
+          sessionStorage.setItem("sumit-intro-seen", "true");
         } catch {}
 
         window.setTimeout(finishIntro, 1150);
       }
 
-      intro?.addEventListener('click', finishIntro, { once: true });
+      intro?.addEventListener("click", finishIntro, {
+        once: true
+      });
 
-      root.classList.add('motion-ready');
+      /* ========================================================
+         Scroll reveals
+         ======================================================== */
+
+      root.classList.add("motion-ready");
 
       const revealItems = [
-        ...document.querySelectorAll('.reveal')
+        ...document.querySelectorAll(".reveal")
       ];
 
-      if ('IntersectionObserver' in window && !reducedMotion) {
+      if ("IntersectionObserver" in window && !reducedMotion) {
         const revealObserver = new IntersectionObserver(
           (entries, observer) => {
             entries.forEach((entry) => {
@@ -3095,13 +3747,13 @@
                 return;
               }
 
-              entry.target.classList.add('is-visible');
+              entry.target.classList.add("is-visible");
               observer.unobserve(entry.target);
             });
           },
           {
             threshold: 0.12,
-            rootMargin: '0px 0px -6% 0px'
+            rootMargin: "0px 0px -6% 0px"
           }
         );
 
@@ -3110,24 +3762,30 @@
         });
       } else {
         revealItems.forEach((item) => {
-          item.classList.add('is-visible');
+          item.classList.add("is-visible");
         });
       }
 
-      const toggle = document.querySelector('.menu-toggle');
-      const menu = document.getElementById('mobile-menu');
-      const menuLinks = [...menu.querySelectorAll('a')];
+      /* ========================================================
+         Mobile menu
+         ======================================================== */
+
+      const toggle = document.querySelector(".menu-toggle");
+      const menu = document.getElementById("mobile-menu");
+      const menuLinks = [...menu.querySelectorAll("a")];
+
       let menuLastFocus = null;
 
       const openMenu = () => {
         menuLastFocus = document.activeElement;
 
-        toggle.setAttribute('aria-expanded', 'true');
-        toggle.setAttribute('aria-label', 'Close menu');
-        menu.setAttribute('aria-hidden', 'false');
+        toggle.setAttribute("aria-expanded", "true");
+        toggle.setAttribute("aria-label", "Close menu");
 
-        menu.classList.add('is-open');
-        body.classList.add('menu-open');
+        menu.setAttribute("aria-hidden", "false");
+
+        menu.classList.add("is-open");
+        body.classList.add("menu-open");
 
         window.setTimeout(() => {
           menuLinks[0]?.focus();
@@ -3135,20 +3793,21 @@
       };
 
       const closeMenu = (restoreFocus = true) => {
-        toggle.setAttribute('aria-expanded', 'false');
-        toggle.setAttribute('aria-label', 'Open menu');
-        menu.setAttribute('aria-hidden', 'true');
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Open menu");
 
-        menu.classList.remove('is-open');
-        body.classList.remove('menu-open');
+        menu.setAttribute("aria-hidden", "true");
+
+        menu.classList.remove("is-open");
+        body.classList.remove("menu-open");
 
         if (restoreFocus) {
           menuLastFocus?.focus();
         }
       };
 
-      toggle.addEventListener('click', () => {
-        if (toggle.getAttribute('aria-expanded') === 'true') {
+      toggle.addEventListener("click", () => {
+        if (toggle.getAttribute("aria-expanded") === "true") {
           closeMenu();
         } else {
           openMenu();
@@ -3156,36 +3815,46 @@
       });
 
       menuLinks.forEach((link) => {
-        link.addEventListener('click', () => {
+        link.addEventListener("click", () => {
           closeMenu(false);
         });
       });
 
-      document.addEventListener('keydown', (event) => {
+      document.addEventListener("keydown", (event) => {
         if (
-          event.key === 'Escape' &&
-          toggle.getAttribute('aria-expanded') === 'true'
+          event.key === "Escape" &&
+          toggle.getAttribute("aria-expanded") === "true"
         ) {
           closeMenu();
         }
       });
 
+      /* ========================================================
+         Active navigation
+         ======================================================== */
+
       const sectionLinks = [
-        ...document.querySelectorAll('.desktop-nav .nav-link')
+        ...document.querySelectorAll(".desktop-nav .nav-link")
       ];
 
       const sections = sectionLinks
         .map((link) => {
-          return document.querySelector(link.getAttribute('href'));
+          return document.querySelector(
+            link.getAttribute("href")
+          );
         })
         .filter(Boolean);
 
-      if ('IntersectionObserver' in window) {
+      if ("IntersectionObserver" in window) {
         const sectionObserver = new IntersectionObserver(
           (entries) => {
             const visible = entries
               .filter((entry) => entry.isIntersecting)
-              .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+              .sort(
+                (a, b) =>
+                  b.intersectionRatio -
+                  a.intersectionRatio
+              )[0];
 
             if (!visible) {
               return;
@@ -3193,9 +3862,9 @@
 
             sectionLinks.forEach((link) => {
               link.setAttribute(
-                'aria-current',
+                "aria-current",
                 String(
-                  link.getAttribute('href') ===
+                  link.getAttribute("href") ===
                   `#${visible.target.id}`
                 )
               );
@@ -3203,7 +3872,7 @@
           },
           {
             threshold: [0.25, 0.45, 0.7],
-            rootMargin: '-15% 0px -55% 0px'
+            rootMargin: "-15% 0px -55% 0px"
           }
         );
 
@@ -3212,7 +3881,13 @@
         });
       }
 
-      const progress = document.getElementById('scroll-progress');
+      /* ========================================================
+         Scroll progress
+         ======================================================== */
+
+      const progress =
+        document.getElementById("scroll-progress");
+
       let scrollFrame = 0;
 
       const updateScroll = () => {
@@ -3222,176 +3897,220 @@
           document.documentElement.scrollHeight -
           window.innerHeight;
 
-        const ratio = max > 0
-          ? window.scrollY / max
-          : 0;
+        const ratio =
+          max > 0
+            ? window.scrollY / max
+            : 0;
 
         progress.style.transform =
           `scaleX(${Math.min(1, Math.max(0, ratio))})`;
       };
 
       window.addEventListener(
-        'scroll',
+        "scroll",
         () => {
           if (!scrollFrame) {
-            scrollFrame = requestAnimationFrame(updateScroll);
+            scrollFrame =
+              requestAnimationFrame(updateScroll);
           }
         },
-        { passive: true }
+        {
+          passive: true
+        }
       );
 
       updateScroll();
 
+      /* ========================================================
+         Cursor + magnetic interactions
+         ======================================================== */
+
       if (finePointer && !reducedMotion) {
-        const cursor = document.getElementById('cursor');
+        const cursor =
+          document.getElementById("cursor");
 
         let currentX = -100;
         let currentY = -100;
         let targetX = -100;
         let targetY = -100;
+
         let cursorFrame = 0;
 
         const renderCursor = () => {
-          currentX += (targetX - currentX) * .19;
-          currentY += (targetY - currentY) * .19;
+          currentX +=
+            (targetX - currentX) * .19;
+
+          currentY +=
+            (targetY - currentY) * .19;
 
           cursor.style.transform =
             `translate3d(${currentX}px, ${currentY}px, 0) ` +
-            'translate(-50%, -50%)';
+            "translate(-50%, -50%)";
 
-          cursorFrame = requestAnimationFrame(renderCursor);
+          cursorFrame =
+            requestAnimationFrame(renderCursor);
         };
 
         window.addEventListener(
-          'pointermove',
+          "pointermove",
           (event) => {
             targetX = event.clientX;
             targetY = event.clientY;
 
-            cursor.classList.add('is-visible');
+            cursor.classList.add("is-visible");
 
             if (!cursorFrame) {
-              cursorFrame = requestAnimationFrame(renderCursor);
+              cursorFrame =
+                requestAnimationFrame(renderCursor);
             }
           },
-          { passive: true }
+          {
+            passive: true
+          }
         );
 
         document
-          .querySelectorAll('.interactive, button, a')
+          .querySelectorAll(".interactive, button, a")
           .forEach((element) => {
-            element.addEventListener('pointerenter', () => {
-              cursor.classList.add('is-active');
-            });
+            element.addEventListener(
+              "pointerenter",
+              () => {
+                cursor.classList.add("is-active");
+              }
+            );
 
-            element.addEventListener('pointerleave', () => {
-              cursor.classList.remove('is-active');
-            });
+            element.addEventListener(
+              "pointerleave",
+              () => {
+                cursor.classList.remove("is-active");
+              }
+            );
           });
 
         document
-          .querySelectorAll('.magnetic')
+          .querySelectorAll(".magnetic")
           .forEach((element) => {
             let frame = 0;
 
-            element.addEventListener('pointermove', (event) => {
-              const rect = element.getBoundingClientRect();
+            element.addEventListener(
+              "pointermove",
+              (event) => {
+                const rect =
+                  element.getBoundingClientRect();
 
-              const x =
-                (
-                  event.clientX -
-                  rect.left -
-                  rect.width / 2
-                ) * .17;
+                const x =
+                  (
+                    event.clientX -
+                    rect.left -
+                    rect.width / 2
+                  ) * .17;
 
-              const y =
-                (
-                  event.clientY -
-                  rect.top -
-                  rect.height / 2
-                ) * .17;
+                const y =
+                  (
+                    event.clientY -
+                    rect.top -
+                    rect.height / 2
+                  ) * .17;
 
-              if (frame) {
-                cancelAnimationFrame(frame);
+                if (frame) {
+                  cancelAnimationFrame(frame);
+                }
+
+                frame =
+                  requestAnimationFrame(() => {
+                    element.style.transform =
+                      `translate3d(${x}px, ${y}px, 0)`;
+                  });
               }
+            );
 
-              frame = requestAnimationFrame(() => {
-                element.style.transform =
-                  `translate3d(${x}px, ${y}px, 0)`;
-              });
-            });
+            element.addEventListener(
+              "pointerleave",
+              () => {
+                if (frame) {
+                  cancelAnimationFrame(frame);
+                }
 
-            element.addEventListener('pointerleave', () => {
-              if (frame) {
-                cancelAnimationFrame(frame);
+                frame =
+                  requestAnimationFrame(() => {
+                    element.style.transform = "";
+                  });
               }
-
-              frame = requestAnimationFrame(() => {
-                element.style.transform = '';
-              });
-            });
+            );
           });
 
         document
-          .querySelectorAll('[data-tilt]')
+          .querySelectorAll("[data-tilt]")
           .forEach((element) => {
             let frame = 0;
 
-            element.addEventListener('pointermove', (event) => {
-              const rect = element.getBoundingClientRect();
+            element.addEventListener(
+              "pointermove",
+              (event) => {
+                const rect =
+                  element.getBoundingClientRect();
 
-              const rotateX =
-                (
-                  (event.clientY - rect.top) /
-                  rect.height -
-                  .5
-                ) * -4;
+                const rotateX =
+                  (
+                    (event.clientY - rect.top) /
+                    rect.height -
+                    .5
+                  ) * -4;
 
-              const rotateY =
-                (
-                  (event.clientX - rect.left) /
-                  rect.width -
-                  .5
-                ) * 4;
+                const rotateY =
+                  (
+                    (event.clientX - rect.left) /
+                    rect.width -
+                    .5
+                  ) * 4;
 
-              if (frame) {
-                cancelAnimationFrame(frame);
+                if (frame) {
+                  cancelAnimationFrame(frame);
+                }
+
+                frame =
+                  requestAnimationFrame(() => {
+                    element.style.transform =
+                      `perspective(1100px) ` +
+                      `rotateX(${rotateX}deg) ` +
+                      `rotateY(${rotateY}deg)`;
+                  });
               }
+            );
 
-              frame = requestAnimationFrame(() => {
-                element.style.transform =
-                  `perspective(1100px) ` +
-                  `rotateX(${rotateX}deg) ` +
-                  `rotateY(${rotateY}deg)`;
-              });
-            });
-
-            element.addEventListener('pointerleave', () => {
-              element.style.transform = '';
-            });
+            element.addEventListener(
+              "pointerleave",
+              () => {
+                element.style.transform = "";
+              }
+            );
           });
       }
 
+      /* ========================================================
+         Capability interaction
+         ======================================================== */
+
       const capabilityItems = [
-        ...document.querySelectorAll('.cap-item')
+        ...document.querySelectorAll(".cap-item")
       ];
 
       const capabilityVisual =
-        document.getElementById('cap-visual');
+        document.getElementById("cap-visual");
 
       const capabilityNumber =
-        document.getElementById('cap-number');
+        document.getElementById("cap-number");
 
       const capabilityTitle =
-        document.getElementById('cap-title');
+        document.getElementById("cap-title");
 
       const capabilityDescription =
-        document.getElementById('cap-desc');
+        document.getElementById("cap-desc");
 
       const selectCapability = (item) => {
         capabilityItems.forEach((entry) => {
           entry.classList.toggle(
-            'is-active',
+            "is-active",
             entry === item
           );
         });
@@ -3400,7 +4119,10 @@
           item.dataset.cap;
 
         capabilityNumber.textContent =
-          String(item.dataset.cap).padStart(2, '0');
+          String(item.dataset.cap).padStart(
+            2,
+            "0"
+          );
 
         capabilityTitle.textContent =
           item.dataset.title;
@@ -3410,108 +4132,462 @@
       };
 
       capabilityItems.forEach((item) => {
-        item.addEventListener('mouseenter', () => {
-          selectCapability(item);
-        });
+        item.addEventListener(
+          "mouseenter",
+          () => {
+            selectCapability(item);
+          }
+        );
 
-        item.addEventListener('focusin', () => {
-          selectCapability(item);
-        });
+        item.addEventListener(
+          "focusin",
+          () => {
+            selectCapability(item);
+          }
+        );
 
         item
-          .querySelector('button')
-          .addEventListener('click', () => {
-            selectCapability(item);
-          });
+          .querySelector("button")
+          .addEventListener(
+            "click",
+            () => {
+              selectCapability(item);
+            }
+          );
       });
 
+      /* ========================================================
+         Dialogs
+         ======================================================== */
+
       document
-        .querySelectorAll('[data-dialog]')
+        .querySelectorAll("[data-dialog]")
         .forEach((button) => {
-          button.addEventListener('click', () => {
-            const dialog =
-              document.getElementById(button.dataset.dialog);
+          button.addEventListener(
+            "click",
+            () => {
+              const dialog =
+                document.getElementById(
+                  button.dataset.dialog
+                );
 
-            if (!dialog) {
-              return;
+              if (!dialog) {
+                return;
+              }
+
+              dialog.showModal();
+              body.classList.add("dialog-open");
             }
-
-            dialog.showModal();
-            body.classList.add('dialog-open');
-          });
+          );
         });
 
       document
-        .querySelectorAll('dialog')
+        .querySelectorAll("dialog")
         .forEach((dialog) => {
           dialog
-            .querySelector('.dialog__close')
-            .addEventListener('click', () => {
-              dialog.close();
-            });
+            .querySelector(".dialog__close")
+            .addEventListener(
+              "click",
+              () => {
+                dialog.close();
+              }
+            );
 
-          dialog.addEventListener('click', (event) => {
-            const rect = dialog.getBoundingClientRect();
+          dialog.addEventListener(
+            "click",
+            (event) => {
+              const rect =
+                dialog.getBoundingClientRect();
 
-            const outside =
-              event.clientX < rect.left ||
-              event.clientX > rect.right ||
-              event.clientY < rect.top ||
-              event.clientY > rect.bottom;
+              const outside =
+                event.clientX < rect.left ||
+                event.clientX > rect.right ||
+                event.clientY < rect.top ||
+                event.clientY > rect.bottom;
 
-            if (outside) {
-              dialog.close();
+              if (outside) {
+                dialog.close();
+              }
             }
-          });
+          );
 
-          dialog.addEventListener('close', () => {
-            body.classList.remove('dialog-open');
-          });
+          dialog.addEventListener(
+            "close",
+            () => {
+              body.classList.remove(
+                "dialog-open"
+              );
+            }
+          );
         });
 
-      const toast = document.getElementById('toast');
+      /* ========================================================
+         Copy email
+         ======================================================== */
+
+      const toast =
+        document.getElementById("toast");
 
       const showToast = (message) => {
         toast.textContent = message;
-        toast.classList.add('is-visible');
+        toast.classList.add("is-visible");
 
         window.clearTimeout(showToast.timer);
 
-        showToast.timer = window.setTimeout(() => {
-          toast.classList.remove('is-visible');
-        }, 2200);
+        showToast.timer =
+          window.setTimeout(() => {
+            toast.classList.remove(
+              "is-visible"
+            );
+          }, 2200);
       };
 
       document
-        .getElementById('copy-email')
-        .addEventListener('click', async () => {
-          const email = 'sumityadavtg@gmail.com';
+        .getElementById("copy-email")
+        .addEventListener(
+          "click",
+          async () => {
+            const email =
+              "sumityadavtg@gmail.com";
 
-          try {
-            await navigator.clipboard.writeText(email);
-            showToast('Email copied');
-          } catch {
-            const textarea =
-              document.createElement('textarea');
+            try {
+              await navigator.clipboard.writeText(
+                email
+              );
 
-            textarea.value = email;
-            textarea.style.position = 'fixed';
-            textarea.style.opacity = '0';
+              showToast("Email copied");
+            } catch {
+              const textarea =
+                document.createElement(
+                  "textarea"
+                );
 
-            document.body.appendChild(textarea);
+              textarea.value = email;
+              textarea.style.position =
+                "fixed";
 
-            textarea.select();
-            document.execCommand('copy');
-            textarea.remove();
+              textarea.style.opacity =
+                "0";
 
-            showToast('Email copied');
+              document.body.appendChild(
+                textarea
+              );
+
+              textarea.select();
+
+              document.execCommand("copy");
+
+              textarea.remove();
+
+              showToast("Email copied");
+            }
           }
+        );
+
+      /* ========================================================
+         Resume PDF
+         ======================================================== */
+
+      const pdfEscape = (text) => {
+        return text
+          .replace(/\\/g, "\\\\")
+          .replace(/\(/g, "\\(")
+          .replace(/\)/g, "\\)");
+      };
+
+      const resumeLines = [
+        {
+          t: "SUMIT YADAV",
+          s: 22,
+          b: true,
+          g: 24
+        },
+        {
+          t: "Java Backend Engineer | sumityadavtg@gmail.com | linkedin.com/in/sumit-yadav-7938bb252 | leetcode.com/u/im_sumit",
+          s: 8.5,
+          g: 18
+        },
+        {
+          t: "PROFESSIONAL SUMMARY",
+          s: 11,
+          b: true,
+          g: 15
+        },
+        {
+          t: "Java Backend Developer with 3 years of experience building scalable Spring Boot microservices and RESTful APIs",
+          s: 8.7,
+          g: 11
+        },
+        {
+          t: "for enterprise FinTech systems. Skilled in event-driven integrations, reusable backend design, production debugging,",
+          s: 8.7,
+          g: 11
+        },
+        {
+          t: "and secure software delivery.",
+          s: 8.7,
+          g: 17
+        },
+        {
+          t: "EXPERIENCE",
+          s: 11,
+          b: true,
+          g: 15
+        },
+        {
+          t: "TATA CONSULTANCY SERVICES | Java Spring Boot Developer - Integrations | Oct 2023 - Present | Bengaluru, India",
+          s: 8.7,
+          b: true,
+          g: 13
+        },
+        {
+          t: "- Built Spring Boot microservices and REST APIs for digital loan-origination workflows using event-driven",
+          s: 8.5,
+          g: 10.5
+        },
+        {
+          t: "  architecture, reactive programming, asynchronous callbacks, and scheduled processing.",
+          s: 8.5,
+          g: 10.5
+        },
+        {
+          t: "- Developed reusable libraries for API clients, validation, object mapping, exception handling, logging, and",
+          s: 8.5,
+          g: 10.5
+        },
+        {
+          t: "  standardised responses.",
+          s: 8.5,
+          g: 10.5
+        },
+        {
+          t: "- Integrated third-party identity, verification, consent, and digital-document services with secure data handling,",
+          s: 8.5,
+          g: 10.5
+        },
+        {
+          t: "  request validation, audit tracking, resilient error handling, callbacks, retries, and recovery.",
+          s: 8.5,
+          g: 10.5
+        },
+        {
+          t: "- Delivered consent-based banking-data flows and transformed statement JSON into income, cash-flow, balance,",
+          s: 8.5,
+          g: 10.5
+        },
+        {
+          t: "  transaction, and risk insights for credit decisioning.",
+          s: 8.5,
+          g: 10.5
+        },
+        {
+          t: "- Diagnosed production defects using root-cause analysis, Spring Boot Actuator, structured logs, and Jenkins.",
+          s: 8.5,
+          g: 10.5
+        },
+        {
+          t: "- Integrated GraalJS runtime mappers for client-specific request and response transformations without redeployment.",
+          s: 8.5,
+          g: 17
+        },
+        {
+          t: "TECHNICAL SKILLS",
+          s: 11,
+          b: true,
+          g: 15
+        },
+        {
+          t: "Backend: Java, JavaScript, Spring Boot, Microservices, REST APIs, Event-Driven Architecture, Reactive Programming",
+          s: 8.3,
+          g: 10.5
+        },
+        {
+          t: "Security & Data: Spring Security, OAuth 2.0, Spring Data JPA, SQL, MySQL, JSON, XML, GraalJS",
+          s: 8.3,
+          g: 10.5
+        },
+        {
+          t: "Engineering: Reusable Libraries, Debugging, Root-Cause Analysis, API Testing, Exception Handling",
+          s: 8.3,
+          g: 10.5
+        },
+        {
+          t: "Tools: Git, GitHub, Jenkins, Docker, Postman, Swagger/OpenAPI, Kubernetes (Basics)",
+          s: 8.3,
+          g: 17
+        },
+        {
+          t: "ACHIEVEMENTS",
+          s: 11,
+          b: true,
+          g: 15
+        },
+        {
+          t: "- Solved 700+ DSA problems across LeetCode and GeeksforGeeks.",
+          s: 8.5,
+          g: 10.5
+        },
+        {
+          t: "- LeetCode contest rating 1940 (Knight), ranked in the top 3% worldwide.",
+          s: 8.5,
+          g: 10.5
+        },
+        {
+          t: "- Grand Finalist in TechGig national-level coding competition, worldwide rank 934.",
+          s: 8.5,
+          g: 10.5
+        },
+        {
+          t: "- CodeKaze 2023 rank 1,235 among approximately 150,000 participants.",
+          s: 8.5,
+          g: 17
+        },
+        {
+          t: "EDUCATION",
+          s: 11,
+          b: true,
+          g: 15
+        },
+        {
+          t: "B.Tech. Electronics and Communication Engineering | PSIT College of Engineering | 2019 - 2023",
+          s: 8.5,
+          b: true,
+          g: 11
+        },
+        {
+          t: "CGPA: 8.5 | Department Topper | University-sponsored for academic excellence",
+          s: 8.5,
+          g: 11
+        }
+      ];
+
+      const buildResumePdf = () => {
+        let y = 755;
+        let stream = "BT\n";
+
+        resumeLines.forEach((line) => {
+          stream +=
+            `/${line.b ? "F2" : "F1"} ${line.s} Tf\n` +
+            `1 0 0 1 42 ${y.toFixed(2)} Tm\n` +
+            `(${pdfEscape(line.t)}) Tj\n`;
+
+          y -= line.g;
         });
 
-      document.getElementById('year').textContent =
+        stream += "ET\n";
+
+        const objects = [];
+
+        objects[1] =
+          "<< /Type /Catalog /Pages 2 0 R >>";
+
+        objects[2] =
+          "<< /Type /Pages /Kids [3 0 R] /Count 1 >>";
+
+        objects[3] =
+          "<< /Type /Page /Parent 2 0 R " +
+          "/MediaBox [0 0 612 792] " +
+          "/Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> " +
+          "/Contents 4 0 R >>";
+
+        objects[4] =
+          `<< /Length ${stream.length} >>\n` +
+          `stream\n${stream}endstream`;
+
+        objects[5] =
+          "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>";
+
+        objects[6] =
+          "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>";
+
+        let pdf = "%PDF-1.4\n";
+
+        const offsets = [0];
+
+        for (
+          let i = 1;
+          i < objects.length;
+          i += 1
+        ) {
+          offsets[i] = pdf.length;
+
+          pdf +=
+            `${i} 0 obj\n${objects[i]}\nendobj\n`;
+        }
+
+        const xrefOffset = pdf.length;
+
+        pdf +=
+          `xref\n0 ${objects.length}\n` +
+          "0000000000 65535 f \n";
+
+        for (
+          let i = 1;
+          i < objects.length;
+          i += 1
+        ) {
+          pdf +=
+            `${String(offsets[i]).padStart(10, "0")} ` +
+            "00000 n \n";
+        }
+
+        pdf +=
+          "trailer\n" +
+          `<< /Size ${objects.length} /Root 1 0 R >>\n` +
+          "startxref\n" +
+          `${xrefOffset}\n` +
+          "%%EOF";
+
+        return new Blob(
+          [pdf],
+          {
+            type: "application/pdf"
+          }
+        );
+      };
+
+      document
+        .querySelectorAll(".resume-link")
+        .forEach((link) => {
+          link.addEventListener(
+            "click",
+            (event) => {
+              event.preventDefault();
+
+              const url =
+                URL.createObjectURL(
+                  buildResumePdf()
+                );
+
+              const download =
+                document.createElement("a");
+
+              download.href = url;
+              download.download =
+                "Sumit_Yadav_Resume.pdf";
+
+              document.body.appendChild(
+                download
+              );
+
+              download.click();
+              download.remove();
+
+              window.setTimeout(() => {
+                URL.revokeObjectURL(url);
+              }, 1500);
+            }
+          );
+        });
+
+      document.getElementById("year").textContent =
         new Date().getFullYear();
 
-      window.addEventListener('load', () => {
+      /* ========================================================
+         GSAP enhancements
+         ======================================================== */
+
+      window.addEventListener("load", () => {
         if (
           reducedMotion ||
           !window.gsap ||
@@ -3520,65 +4596,72 @@
           return;
         }
 
-        gsap.registerPlugin(ScrollTrigger);
+        gsap.registerPlugin(
+          ScrollTrigger
+        );
 
         gsap.fromTo(
-          '.hero-line',
+          ".hero-line",
           {
-            yPercent: 115,
-            rotate: 2
+            yPercent: 105,
+            rotate: 1
           },
           {
             yPercent: 0,
             rotate: 0,
-            duration: 1.25,
+            duration: 1.15,
             stagger: .08,
-            ease: 'power4.out',
+            ease: "power4.out",
             delay: .15
           }
         );
 
-        gsap.to('#system-art', {
-          yPercent: 10,
-          rotate: 5,
-          ease: 'none',
+        gsap.to("#system-art", {
+          yPercent: 8,
+          rotate: 4,
+          ease: "none",
           scrollTrigger: {
-            trigger: '.hero',
-            start: 'top top',
-            end: 'bottom top',
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
             scrub: true
           }
         });
 
-        gsap.to('.hero__name', {
-          yPercent: 16,
-          ease: 'none',
+        /*
+          Reduced the previous hero heading parallax so it cannot visually
+          push the display type into the supporting paragraph on short
+          viewport deployments.
+        */
+        gsap.to(".hero__name", {
+          yPercent: 5,
+          ease: "none",
           scrollTrigger: {
-            trigger: '.hero',
-            start: 'top top',
-            end: 'bottom top',
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
             scrub: true
           }
         });
 
         document
-          .querySelectorAll('.project-visual')
+          .querySelectorAll(".project-visual")
           .forEach((visual, index) => {
             gsap.fromTo(
               visual,
               {
                 clipPath:
                   index % 2
-                    ? 'inset(0 100% 0 0)'
-                    : 'inset(0 0 0 100%)'
+                    ? "inset(0 100% 0 0)"
+                    : "inset(0 0 0 100%)"
               },
               {
-                clipPath: 'inset(0 0 0 0)',
+                clipPath: "inset(0 0 0 0)",
                 duration: 1.2,
-                ease: 'power4.out',
+                ease: "power4.out",
                 scrollTrigger: {
                   trigger: visual,
-                  start: 'top 78%',
+                  start: "top 78%",
                   once: true
                 }
               }
@@ -3586,17 +4669,17 @@
           });
 
         gsap.fromTo(
-          '.proof-item__number',
+          ".proof-item__number",
           {
             y: 80
           },
           {
             y: 0,
             stagger: .12,
-            ease: 'power3.out',
+            ease: "power3.out",
             scrollTrigger: {
-              trigger: '.proof-grid',
-              start: 'top 80%',
+              trigger: ".proof-grid",
+              start: "top 80%",
               once: true
             }
           }

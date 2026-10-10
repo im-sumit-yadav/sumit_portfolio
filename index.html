@@ -7,6 +7,7 @@
   <meta name="theme-color" content="#11110f">
   <meta name="color-scheme" content="light dark">
   <title>Sumit Yadav — Java Backend Engineer</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2311110f'/%3E%3Ctext x='16' y='22' fill='%23d7ff45' font-family='monospace' font-weight='bold' font-size='18' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,6 +26,9 @@
       --white: #fffef8;
       --acid: #d7ff45;
       --blue: #5a62ff;
+      --blue-wash: #f4f8ff;
+      --blue-mist: #eaf2ff;
+      --blue-tint: #c9dfff;
       --coral: #ff664a;
       --line-dark: rgba(17, 17, 15, .18);
       --line-light: rgba(255, 254, 248, .22);
@@ -44,6 +48,7 @@
       scroll-behavior: smooth;
       scrollbar-color: var(--ink) var(--paper);
       scrollbar-width: thin;
+      overflow-x: clip;
     }
 
     body {
@@ -67,6 +72,12 @@
     button, a { -webkit-tap-highlight-color: transparent; }
     button { font: inherit; }
     img, svg { display: block; max-width: 100%; }
+
+    /* Fixed navigation must not cover headings when a section is opened from
+       an anchor link or the browser restores a hash position. */
+    main > section[id] {
+      scroll-margin-top: calc(var(--header-h) + 1.25rem);
+    }
 
     :focus-visible {
       outline: 3px solid var(--coral);
@@ -140,6 +151,8 @@
     .button {
       --button-bg: transparent;
       --button-fg: currentColor;
+      --button-hover-bg: var(--ink);
+      --button-hover-fg: var(--paper);
       position: relative;
       display: inline-flex;
       min-height: 3.15rem;
@@ -166,7 +179,7 @@
       z-index: -1;
       inset: -2px;
       content: "";
-      background: currentColor;
+      background: var(--button-hover-bg);
       border-radius: inherit;
       transform: translateY(105%);
       transition: transform .45s var(--ease-out);
@@ -174,21 +187,26 @@
     .button:hover::before,
     .button:focus-visible::before { transform: translateY(0); }
     .button:hover,
-    .button:focus-visible { color: var(--paper); }
+    .button:focus-visible { color: var(--button-hover-fg); }
     .button--solid {
       --button-bg: var(--ink);
       --button-fg: var(--white);
+      --button-hover-bg: var(--blue);
       border-color: var(--ink);
     }
-    .button--solid::before { background: var(--blue); }
     .button--light {
       --button-bg: var(--white);
       --button-fg: var(--ink);
+      --button-hover-bg: var(--acid);
+      --button-hover-fg: var(--ink);
       border-color: var(--white);
     }
-    .button--light::before { background: var(--acid); }
     .button--light:hover,
     .button--light:focus-visible { color: var(--ink); border-color: var(--acid); }
+    .contact .button:not(.button--solid):not(.button--light) {
+      --button-hover-bg: var(--white);
+      --button-hover-fg: var(--ink);
+    }
     .button svg { width: 1rem; height: 1rem; }
 
     /* Intro */
@@ -272,16 +290,69 @@
       top: 0;
       left: 0;
       width: 100%;
-      color: var(--ink);
-      mix-blend-mode: difference;
+      padding: .85rem var(--gutter) 0;
+      color: var(--white);
       pointer-events: none;
     }
     .site-header__inner {
-      min-height: var(--header-h);
+      position: relative;
+      width: min(100%, 1600px);
+      min-height: 3.85rem;
+      padding-inline: 1rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 2rem;
+      border: 1px solid rgba(255, 254, 248, .2);
+      border-radius: 999px;
+      background: linear-gradient(110deg, rgba(17, 17, 15, .88), rgba(40, 40, 35, .68));
+      box-shadow: 0 16px 36px rgba(17, 17, 15, .22), inset 0 1px 0 rgba(255, 254, 248, .18);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      backdrop-filter: blur(20px) saturate(140%);
+      opacity: 1;
+      clip-path: none;
+      transform: none;
+      transition:
+        clip-path 1.7s cubic-bezier(.22, .75, .2, 1);
+    }
+    .js .site-header__inner {
+      clip-path: inset(calc(50% - 1.35rem) calc(50% - 1.35rem) round 999px);
+    }
+    .header-ready .site-header__inner {
+      opacity: 1;
+      clip-path: inset(0 0 0 0 round 999px);
+      transform: translateY(0) scale(1);
+    }
+    .js .site-header .island-item {
+      opacity: 0;
+      transform: translateY(5px);
+      filter: blur(3px);
+      transition: opacity .75s ease, transform .9s cubic-bezier(.22, .75, .2, 1), filter .75s ease;
+    }
+    .site-header .brand__text .island-item { display: inline-block; }
+    .header-ready .site-header .island-item {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      transition-delay: var(--island-delay, 1.5s);
+    }
+    .js .site-header .brand__mark.island-item { display: grid; }
+    .site-header:focus-within .island-item {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      transition-delay: 0s;
+    }
+    .site-header__inner::after {
+      position: absolute;
+      right: 1.1rem;
+      bottom: -1px;
+      left: 1.1rem;
+      height: 2px;
+      content: "";
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--acid), rgba(90, 98, 255, .8) 52%, transparent 86%);
+      opacity: .9;
     }
     .site-header a,
     .site-header button { pointer-events: auto; }
@@ -301,7 +372,7 @@
       width: 2.2rem;
       height: 2.2rem;
       color: var(--ink);
-      background: var(--white);
+      background: var(--acid);
       border-radius: 50%;
       place-items: center;
       font-weight: 500;
@@ -381,6 +452,7 @@
       visibility: hidden;
       opacity: 0;
       pointer-events: none;
+      overflow-y: auto;
       transition: opacity .35s ease, visibility 0s linear .35s;
       place-items: center stretch;
     }
@@ -390,18 +462,28 @@
       pointer-events: auto;
       transition-delay: 0s;
     }
-    .mobile-menu ul { margin: 0; padding: 0; list-style: none; }
+    .mobile-menu ul {
+      width: 100%;
+      min-width: 0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
     .mobile-menu a {
-      display: flex;
+      display: grid;
+      grid-template-columns: 2rem minmax(0, 1fr);
       align-items: baseline;
-      justify-content: space-between;
+      gap: .7rem;
+      min-width: 0;
       padding: .9rem 0;
       border-bottom: 1px solid rgba(255,255,255,.28);
       font-family: var(--display);
-      font-size: clamp(2.8rem, 15vw, 5.5rem);
+      font-size: clamp(2rem, 10vw, 5.5rem);
       line-height: .9;
       letter-spacing: -.04em;
+      text-align: right;
       text-transform: uppercase;
+      overflow-wrap: anywhere;
     }
     .mobile-menu a span {
       font-family: var(--mono);
@@ -542,11 +624,11 @@
     .system-art::after {
       position: absolute;
       z-index: -1;
-      inset: 0;
+      inset: -14px;
       content: "";
-      border: 1px solid var(--ink);
+      border: 1px dashed rgba(17, 17, 15, .32);
       border-radius: 50%;
-      animation: orbitRotate 28s linear infinite;
+      animation: orbitRotate 32s linear infinite;
       background:
         radial-gradient(circle at 50% 0, var(--ink) 0 5px, transparent 6px),
         radial-gradient(circle at 100% 50%, var(--blue) 0 7px, transparent 8px),
@@ -573,10 +655,10 @@
       letter-spacing: .08em;
       text-transform: uppercase;
     }
-    .packet { animation: packetMove 5.5s ease-in-out infinite; transform-origin: center; }
-    .packet--2 { animation-delay: -2.1s; }
-    .packet--3 { animation-delay: -3.8s; }
-    @keyframes packetMove { 50% { transform: translate(14px, -10px) scale(1.18); } }
+    .packet { animation: packetPulse 4s ease-in-out infinite; transform-origin: 250px 250px; }
+    .packet--2 { animation-delay: -1s; }
+    .packet--3 { animation-delay: -2s; }
+    @keyframes packetPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
     .hero__proof {
       display: grid;
@@ -639,6 +721,11 @@
       padding-top: clamp(8rem, 14vw, 14rem);
       color: var(--white);
       background: var(--ink);
+    }
+    /* No transition overlay: Work keeps its original blue treatment through
+       the end of the section. */
+    .work::after {
+      display: none;
     }
     .work__header {
       display: grid;
@@ -719,6 +806,7 @@
       min-height: min(62vw, 720px);
       display: grid;
       overflow: hidden;
+      border-radius: clamp(1.25rem, 2.5vw, 2.25rem);
       border: 1px solid var(--line-light);
       background: #181816;
       place-items: center;
@@ -738,10 +826,10 @@
     }
     .project-visual::after {
       position: absolute;
-      inset: 8%;
+      inset: 0;
       content: "";
-      border: 1px solid rgba(255,255,255,.3);
-      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, .4) 100%);
     }
     .project-visual svg {
       position: relative;
@@ -789,7 +877,8 @@
     /* About */
     .about {
       position: relative;
-      padding: clamp(7rem, 13vw, 14rem) 0;
+      margin-top: 0;
+      padding: clamp(4rem, 6vw, 6.5rem) 0 clamp(7rem, 13vw, 14rem);
       background: var(--paper);
       overflow: hidden;
     }
@@ -797,7 +886,7 @@
       position: absolute;
       top: 8%;
       right: -8vw;
-      content: "03";
+      content: "02";
       color: rgba(17,17,15,.045);
       font-family: var(--display);
       font-size: min(45vw, 42rem);
@@ -807,7 +896,7 @@
     }
     .about__layout {
       position: relative;
-      z-index: 1;
+      z-index: 3;
       display: grid;
       grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
       gap: clamp(3rem, 8vw, 9rem);
@@ -887,7 +976,7 @@
       cursor: default;
       transition: padding .35s var(--ease-out), background .35s ease;
     }
-    .cap-item:is(:hover, :focus-within, .is-active) { padding-inline: 1rem; background: rgba(255,255,255,.25); }
+    .cap-item:is(:focus-within, .is-active) { padding-inline: 1rem; background: rgba(255,255,255,.25); }
     .cap-item > span:first-child { font-family: var(--mono); font-size: .68rem; }
     .cap-item h3 {
       margin: 0;
@@ -913,13 +1002,16 @@
       position: sticky;
       top: calc(var(--header-h) + 2rem);
       min-height: 32rem;
+      min-width: 0;
       display: grid;
       align-content: space-between;
       padding: 2rem;
       color: var(--white);
       background: var(--ink);
       box-shadow: var(--shadow);
+      border-radius: clamp(1.25rem, 2vw, 1.75rem);
       overflow: hidden;
+      container-type: inline-size;
     }
     .cap-visual::before,
     .cap-visual::after {
@@ -935,16 +1027,30 @@
     .cap-visual[data-state="3"]::after { transform: translate(9rem, -8rem) scale(1.3); }
     .cap-visual[data-state="4"]::before { transform: translate(-9rem, 12rem) rotate(45deg); }
     .cap-visual__top,
-    .cap-visual__bottom { position: relative; z-index: 2; }
+    .cap-visual__bottom {
+      position: relative;
+      z-index: 2;
+      min-width: 0;
+    }
     .cap-visual__title {
+      min-width: 0;
+      max-width: 100%;
       margin: 1.6rem 0 1rem;
       font-family: var(--display);
-      font-size: clamp(3rem, 5vw, 5.3rem);
+      /* Scale against the panel itself, not the browser viewport. This keeps
+         long capability names inside the visual at every desktop width. */
+      font-size: clamp(2rem, 9cqw, 5.3rem);
       line-height: .87;
       letter-spacing: -.05em;
       text-transform: uppercase;
+      overflow-wrap: anywhere;
     }
-    .cap-visual__desc { max-width: 25rem; margin: 0; color: rgba(255,255,255,.7); }
+    .cap-visual__desc {
+      max-width: 25rem;
+      margin: 0;
+      color: rgba(255,255,255,.7);
+      overflow-wrap: anywhere;
+    }
     .cap-visual__signal {
       width: 100%;
       height: 7rem;
@@ -960,17 +1066,18 @@
 
     /* Proof */
     .proof {
-      padding: clamp(7rem, 12vw, 12rem) 0;
+      padding: clamp(3rem, 4vw, 4.5rem) 0 clamp(5rem, 8vw, 8rem);
       background: var(--paper);
     }
     .proof__head {
       display: grid;
       grid-template-columns: 1fr minmax(250px, 30rem);
       align-items: end;
-      gap: 3rem;
-      margin-bottom: clamp(4rem, 8vw, 7rem);
+      gap: 2rem;
+      margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
     }
     .proof__head p { margin: 0; font-size: 1rem; }
+    .proof .section-title { font-size: clamp(3.2rem, 7vw, 7.5rem); }
     .proof-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -978,19 +1085,19 @@
       border-bottom: 1px solid var(--ink);
     }
     .proof-item {
-      min-height: 24rem;
+      min-height: 20rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 4rem;
-      padding: 2rem clamp(1rem, 3vw, 3rem);
+      gap: 2.25rem;
+      padding: 1.5rem clamp(1rem, 2.5vw, 2.25rem);
       border-right: 1px solid var(--ink);
     }
     .proof-item:first-child { padding-left: 0; }
     .proof-item:last-child { padding-right: 0; border-right: 0; }
     .proof-item__number {
       font-family: var(--display);
-      font-size: clamp(4.6rem, 9vw, 10rem);
+      font-size: clamp(4.2rem, 7.5vw, 8rem);
       line-height: .78;
       letter-spacing: -.07em;
     }
@@ -1100,6 +1207,7 @@
       padding: 0;
       color: var(--ink);
       border: 0;
+      border-radius: 1.5rem;
       background: var(--paper);
       box-shadow: 0 35px 120px rgba(0,0,0,.45);
       overflow: auto;
@@ -1179,6 +1287,40 @@
     .motion-ready .reveal[data-delay="1"].is-visible { transition-delay: .12s; }
     .motion-ready .reveal[data-delay="2"].is-visible { transition-delay: .22s; }
 
+    /* Scroll-pop treatment for supporting content, not the hero identity. */
+    .motion-ready .scroll-pop {
+      opacity: 0;
+      transform: translateY(2.2rem) scale(.965);
+      filter: blur(5px);
+    }
+    .motion-ready .scroll-pop.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+      transition:
+        opacity .7s var(--ease-out),
+        transform .85s var(--ease-out),
+        filter .7s ease;
+      transition-delay: var(--pop-delay, 0ms);
+    }
+
+    .motion-ready .about-pop {
+      opacity: 0;
+      transition:
+        opacity .85s var(--ease-out),
+        transform 1s var(--ease-out),
+        filter .85s ease;
+      filter: blur(8px);
+    }
+    .motion-ready .about-pop--label { transform: translateY(1.6rem); }
+    .motion-ready .about-pop--statement { transform: translateY(6rem); }
+    .motion-ready .about-pop--note { transform: translateX(5rem) translateY(2.5rem); }
+    .motion-ready .about-pop.is-visible {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+      filter: blur(0);
+    }
+
     @media (min-width: 901px) {
       .project-story { position: sticky; top: 0; }
       .project-story:nth-child(2) { top: .6rem; }
@@ -1234,6 +1376,9 @@
 
     @media (max-width: 620px) {
       :root { --gutter: 1rem; }
+      .site-header { padding: .55rem .7rem 0; }
+      .site-header__inner { min-height: 3.45rem; padding-inline: .7rem; border-radius: 1.25rem; }
+      .site-header__inner::after { right: .8rem; left: .8rem; }
       .brand__text { display: none; }
       .hero__inner { padding-bottom: .75rem; }
       .hero__meta { align-items: flex-start; }
@@ -1266,7 +1411,7 @@
       .cap-item h3 { font-size: 1.65rem; }
       .cap-item__mobile { display: block; }
       .cap-visual { display: none; }
-      .proof-item { min-height: 15rem; }
+      .proof-item { min-height: 13.5rem; }
       .contact__title { font-size: clamp(4rem, 21vw, 7rem); }
       .contact__actions { display: grid; grid-template-columns: 1fr 1fr; }
       .contact__actions .button { width: 100%; }
@@ -1290,6 +1435,19 @@
         transition-duration: .001ms !important;
       }
       .intro { display: none; }
+      .site-header__inner,
+      .js .site-header__inner,
+      .header-ready .site-header__inner {
+        opacity: 1;
+        clip-path: none;
+        transform: none;
+      }
+      .js .site-header .island-item {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        transition-delay: 0s;
+      }
       .motion-ready .reveal { opacity: 1; transform: none; }
       .cursor { display: none; }
     }
@@ -1783,6 +1941,428 @@
       .project-story__copy .button { width: fit-content; min-width: 12rem; }
     }
 
+    /* ==========================================================
+       RESPONSIVE SAFETY NET
+       Keep the hero readable at tablet/mobile widths. The orbit
+       becomes part of the document flow instead of sitting behind
+       the copy, and summary values never share a cramped row.
+       ========================================================== */
+
+    @media (max-width: 1500px) and (min-width: 1101px) {
+      .hero__stage {
+        grid-template-columns: minmax(0, 1.18fr) minmax(340px, .82fr);
+        gap: clamp(1.2rem, 3vw, 3rem);
+      }
+
+      .hero__positioning {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: clamp(.55rem, 1.8vw, 1.5rem);
+        margin-left: clamp(0rem, 3vw, 2.5rem);
+      }
+
+      .hero__positioning p {
+        min-width: 0;
+        font-size: clamp(.86rem, 1.15vw, 1.18rem);
+      }
+
+      .system-art {
+        width: min(100%, 34vw, 68vh, 540px);
+      }
+
+      .hero__actions {
+        flex-wrap: nowrap;
+        gap: clamp(.4rem, .8vw, .65rem);
+      }
+
+      .hero__actions .button {
+        min-height: clamp(2.45rem, 3.6vw, 3.15rem);
+        padding-inline: clamp(.7rem, 1.2vw, 1.2rem);
+        font-size: clamp(.56rem, .65vw, .7rem);
+      }
+    }
+
+    @media (max-width: 1100px) and (min-width: 901px) {
+      .hero__stage {
+        grid-template-columns: minmax(0, 1.16fr) minmax(300px, .84fr);
+        gap: clamp(1rem, 2.5vw, 2rem);
+      }
+
+      .hero__positioning {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: .55rem;
+        margin-left: 0;
+      }
+
+      .hero__positioning p {
+        font-size: clamp(.78rem, 1.2vw, 1rem);
+      }
+
+      .hero__actions {
+        flex-wrap: nowrap;
+        gap: .4rem;
+      }
+
+      .hero__actions .button {
+        min-height: 2.55rem;
+        padding: .7rem .75rem;
+        font-size: .56rem;
+      }
+
+      .system-art {
+        width: min(100%, 34vw, 68vh, 420px);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        min-height: auto;
+        padding-top: calc(var(--header-h) + 1rem);
+      }
+
+      .hero__inner {
+        min-height: auto;
+        display: flex;
+        gap: 1rem;
+        padding-top: 1rem;
+        padding-bottom: 1.25rem;
+      }
+
+      .hero__meta {
+        flex-wrap: wrap;
+        gap: .75rem 1.5rem;
+        font-size: .64rem;
+      }
+
+      .hero__stage {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.5rem;
+        padding-block: 1rem 1.75rem;
+      }
+
+      .hero__name {
+        width: 100%;
+        max-width: 100%;
+        font-size: clamp(4.5rem, 14vw, 8.5rem);
+        line-height: .82;
+      }
+
+      .hero__name span:last-child {
+        width: 100%;
+        max-width: 100%;
+        margin-top: .05em;
+        transform: none;
+      }
+
+      .hero__positioning {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin: 1.5rem 0 0;
+      }
+
+      .hero__positioning p {
+        max-width: 38rem;
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
+      }
+
+      .system-art {
+        position: relative;
+        z-index: 0;
+        top: auto;
+        right: auto;
+        width: min(100%, 520px);
+        margin-inline: auto;
+        opacity: 1;
+        transform: none;
+      }
+
+      .hero__proof {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-proof,
+      .hero-proof:first-child {
+        grid-template-columns: 5.5rem minmax(0, 1fr);
+        padding: .75rem 0;
+        border-right: 0;
+        border-bottom: 1px solid var(--line-dark);
+      }
+
+      .hero-proof:last-child { border-bottom: 0; }
+      .hero-proof span { max-width: 24rem; }
+    }
+
+    @media (max-width: 620px) {
+      .hero__meta .mono:last-child {
+        max-width: 100%;
+        text-align: left;
+      }
+
+      .hero__name {
+        font-size: clamp(4rem, 20vw, 6.8rem);
+      }
+
+      .hero__positioning p {
+        font-size: 1rem;
+      }
+
+      .system-art {
+        width: min(100%, 420px);
+      }
+
+      .hero-proof,
+      .hero-proof:first-child {
+        grid-template-columns: 4.7rem minmax(0, 1fr);
+      }
+    }
+
+    /* Work case-study theme: deep navy flowing into a confident engineering blue. */
+    .project-story {
+      color: #f8fafc;
+      border-top-color: rgba(226, 232, 240, .2);
+      background:
+        radial-gradient(circle at 82% 22%, rgba(96, 165, 250, .2), transparent 30%),
+        linear-gradient(118deg, #0F172A 0%, #172554 52%, #2563EB 145%);
+    }
+
+    .work {
+      background: linear-gradient(180deg, var(--ink) 0%, #0F172A 100%);
+    }
+
+    /* Keep this visible: sticky project layers need an unclipped parent to slide upward. */
+    .work-stack { overflow: visible; }
+
+    .project-story:first-child {
+      border-top-color: transparent;
+      background:
+        linear-gradient(180deg, var(--ink) 0, rgba(15, 23, 42, .96) 5rem, rgba(15, 23, 42, 0) 13rem),
+        radial-gradient(circle at 82% 22%, rgba(96, 165, 250, .2), transparent 30%),
+        linear-gradient(118deg, #0F172A 0%, #172554 52%, #2563EB 145%);
+    }
+
+    .project-story:nth-child(2) {
+      background:
+        linear-gradient(180deg, #0F172A 0, rgba(15, 23, 42, .94) 5rem, rgba(15, 23, 42, 0) 13rem),
+        radial-gradient(circle at 18% 76%, rgba(147, 197, 253, .22), transparent 32%),
+        linear-gradient(118deg, #0F172A 0%, #1E3A8A 55%, #2563EB 145%);
+    }
+
+    .project-story:nth-child(3) {
+      background:
+        linear-gradient(180deg, #0F172A 0, rgba(15, 23, 42, .94) 5rem, rgba(15, 23, 42, 0) 13rem),
+        radial-gradient(circle at 78% 70%, rgba(191, 219, 254, .18), transparent 30%),
+        linear-gradient(118deg, #0F172A 0%, #1D4ED8 64%, #2563EB 145%);
+    }
+
+    .project-story:nth-child(3)::after {
+      display: none;
+    }
+
+    .project-index { border-bottom-color: rgba(226, 232, 240, .26); }
+    .project-index span:last-child { color: #93C5FD; }
+    .project-story__copy > p { color: rgba(226, 232, 240, .84); }
+    .project-story .tech-line li:not(:last-child)::after { color: #93C5FD; }
+    .project-story .button--light {
+      --button-bg: #f8fafc;
+      --button-fg: #0F172A;
+      --button-hover-bg: #93C5FD;
+      --button-hover-fg: #0F172A;
+      border-color: #f8fafc;
+    }
+    .project-story .project-visual {
+      border-color: rgba(147, 197, 253, .34);
+      box-shadow: 0 28px 60px rgba(2, 6, 23, .34);
+    }
+
+    /* Wide Chrome windows should use the available canvas. The previous
+       1600px cap made 1920px renders wrap and align differently from the
+       intended composition while smaller screens were unaffected. */
+    @media (min-width: 1800px) {
+      .container,
+      .site-header__inner {
+        width: 100%;
+      }
+    }
+
+    /* Keep the two About columns in one readable viewport on wide desktop
+       screens. The original 14rem section padding plus display-sized copy
+       pushed the experience card below the fold and made it look like the
+       preceding Work panel was covering it. */
+    /* Keep the wide About layout compact when Chrome is zoomed or its
+       viewport height is reduced. Width is the meaningful breakpoint here. */
+    @media (min-width: 1400px) {
+      .about {
+        padding-top: clamp(4rem, 5vw, 5.5rem);
+        padding-bottom: clamp(5rem, 8vw, 8rem);
+      }
+
+      .about__statement {
+        font-size: clamp(2rem, 3.45vw, 4rem);
+      }
+
+      .about__layout {
+        gap: clamp(2rem, 5vw, 6rem);
+      }
+    }
+
+    /* Selective blue accents: keep the paper sections calm, and reserve the
+       gradient treatment for the experience card and one proof highlight. */
+    .career-note {
+      position: relative;
+      padding: 1.25rem clamp(1rem, 2vw, 1.75rem) 1.5rem;
+      border: 1px solid rgba(37, 99, 235, .16);
+      border-top-color: rgba(37, 99, 235, .3);
+      border-radius: 1.25rem;
+      background: linear-gradient(135deg, var(--blue-wash) 0%, var(--blue-mist) 58%, var(--blue-tint) 145%);
+      box-shadow: 0 1.25rem 2.75rem rgba(37, 99, 235, .08);
+      overflow: hidden;
+    }
+
+    .career-note::after {
+      content: "";
+      position: absolute;
+      width: 8rem;
+      height: 8rem;
+      right: -3.5rem;
+      bottom: -4rem;
+      border-radius: 50%;
+      background: rgba(147, 197, 253, .22);
+      pointer-events: none;
+    }
+
+    .proof-item:nth-child(2) {
+      position: relative;
+      margin: .5rem 0;
+      border-right-color: rgba(37, 99, 235, .16);
+      border-radius: 1.25rem;
+      background: linear-gradient(145deg, var(--blue-wash) 0%, var(--blue-mist) 64%, var(--blue-tint) 150%);
+      box-shadow: inset 0 0 0 1px rgba(37, 99, 235, .1), 0 1rem 2.5rem rgba(37, 99, 235, .07);
+    }
+
+    @media (max-width: 900px) {
+      .career-note {
+        width: 100%;
+        max-width: 38rem;
+        box-sizing: border-box;
+      }
+
+      /* The desktop reveal enters from the side. On a single-column layout,
+         keep the motion vertical so the card never clips against the section. */
+      .motion-ready .about-pop--note {
+        transform: translateY(2.5rem);
+      }
+
+      .proof-item:nth-child(2) {
+        margin: 0;
+        border-right: 0;
+        border-bottom-color: rgba(37, 99, 235, .16);
+      }
+    }
+
+    /* Hover pop is deliberately attached to individual content elements. */
+    @media (hover: hover) and (pointer: fine) {
+      .project-visual,
+      .cap-visual,
+      .project-story__copy h3,
+      .project-story__copy > p,
+      .project-story__copy .tech-line,
+      .project-story__copy .button,
+      .career-note__role,
+      .impact-list li,
+      .cap-item h3,
+      .cap-item button,
+      .proof-item__number,
+      .proof-item h3,
+      .proof-item p,
+      .contact__mail,
+      .contact__actions .button,
+      .contact-links a {
+        transition:
+          translate .45s var(--ease-out),
+          scale .45s var(--ease-out),
+          box-shadow .45s ease,
+          filter .35s ease,
+          color .3s ease,
+          background-color .35s ease;
+      }
+
+      .project-visual:hover,
+      .project-visual:focus-within,
+      .cap-visual:hover,
+      .cap-visual:focus-within,
+      .project-story__copy h3:hover,
+      .project-story__copy > p:hover,
+      .project-story__copy .tech-line:hover,
+      .project-story__copy .button:hover,
+      .career-note__role:hover,
+      .impact-list li:hover,
+      .cap-item h3:hover,
+      .cap-item button:hover,
+      .proof-item__number:hover,
+      .proof-item h3:hover,
+      .proof-item p:hover,
+      .contact__mail:hover,
+      .contact__actions .button:hover,
+      .contact-links a:hover {
+        translate: 0 -6px;
+        scale: 1.012;
+        filter: drop-shadow(0 7px 10px rgba(17, 17, 15, .18));
+      }
+
+      /* Only actual controls receive a shaped shadow. Text must not create a box. */
+      .project-story__copy .button:hover,
+      .cap-item button:hover,
+      .contact__actions .button:hover {
+        box-shadow: 0 12px 24px rgba(0, 0, 0, .16);
+      }
+
+      .project-visual:hover::after,
+      .cap-visual:hover::before,
+      .cap-visual:hover::after {
+        transform: scale(1.08) rotate(5deg);
+      }
+
+      /* Hovering a work card animates its individual contents, never the card itself. */
+      .project-story:hover .project-story__copy h3,
+      .project-story:focus-within .project-story__copy h3 {
+        translate: 0 -8px;
+        scale: 1.018;
+        filter: drop-shadow(0 8px 12px rgba(0, 0, 0, .2));
+      }
+
+      .project-story:hover .project-story__copy > p,
+      .project-story:hover .project-story__copy .tech-line,
+      .project-story:hover .project-story__copy .button,
+      .project-story:focus-within .project-story__copy > p,
+      .project-story:focus-within .project-story__copy .tech-line,
+      .project-story:focus-within .project-story__copy .button {
+        translate: 0 -4px;
+      }
+
+      .project-story:hover .project-visual,
+      .project-story:focus-within .project-visual {
+        scale: 1.018;
+      }
+
+      /* Proof cards use the same content-only pop treatment. */
+      .proof-item:hover .proof-item__number,
+      .proof-item:focus-within .proof-item__number {
+        translate: 0 -10px;
+        scale: 1.07;
+        filter: drop-shadow(0 9px 12px rgba(17, 17, 15, .18));
+      }
+
+      .proof-item:hover h3,
+      .proof-item:hover p,
+      .proof-item:focus-within h3,
+      .proof-item:focus-within p {
+        translate: 0 -4px;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .flow-ribbon,
       .flow-signal,
@@ -1835,21 +2415,21 @@
   <header class="site-header" id="site-header">
     <div class="container site-header__inner">
       <a class="brand interactive" href="#home" aria-label="Sumit Yadav, back to top">
-        <span class="brand__mark">SY</span>
-        <span class="brand__text"><span>Sumit Yadav</span><span>Backend systems</span></span>
+        <span class="brand__mark island-item" style="--island-delay: 1.5s">SY</span>
+        <span class="brand__text"><span><span class="island-item" style="--island-delay: 1.65s">Sumit</span> <span class="island-item" style="--island-delay: 1.8s">Yadav</span></span><span><span class="island-item" style="--island-delay: 1.95s">Backend</span> <span class="island-item" style="--island-delay: 2.1s">systems</span></span></span>
       </a>
 
       <nav class="desktop-nav" aria-label="Primary navigation">
         <ul class="nav-list">
-          <li><a class="nav-link" href="#work">Work</a></li>
-          <li><a class="nav-link" href="#about">About</a></li>
-          <li><a class="nav-link" href="#capabilities">Capabilities</a></li>
-          <li><a class="nav-link" href="#proof">Proof</a></li>
-          <li><a class="nav-link" href="#contact">Contact</a></li>
+          <li><a class="nav-link island-item" style="--island-delay: 2.25s" href="#work">Work</a></li>
+          <li><a class="nav-link island-item" style="--island-delay: 2.4s" href="#about">About</a></li>
+          <li><a class="nav-link island-item" style="--island-delay: 2.55s" href="#capabilities">Capabilities</a></li>
+          <li><a class="nav-link island-item" style="--island-delay: 2.7s" href="#proof">Proof</a></li>
+          <li><a class="nav-link island-item" style="--island-delay: 2.85s" href="#contact">Contact</a></li>
         </ul>
       </nav>
 
-      <button class="menu-toggle interactive" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+      <button class="menu-toggle interactive island-item" style="--island-delay: 2.25s" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
         <span aria-hidden="true"></span>
       </button>
     </div>
@@ -1885,7 +2465,7 @@
                 <a class="button button--solid magnetic interactive" href="#work">Explore work
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12M13 7l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </a>
-                <a class="button magnetic interactive resume-link" href="data:text/plain;charset=utf-8,Sumit%20Yadav%20-%20Java%20Backend%20Engineer" download="Sumit_Yadav_Resume.txt">Resume
+                <a class="button magnetic interactive resume-link" href="Sumit_Yadav_Resume.pdf" download="Sumit_Yadav_Resume.pdf">Resume
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0 4-4m-4 4-4-4M5 19h14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </a>
               </div>
@@ -1901,13 +2481,13 @@
               <g class="packet">
                 <circle cx="250" cy="250" r="70" class="node-ring"/>
                 <circle cx="250" cy="250" r="14" class="node-core"/>
-                <text x="250" y="288" text-anchor="middle">Core service</text>
+                <text x="250" y="286" text-anchor="middle">Core service</text>
               </g>
 
               <g class="packet packet--2">
                 <circle cx="250" cy="90" r="33" class="node-ring"/>
                 <circle cx="250" cy="90" r="8" class="node-core--blue"/>
-                <text x="250" y="55" text-anchor="middle">Identity</text>
+                <text x="250" y="136" text-anchor="middle">Identity</text>
               </g>
 
               <g class="packet packet--3">
@@ -1916,13 +2496,13 @@
                 <text x="408" y="295" text-anchor="middle">Risk</text>
               </g>
 
-              <g>
+              <g class="packet packet--2">
                 <circle cx="250" cy="411" r="33" class="node-ring"/>
                 <circle cx="250" cy="411" r="8" class="node-core--blue"/>
-                <text x="250" y="458" text-anchor="middle">Bank data</text>
+                <text x="250" y="370" text-anchor="middle">Bank data</text>
               </g>
 
-              <g>
+              <g class="packet packet--3">
                 <circle cx="91" cy="250" r="33" class="node-ring"/>
                 <circle cx="91" cy="250" r="8" class="node-core--coral"/>
                 <text x="91" y="295" text-anchor="middle">Documents</text>
@@ -1987,10 +2567,10 @@
 
                 <!-- Asynchronous callback path -->
                 <path class="wf-route wf-route--blue" d="M486 193V346" marker-end="url(#wf-arrow-blue)"/>
-                <path class="wf-route wf-route--acid" d="M459 391C421 430 379 447 339 451" marker-end="url(#wf-arrow-acid)"/>
+                <path class="wf-route wf-route--acid" d="M459 391C421 420 379 430 339 430" marker-end="url(#wf-arrow-acid)"/>
 
                 <!-- Explicit retry path, deliberately separate from the happy path. -->
-                <path class="wf-route wf-route--coral wf-route--retry" d="M310 424C249 411 225 359 306 314" marker-end="url(#wf-arrow-coral)"/>
+                <path class="wf-route wf-route--coral wf-route--retry" d="M310 405C249 395 225 350 306 314" marker-end="url(#wf-arrow-coral)"/>
 
                 <g class="wf-node wf-node--request">
                   <path class="wf-node-shape wf-node-shape--acid" d="M48 250H92L108 270L92 290H48L32 270Z"/>
@@ -2004,9 +2584,8 @@
 
                 <g class="wf-node wf-node--core">
                   <path class="wf-core-shape" d="M292 224H354L378 248V302L354 326H292L268 302V248Z"/>
-                  <text class="wf-core-title" x="323" y="270">ORCH</text>
-                  <text class="wf-core-title" x="323" y="289">ESTRATE</text>
-                  <text class="wf-core-sub" x="323" y="307">STATEFUL FLOW</text>
+                  <text class="wf-core-title" x="323" y="278">ORCHESTRATOR</text>
+                  <text class="wf-core-sub" x="323" y="299">STATEFUL FLOW</text>
                 </g>
 
                 <g class="wf-node">
@@ -2022,24 +2601,33 @@
                 </g>
 
                 <g class="wf-node">
-                  <path class="wf-node-shape wf-node-shape--acid" d="M306 425H350L366 451L350 477H306L290 451Z"/>
-                  <text x="328" y="505">DECISION STATE</text>
+                  <path class="wf-node-shape wf-node-shape--acid" d="M306 405H350L366 430L350 455H306L290 430Z"/>
+                  <text x="328" y="478">DECISION STATE</text>
                 </g>
 
                 <text class="wf-edge-label" x="129" y="252">VALIDATE</text>
-                <text class="wf-edge-label" x="255" y="252">DISPATCH</text>
+                <text class="wf-edge-label" x="254" y="248">DISPATCH</text>
                 <text class="wf-edge-label" x="409" y="207">ASYNC CALL</text>
                 <text class="wf-edge-label" x="511" y="278">CALLBACK</text>
-                <text class="wf-edge-label" x="250" y="385">RETRY / RECOVER</text>
+                <text class="wf-edge-label" x="250" y="380">RETRY / RECOVER</text>
 
                 <circle class="wf-packet wf-packet--acid" r="5">
                   <animateMotion dur="2.6s" repeatCount="indefinite" path="M70 270H162"/>
+                </circle>
+                <circle class="wf-packet wf-packet--acid" r="5">
+                  <animateMotion dur="2.2s" begin="-.8s" repeatCount="indefinite" path="M222 270H292"/>
                 </circle>
                 <circle class="wf-packet wf-packet--blue" r="5">
                   <animateMotion dur="3s" begin="-.7s" repeatCount="indefinite" path="M353 247C393 216 416 193 451 164"/>
                 </circle>
                 <circle class="wf-packet wf-packet--coral" r="5">
                   <animateMotion dur="3.2s" begin="-1.2s" repeatCount="indefinite" path="M486 193V346"/>
+                </circle>
+                <circle class="wf-packet wf-packet--acid" r="5">
+                  <animateMotion dur="3.4s" begin="-1.5s" repeatCount="indefinite" path="M459 391C421 420 379 430 339 430"/>
+                </circle>
+                <circle class="wf-packet wf-packet--coral" r="5">
+                  <animateMotion dur="4.2s" begin="-2s" repeatCount="indefinite" path="M310 405C249 395 225 350 306 314"/>
                 </circle>
               </svg>
               <span class="visual-label">request → orchestrate → integrate → callback → decision</span>
@@ -2057,22 +2645,93 @@
               <button class="button button--light magnetic interactive" type="button" data-dialog="dialog-trust">Open engineering note</button>
             </div>
             <div class="project-visual visual-b project-layer-visual" data-tilt aria-hidden="true">
-              <svg viewBox="0 0 600 600">
-                <path class="route" d="M300 82c120 0 218 98 218 218s-98 218-218 218S82 420 82 300 180 82 300 82Z"/>
-                <path class="route blue" d="M300 130c94 0 170 76 170 170s-76 170-170 170-170-76-170-170 76-170 170-170Z"/>
-                <path class="route accent" d="M300 160v280M160 300h280"/>
-                <path class="route coral" d="m201 201 198 198m0-198L201 399"/>
-                <circle class="visual-node blue" cx="300" cy="300" r="55"/>
-                <circle class="visual-node acid" cx="300" cy="130" r="15"/>
-                <circle class="visual-node" cx="470" cy="300" r="21"/>
-                <circle class="visual-node coral" cx="300" cy="470" r="15"/>
-                <circle class="visual-node" cx="130" cy="300" r="21"/>
-                <text x="300" y="305" text-anchor="middle">verified</text>
-                <text x="300" y="104" text-anchor="middle">identity</text>
-                <text x="485" y="272" text-anchor="middle">consent</text>
-                <text x="300" y="510" text-anchor="middle">signed</text>
+              <svg class="workflow-diagram" viewBox="0 0 640 560">
+                <defs>
+                  <marker id="wf2-arrow-acid" viewBox="0 0 10 10" refX="8.3" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M0 0L10 5L0 10Z" fill="#d7ff45"/>
+                  </marker>
+                  <marker id="wf2-arrow-blue" viewBox="0 0 10 10" refX="8.3" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M0 0L10 5L0 10Z" fill="#9297ff"/>
+                  </marker>
+                  <marker id="wf2-arrow-coral" viewBox="0 0 10 10" refX="8.3" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M0 0L10 5L0 10Z" fill="#ff664a"/>
+                  </marker>
+                </defs>
+
+                <text class="workflow-kicker" x="55" y="61">IDENTITY &amp; TRUST / VERIFICATION PIPELINE</text>
+
+                <!-- Auth dispatch path -->
+                <path class="wf-route wf-route--acid" d="M70 270H155" marker-end="url(#wf2-arrow-acid)"/>
+                <path class="wf-route wf-route--acid" d="M223 270H285" marker-end="url(#wf2-arrow-acid)"/>
+                <path class="wf-route wf-route--blue" d="M346 247C386 216 410 193 445 164" marker-end="url(#wf2-arrow-blue)"/>
+
+                <!-- KYC to Doc Engine to Audit path -->
+                <path class="wf-route wf-route--blue" d="M489 194V346" marker-end="url(#wf2-arrow-blue)"/>
+                <path class="wf-route wf-route--acid" d="M455 391C417 420 375 430 335 430" marker-end="url(#wf2-arrow-acid)"/>
+
+                <!-- Reconciliation loop -->
+                <path class="wf-route wf-route--coral wf-route--retry" d="M306 405C250 395 226 350 300 314" marker-end="url(#wf2-arrow-coral)"/>
+
+                <g class="wf-node wf-node--request">
+                  <path class="wf-node-shape wf-node-shape--acid" d="M48 250H92L108 270L92 290H48L32 270Z"/>
+                  <text x="70" y="314">CLIENT APP</text>
+                </g>
+
+                <g class="wf-node">
+                  <rect class="wf-node-shape" x="155" y="238" width="68" height="64" rx="18"/>
+                  <text x="189" y="322">OAUTH 2.0</text>
+                  <text x="189" y="334">GATEWAY</text>
+                </g>
+
+                <g class="wf-node wf-node--core">
+                  <path class="wf-core-shape" d="M285 224H347L371 248V302L347 326H285L261 302V248Z"/>
+                  <text class="wf-core-title" x="316" y="278">TRUST CORE</text>
+                  <text class="wf-core-sub" x="316" y="299">VALIDATION HUB</text>
+                </g>
+
+                <g class="wf-node">
+                  <rect class="wf-node-shape wf-node-shape--blue" x="445" y="124" width="88" height="70" rx="20"/>
+                  <text x="489" y="106">KYC SERVICES</text>
+                  <text x="489" y="119">UIDAI / PAN / NSDL</text>
+                </g>
+
+                <g class="wf-node">
+                  <rect class="wf-node-shape wf-node-shape--coral" x="445" y="346" width="88" height="72" rx="20"/>
+                  <text x="489" y="446">DOC ENGINE</text>
+                  <text x="489" y="460">DIGILOCKER / ESIGN</text>
+                </g>
+
+                <g class="wf-node">
+                  <path class="wf-node-shape wf-node-shape--acid" d="M302 405H346L362 430L346 455H302L286 430Z"/>
+                  <text x="324" y="478">AUDIT VAULT</text>
+                </g>
+
+                <text class="wf-edge-label" x="122" y="252">AUTHENTICATE</text>
+                <text class="wf-edge-label" x="252" y="248">AUTHORIZE</text>
+                <text class="wf-edge-label" x="405" y="207">VERIFY ID</text>
+                <text class="wf-edge-label" x="510" y="278">FETCH &amp; SIGN</text>
+                <text class="wf-edge-label" x="250" y="380">AUDIT &amp; RECONCILE</text>
+
+                <circle class="wf-packet wf-packet--acid" r="5">
+                  <animateMotion dur="2.6s" repeatCount="indefinite" path="M70 270H155"/>
+                </circle>
+                <circle class="wf-packet wf-packet--acid" r="5">
+                  <animateMotion dur="2.2s" begin="-.8s" repeatCount="indefinite" path="M223 270H285"/>
+                </circle>
+                <circle class="wf-packet wf-packet--blue" r="5">
+                  <animateMotion dur="3s" begin="-.7s" repeatCount="indefinite" path="M346 247C386 216 410 193 445 164"/>
+                </circle>
+                <circle class="wf-packet wf-packet--coral" r="5">
+                  <animateMotion dur="3.2s" begin="-1.2s" repeatCount="indefinite" path="M489 194V346"/>
+                </circle>
+                <circle class="wf-packet wf-packet--acid" r="5">
+                  <animateMotion dur="3.4s" begin="-1.5s" repeatCount="indefinite" path="M455 391C417 420 375 430 335 430"/>
+                </circle>
+                <circle class="wf-packet wf-packet--coral" r="5">
+                  <animateMotion dur="4.2s" begin="-2s" repeatCount="indefinite" path="M306 405C250 395 226 350 300 314"/>
+                </circle>
               </svg>
-              <span class="visual-label">Validate / consent / audit / recover</span>
+              <span class="visual-label">authenticate → verify kyc → digital sign → audit &amp; reconcile</span>
             </div>
           </div>
         </article>
@@ -2087,24 +2746,107 @@
               <button class="button button--light magnetic interactive" type="button" data-dialog="dialog-data">Open engineering note</button>
             </div>
             <div class="project-visual visual-c project-layer-visual" data-tilt aria-hidden="true">
-              <svg viewBox="0 0 600 600">
-                <path class="route" d="M85 155h145c46 0 46 70 92 70h193"/>
-                <path class="route blue" d="M85 300h430"/>
-                <path class="route accent" d="M85 445h145c46 0 46-70 92-70h193"/>
-                <path class="route coral" d="M235 120v360M365 120v360"/>
-                <circle class="visual-node coral" cx="85" cy="155" r="13"/>
-                <circle class="visual-node" cx="85" cy="300" r="13"/>
-                <circle class="visual-node acid" cx="85" cy="445" r="13"/>
-                <rect class="visual-node blue" x="235" y="225" width="130" height="150" rx="0"/>
-                <circle class="visual-node" cx="515" cy="155" r="13"/>
-                <circle class="visual-node acid" cx="515" cy="300" r="13"/>
-                <circle class="visual-node coral" cx="515" cy="445" r="13"/>
-                <text x="300" y="294" text-anchor="middle">runtime</text>
-                <text x="300" y="315" text-anchor="middle">mapper</text>
-                <text x="85" y="128" text-anchor="middle">source</text>
-                <text x="515" y="128" text-anchor="middle">insight</text>
+              <svg class="workflow-diagram" viewBox="0 0 640 560">
+                <defs>
+                  <marker id="wf3-arrow-acid" viewBox="0 0 10 10" refX="8.3" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M0 0L10 5L0 10Z" fill="#d7ff45"/>
+                  </marker>
+                  <marker id="wf3-arrow-blue" viewBox="0 0 10 10" refX="8.3" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M0 0L10 5L0 10Z" fill="#9297ff"/>
+                  </marker>
+                  <marker id="wf3-arrow-coral" viewBox="0 0 10 10" refX="8.3" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M0 0L10 5L0 10Z" fill="#ff664a"/>
+                  </marker>
+                </defs>
+
+                <text class="workflow-kicker" x="55" y="61">ADAPTIVE DATA / RUNTIME TRANSFORMATION ENGINE</text>
+
+                <!-- Input ingestion paths -->
+                <path class="wf-route wf-route--acid" d="M140 147C190 147 195 240 240 240" marker-end="url(#wf3-arrow-acid)"/>
+                <path class="wf-route wf-route--acid" d="M140 270H240" marker-end="url(#wf3-arrow-acid)"/>
+                <path class="wf-route wf-route--coral" d="M140 391C190 391 195 300 240 300" marker-end="url(#wf3-arrow-coral)"/>
+
+                <!-- Output distribution paths -->
+                <path class="wf-route wf-route--acid" d="M400 240C445 240 450 147 500 147" marker-end="url(#wf3-arrow-acid)"/>
+                <path class="wf-route wf-route--blue" d="M400 270H500" marker-end="url(#wf3-arrow-blue)"/>
+                <path class="wf-route wf-route--coral" d="M400 300C445 300 450 391 500 391" marker-end="url(#wf3-arrow-coral)"/>
+
+                <!-- Input source nodes -->
+                <g class="wf-node">
+                  <rect class="wf-node-shape wf-node-shape--acid" x="45" y="120" width="95" height="54" rx="16"/>
+                  <text x="92" y="145" style="fill: var(--ink); font-weight: 500;">AA CONSENT</text>
+                  <text x="92" y="157" style="fill: var(--ink); font-size: 7.5px;">BANK DATA</text>
+                </g>
+
+                <g class="wf-node">
+                  <rect class="wf-node-shape" x="45" y="242" width="95" height="54" rx="16"/>
+                  <text x="92" y="267">STATEMENT</text>
+                  <text x="92" y="279" style="fill: rgba(255,255,255,.6); font-size: 7.5px;">RAW JSON</text>
+                </g>
+
+                <g class="wf-node">
+                  <rect class="wf-node-shape wf-node-shape--coral" x="45" y="364" width="95" height="54" rx="16"/>
+                  <text x="92" y="389" style="fill: var(--white); font-weight: 500;">CUSTOM API</text>
+                  <text x="92" y="401" style="fill: rgba(255,255,255,.8); font-size: 7.5px;">CLIENT DTO</text>
+                </g>
+
+                <!-- Center GraalJS Runtime Mapper hub -->
+                <g class="wf-node">
+                  <rect class="wf-node-shape wf-node-shape--blue" x="240" y="195" width="160" height="150" rx="24"/>
+                  <text class="wf-core-title" x="320" y="248" style="fill: var(--white) !important; font-size: 13px !important; font-weight: 600;">GRAALJS ENGINE</text>
+                  <text class="wf-core-title" x="320" y="268" style="fill: var(--white) !important; font-size: 10.5px !important;">RUNTIME MAPPER</text>
+                  <text class="wf-core-sub" x="320" y="292" style="fill: rgba(255,255,255,.75) !important; font-size: 8px !important;">ZERO-DOWNTIME LOGIC</text>
+                  <text class="wf-core-sub" x="320" y="309" style="fill: var(--acid) !important; font-size: 8px !important; font-weight: 600;">POLYGLOT RUNTIME</text>
+                </g>
+
+                <!-- Transformed output nodes -->
+                <g class="wf-node">
+                  <rect class="wf-node-shape wf-node-shape--acid" x="500" y="120" width="95" height="54" rx="16"/>
+                  <text x="547" y="145" style="fill: var(--ink); font-weight: 500;">NORMALIZED</text>
+                  <text x="547" y="157" style="fill: var(--ink); font-size: 7.5px;">CLEAN DTO</text>
+                </g>
+
+                <g class="wf-node">
+                  <rect class="wf-node-shape" x="500" y="242" width="95" height="54" rx="16"/>
+                  <text x="547" y="267">CASH FLOW</text>
+                  <text x="547" y="279" style="fill: rgba(255,255,255,.6); font-size: 7.5px;">AGGREGATES</text>
+                </g>
+
+                <g class="wf-node">
+                  <rect class="wf-node-shape wf-node-shape--coral" x="500" y="364" width="95" height="54" rx="16"/>
+                  <text x="547" y="389" style="fill: var(--white); font-weight: 500;">RISK SIGNALS</text>
+                  <text x="547" y="401" style="fill: rgba(255,255,255,.8); font-size: 7.5px;">DECISION DTO</text>
+                </g>
+
+                <!-- Labeled edge descriptions -->
+                <text class="wf-edge-label" x="185" y="180">INGEST AA</text>
+                <text class="wf-edge-label" x="190" y="260">STREAM JSON</text>
+                <text class="wf-edge-label" x="185" y="360">MAP SCHEMA</text>
+                <text class="wf-edge-label" x="455" y="180">STANDARDIZE</text>
+                <text class="wf-edge-label" x="450" y="260">AGGREGATE</text>
+                <text class="wf-edge-label" x="455" y="360">RISK SCORING</text>
+
+                <!-- Animated flowing data packets -->
+                <circle class="wf-packet wf-packet--acid" r="5">
+                  <animateMotion dur="2.8s" repeatCount="indefinite" path="M140 147C190 147 195 240 240 240"/>
+                </circle>
+                <circle class="wf-packet wf-packet--acid" r="5">
+                  <animateMotion dur="2.2s" begin="-.7s" repeatCount="indefinite" path="M140 270H240"/>
+                </circle>
+                <circle class="wf-packet wf-packet--coral" r="5">
+                  <animateMotion dur="3s" begin="-1.3s" repeatCount="indefinite" path="M140 391C190 391 195 300 240 300"/>
+                </circle>
+                <circle class="wf-packet wf-packet--acid" r="5">
+                  <animateMotion dur="2.8s" begin="-.5s" repeatCount="indefinite" path="M400 240C445 240 450 147 500 147"/>
+                </circle>
+                <circle class="wf-packet wf-packet--blue" r="5">
+                  <animateMotion dur="2.4s" begin="-1.1s" repeatCount="indefinite" path="M400 270H500"/>
+                </circle>
+                <circle class="wf-packet wf-packet--coral" r="5">
+                  <animateMotion dur="3.2s" begin="-1.8s" repeatCount="indefinite" path="M400 300C445 300 450 391 500 391"/>
+                </circle>
               </svg>
-              <span class="visual-label">Ingest / map / standardise / decide</span>
+              <span class="visual-label">ingest → map &amp; standardise → compute metrics → decide</span>
             </div>
           </div>
         </article>
@@ -2219,7 +2961,7 @@
         <div class="contact-links reveal" data-delay="2" aria-label="Professional links">
           <a class="interactive" href="https://www.linkedin.com/in/sumit-yadav-7938bb252/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
           <a class="interactive" href="https://leetcode.com/u/im_sumit/" target="_blank" rel="noopener noreferrer">LeetCode ↗</a>
-          <a class="interactive resume-link" href="data:text/plain;charset=utf-8,Sumit%20Yadav%20-%20Java%20Backend%20Engineer" download="Sumit_Yadav_Resume.txt">Resume ↓</a>
+          <a class="interactive resume-link" href="Sumit_Yadav_Resume.pdf" download="Sumit_Yadav_Resume.pdf">Resume ↓</a>
         </div>
         <footer class="footer">
           <span>© <span id="year">2026</span> Sumit Yadav</span>
@@ -2287,6 +3029,7 @@
 
       /* Intro: brief, non-blocking, and skipped after the first view in a session. */
       const intro = document.getElementById('intro');
+      const revealHeader = () => root.classList.add('header-ready');
       const finishIntro = () => {
         if (!intro || intro.classList.contains('is-done')) return;
         intro.classList.add('is-done');
@@ -2307,6 +3050,7 @@
         } catch {}
         window.setTimeout(finishIntro, 1150);
       }
+      window.setTimeout(revealHeader, reducedMotion ? 0 : (introSeen ? 700 : 1800));
       intro?.addEventListener('click', finishIntro, { once: true });
 
       /* Progressive reveal fallback works with or without GSAP. */
@@ -2323,6 +3067,52 @@
         revealItems.forEach(item => revealObserver.observe(item));
       } else {
         revealItems.forEach(item => item.classList.add('is-visible'));
+      }
+
+      /* Scroll-pop supporting content in small staggered groups. The hero name
+         and resume controls are deliberately excluded from this treatment. */
+      const scrollPopItems = [...document.querySelectorAll(
+        '.cap-item, .cap-visual, .proof-item, .contact__bar, .contact-links'
+      )];
+      scrollPopItems.forEach((item, index) => {
+        item.classList.add('scroll-pop');
+        item.style.setProperty('--pop-delay', `${Math.min(index % 4, 3) * 70}ms`);
+      });
+      if ('IntersectionObserver' in window && !reducedMotion) {
+        const popObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          });
+        }, { threshold: 0.16, rootMargin: '0px 0px -9% 0px' });
+        scrollPopItems.forEach(item => popObserver.observe(item));
+      } else {
+        scrollPopItems.forEach(item => item.classList.add('is-visible'));
+      }
+
+      /* Native About reveal: reliable even when GSAP is unavailable or an
+         anchor link lands close to the section. */
+      const aboutPopItems = [
+        ['.about .eyebrow', 'about-pop--label'],
+        ['.about__statement', 'about-pop--statement'],
+        ['.career-note', 'about-pop--note']
+      ].map(([selector, modifier]) => {
+        const item = document.querySelector(selector);
+        item?.classList.add('about-pop', modifier);
+        return item;
+      }).filter(Boolean);
+      if ('IntersectionObserver' in window && !reducedMotion) {
+        const aboutObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          });
+        }, { threshold: 0.08, rootMargin: '0px 0px -12% 0px' });
+        aboutPopItems.forEach(item => aboutObserver.observe(item));
+      } else {
+        aboutPopItems.forEach(item => item.classList.add('is-visible'));
       }
 
       /* Header navigation + mobile focus management. */
@@ -2357,14 +3147,100 @@
       /* Active section indicator. */
       const sectionLinks = [...document.querySelectorAll('.desktop-nav .nav-link')];
       const sections = sectionLinks.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
-      if ('IntersectionObserver' in window) {
-        const sectionObserver = new IntersectionObserver(entries => {
-          const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-          if (!visible) return;
-          sectionLinks.forEach(link => link.setAttribute('aria-current', String(link.getAttribute('href') === '#' + visible.target.id)));
-        }, { threshold: [0.25, 0.45, 0.7], rootMargin: '-15% 0px -55% 0px' });
-        sections.forEach(section => sectionObserver.observe(section));
+      const sectionAnchorLinks = [...document.querySelectorAll('a[href^="#"]')]
+        .filter(link => document.querySelector(link.getAttribute('href')));
+      const hasInitialHash = Boolean(location.hash);
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      if (!hasInitialHash) window.scrollTo(0, 0);
+      let autoScrollingToSection = Boolean(location.hash);
+      let autoScrollTimer = 0;
+      let initialEntryNavigationStarted = false;
+      const holdSectionHash = () => {
+        autoScrollingToSection = true;
+        window.clearTimeout(autoScrollTimer);
+        autoScrollTimer = window.setTimeout(() => { autoScrollingToSection = false; }, 2400);
+      };
+      const sectionScrollOffset = () => {
+        const header = document.querySelector('.site-header__inner');
+        return Math.ceil((header?.getBoundingClientRect().bottom || 0) + 22);
+      };
+      const scrollToSectionHash = (hash, behavior = reducedMotion ? 'auto' : 'smooth') => {
+        const target = document.querySelector(hash);
+        if (!target) return;
+        const top = Math.max(0, window.scrollY + target.getBoundingClientRect().top - sectionScrollOffset());
+        window.scrollTo({ top, behavior });
+      };
+      const handleSectionNavigation = event => {
+        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        const hash = event.currentTarget.getAttribute('href');
+        if (!document.querySelector(hash)) return;
+        event.preventDefault();
+        initialEntryNavigationStarted = true;
+        holdSectionHash();
+        if (location.hash !== hash) history.pushState(null, '', hash);
+        scrollToSectionHash(hash);
+      };
+      sectionAnchorLinks.forEach(link => link.addEventListener('click', handleSectionNavigation));
+      window.addEventListener('hashchange', () => {
+        initialEntryNavigationStarted = true;
+        holdSectionHash();
+        window.requestAnimationFrame(() => scrollToSectionHash(location.hash, 'auto'));
+      });
+      const correctInitialHashPosition = () => {
+        if (!location.hash || !document.querySelector(location.hash)) return;
+        holdSectionHash();
+        const correct = () => scrollToSectionHash(location.hash, 'auto');
+        /* Browsers may restore their native anchor position after scripts run.
+           Reapply the header-aware position once loading has settled. */
+        window.requestAnimationFrame(correct);
+        window.setTimeout(correct, 80);
+        window.setTimeout(correct, 280);
+      };
+
+      /* A browser can restore the previous scroll position after startup.
+         Keep a hashless entry at the top until the visitor chooses a section. */
+      if (!hasInitialHash) {
+        const settleAtTop = () => {
+          if (initialEntryNavigationStarted) return;
+          autoScrollingToSection = true;
+          window.scrollTo({ top: 0, behavior: 'auto' });
+          history.replaceState(null, '', location.pathname + location.search);
+          window.setTimeout(() => { autoScrollingToSection = false; }, 120);
+        };
+        [0, 120, 350, 700].forEach(delay => window.setTimeout(settleAtTop, delay));
       }
+      if (document.readyState === 'complete') {
+        correctInitialHashPosition();
+      } else {
+        window.addEventListener('load', correctInitialHashPosition, { once: true });
+      }
+      window.addEventListener('pageshow', event => {
+        if (event.persisted) correctInitialHashPosition();
+      });
+      window.addEventListener('scrollend', () => {
+        window.clearTimeout(autoScrollTimer);
+        autoScrollTimer = window.setTimeout(() => { autoScrollingToSection = false; }, 80);
+      });
+      const updateActiveSection = () => {
+        if (!sections.length) return;
+        const marker = Math.min(window.innerHeight * .35, window.innerHeight - 1);
+        const visible = sections.find(section => {
+          const rect = section.getBoundingClientRect();
+          return rect.top <= marker && rect.bottom > marker;
+        }) || sections.reduce((closest, section) => {
+          const distance = Math.abs(section.getBoundingClientRect().top - marker);
+          return distance < closest.distance ? { section, distance } : closest;
+        }, { section: sections[0], distance: Infinity }).section;
+        const visibleHash = '#' + visible.id;
+        sectionLinks.forEach(link => link.setAttribute('aria-current', String(link.getAttribute('href') === visibleHash)));
+        /* Keep the address bar truthful after free scrolling. */
+        if (!autoScrollingToSection && history.replaceState && location.hash !== visibleHash) {
+          history.replaceState(null, '', visibleHash);
+        }
+      };
+      window.addEventListener('scroll', updateActiveSection, { passive: true });
+      window.addEventListener('resize', updateActiveSection);
+      updateActiveSection();
 
       /* Scroll progress uses one passive listener and one animation frame. */
       const progress = document.getElementById('scroll-progress');
@@ -2443,9 +3319,12 @@
         capDesc.textContent = item.dataset.desc;
       };
       capItems.forEach(item => {
-        item.addEventListener('mouseenter', () => selectCapability(item));
         item.addEventListener('focusin', () => selectCapability(item));
-        item.querySelector('button').addEventListener('click', () => selectCapability(item));
+        const title = item.querySelector('h3');
+        const button = item.querySelector('button');
+        title?.addEventListener('mouseenter', () => selectCapability(item));
+        button.addEventListener('mouseenter', () => selectCapability(item));
+        button.addEventListener('click', () => selectCapability(item));
       });
 
       /* Accessible project dialogs. */
@@ -2491,87 +3370,6 @@
           textarea.remove();
           showToast('Email copied');
         }
-      });
-
-      /* One-file resume: generate a compact, accurate PDF in the browser. */
-      const pdfEscape = text => text.replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)');
-      const resumeLines = [
-        { t: 'SUMIT YADAV', s: 22, b: true, g: 24 },
-        { t: 'Java Backend Engineer | sumityadavtg@gmail.com | linkedin.com/in/sumit-yadav-7938bb252 | leetcode.com/u/im_sumit', s: 8.5, g: 18 },
-        { t: 'PROFESSIONAL SUMMARY', s: 11, b: true, g: 15 },
-        { t: 'Java Backend Developer with 3 years of experience building scalable Spring Boot microservices and RESTful APIs', s: 8.7, g: 11 },
-        { t: 'for enterprise FinTech systems. Skilled in event-driven integrations, reusable backend design, production debugging,', s: 8.7, g: 11 },
-        { t: 'and secure software delivery.', s: 8.7, g: 17 },
-        { t: 'EXPERIENCE', s: 11, b: true, g: 15 },
-        { t: 'TATA CONSULTANCY SERVICES | Java Spring Boot Developer - Integrations | Oct 2023 - Present | Bengaluru, India', s: 8.7, b: true, g: 13 },
-        { t: '- Built Spring Boot microservices and REST APIs for digital loan-origination workflows using event-driven', s: 8.5, g: 10.5 },
-        { t: '  architecture, reactive programming, asynchronous callbacks, and scheduled processing.', s: 8.5, g: 10.5 },
-        { t: '- Developed reusable libraries for API clients, validation, object mapping, exception handling, logging, and', s: 8.5, g: 10.5 },
-        { t: '  standardised responses.', s: 8.5, g: 10.5 },
-        { t: '- Integrated third-party identity, verification, consent, and digital-document services with secure data handling,', s: 8.5, g: 10.5 },
-        { t: '  request validation, audit tracking, resilient error handling, callbacks, retries, and recovery.', s: 8.5, g: 10.5 },
-        { t: '- Delivered net-banking and Account Aggregator consent flows; transformed statement JSON into income, cash-flow,', s: 8.5, g: 10.5 },
-        { t: '  balance, transaction, and risk insights for credit decisioning.', s: 8.5, g: 10.5 },
-        
-        { t: '- Diagnosed production defects using root-cause analysis, Spring Boot Actuator, structured logs, and Jenkins.', s: 8.5, g: 10.5 },
-        { t: '- Integrated GraalJS runtime mappers for client-specific request and response transformations without redeployment.', s: 8.5, g: 17 },
-        { t: 'TECHNICAL SKILLS', s: 11, b: true, g: 15 },
-        { t: 'Backend: Java, JavaScript, Spring Boot, Microservices, REST APIs, Event-Driven Architecture, Reactive Programming', s: 8.3, g: 10.5 },
-        { t: 'Security & Data: Spring Security, OAuth 2.0, Spring Data JPA, SQL, MySQL, JSON, XML, GraalJS', s: 8.3, g: 10.5 },
-        { t: 'Engineering: Reusable Libraries, Debugging, Root-Cause Analysis, API Testing, Exception Handling', s: 8.3, g: 10.5 },
-        { t: 'Tools: Git, GitHub, Jenkins, Docker, Postman, Swagger/OpenAPI, Kubernetes (Basics)', s: 8.3, g: 17 },
-        { t: 'ACHIEVEMENTS', s: 11, b: true, g: 15 },
-        { t: '- Solved 700+ DSA problems across LeetCode and GeeksforGeeks.', s: 8.5, g: 10.5 },
-        { t: '- LeetCode contest rating 1940 (Knight), ranked in the top 3% worldwide.', s: 8.5, g: 10.5 },
-        { t: '- Grand Finalist in TechGig national-level coding competition, worldwide rank 934.', s: 8.5, g: 10.5 },
-        { t: '- CodeKaze 2023 rank 1,235 among approximately 150,000 participants.', s: 8.5, g: 17 },
-        { t: 'EDUCATION', s: 11, b: true, g: 15 },
-        { t: 'B.Tech. Electronics and Communication Engineering | PSIT College of Engineering | 2019 - 2023', s: 8.5, b: true, g: 11 },
-        { t: 'CGPA: 8.5 | Department Topper | University-sponsored for academic excellence', s: 8.5, g: 11 }
-      ];
-
-      const buildResumePdf = () => {
-        let y = 755;
-        let stream = 'BT\n';
-        resumeLines.forEach(line => {
-          stream += `/${line.b ? 'F2' : 'F1'} ${line.s} Tf\n1 0 0 1 42 ${y.toFixed(2)} Tm\n(${pdfEscape(line.t)}) Tj\n`;
-          y -= line.g;
-        });
-        stream += 'ET\n';
-
-        const objects = [];
-        objects[1] = '<< /Type /Catalog /Pages 2 0 R >>';
-        objects[2] = '<< /Type /Pages /Kids [3 0 R] /Count 1 >>';
-        objects[3] = '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> /Contents 4 0 R >>';
-        objects[4] = `<< /Length ${stream.length} >>\nstream\n${stream}endstream`;
-        objects[5] = '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>';
-        objects[6] = '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>';
-
-        let pdf = '%PDF-1.4\n';
-        const offsets = [0];
-        for (let i = 1; i < objects.length; i++) {
-          offsets[i] = pdf.length;
-          pdf += `${i} 0 obj\n${objects[i]}\nendobj\n`;
-        }
-        const xrefOffset = pdf.length;
-        pdf += `xref\n0 ${objects.length}\n0000000000 65535 f \n`;
-        for (let i = 1; i < objects.length; i++) pdf += `${String(offsets[i]).padStart(10, '0')} 00000 n \n`;
-        pdf += `trailer\n<< /Size ${objects.length} /Root 1 0 R >>\nstartxref\n${xrefOffset}\n%%EOF`;
-        return new Blob([pdf], { type: 'application/pdf' });
-      };
-
-      document.querySelectorAll('.resume-link').forEach(link => {
-        link.addEventListener('click', event => {
-          event.preventDefault();
-          const url = URL.createObjectURL(buildResumePdf());
-          const download = document.createElement('a');
-          download.href = url;
-          download.download = 'Sumit_Yadav_Resume.pdf';
-          document.body.appendChild(download);
-          download.click();
-          download.remove();
-          window.setTimeout(() => URL.revokeObjectURL(url), 1500);
-        });
       });
 
       document.getElementById('year').textContent = new Date().getFullYear();
@@ -2622,8 +3420,13 @@
 
             timeline.fromTo(
               [copy, visual],
-              { y: () => Math.min(window.innerHeight * 0.18, 145), opacity: 0.12 },
-              { y: 0, opacity: 1, ease: 'none' },
+              {
+                y: () => Math.min(window.innerHeight * 0.18, 145),
+                opacity: 0.08,
+                scale: .965,
+                filter: 'blur(6px)'
+              },
+              { y: 0, opacity: 1, scale: 1, filter: 'blur(0px)', ease: 'none' },
               0
             );
           });
@@ -2635,7 +3438,6 @@
           });
         });
 
-        gsap.to('.about::after', { duration: 0 });
         gsap.fromTo('.proof-item__number',
           { y: 80 },
           { y: 0, stagger: .12, ease: 'power3.out', scrollTrigger: { trigger: '.proof-grid', start: 'top 80%', once: true } }
